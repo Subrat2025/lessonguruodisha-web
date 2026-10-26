@@ -138,7 +138,7 @@ Problems? Copy the red lines from **lessonguru-web → Logs** and send them to m
 
 1. **Final copy:** run the step 5 copy command again, adding `--replace` at the end. Wait for **"All document counts match."**
 2. **Point the domain to Render:** replace the `lessonguruodisha.in` and `www` records with Render's. Then press **Verify** in Render. HTTPS turns on automatically.
-3. **Turn on background jobs:** Render → lessonguru-web → Environment → **delete `BACKGROUND_JOBS_DISABLED`** → Save and deploy. WhatsApp campaigns, the message queue and the 5 scheduled jobs start.
+3. **Turn on background jobs:** Render → **Env Groups → lessonguru-shared** → set `BACKGROUND_JOBS_DISABLED` to **0** → Save. Then lessonguru-web → **Manual Deploy → Deploy latest commit**. WhatsApp campaigns, the message queue and the 5 scheduled jobs start.
 4. **Stop the old site:** in Emergent, **stop/pause the deployment**. Don't delete it yet; it's your backup.
 5. **Check:**
    - open lessonguruodisha.in on your phone and in both apps;
