@@ -57,4 +57,13 @@ test('refuses bad addresses and the live database itself', async () => {
   await assert.rejects(startTransfer(src, { targetUrl: 'http://evil', targetDb: 'a' }), /starts with mongodb/)
   await assert.rejects(startTransfer(src, { targetUrl: 'mongodb+srv://other:pw@customer-apps.lxqsv8.mongodb.net/', targetDb: '' }), /own database/)
   await assert.rejects(startTransfer(src, { targetUrl: 'mongodb://a:b@new.example/', targetDb: 'bad name!' }), /letters, numbers/)
+  await assert.rejects(startTransfer(src, { targetUrl: 'mongodb+srv://lessonguru_app:pw@m.telf.mongodb.net/', targetDb: 'lessonguru_app' }), /USER name.*edumaster_odisha/)
+})
+
+test('falls back to plain inserts when the user may not bypass validation', async () => {
+  const src = fakeDb(); src.ensure('abpAudit').docs.push({ _id: 1 }, { _id: 2 })
+  const dst = fakeDb(); const plain = dst.collection
+  dst.collection = (n) => { const c = plain(n); const ins = c.insertMany; c.insertMany = async (docs, o = {}) => { if (o.bypassDocumentValidation) throw Object.assign(new Error('user is not allowed to do action [bypassDocumentValidation] on [x.abpAudit]'), { code: 13 }); return ins(docs, o) }; return c }
+  const rows = await copyAll(src, dst)
+  assert.deepEqual(rows.map((r) => [r.name, r.target, r.state]), [['abpAudit', 2, 'ok']])
 })

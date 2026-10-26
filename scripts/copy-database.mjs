@@ -55,7 +55,11 @@ export async function copyDatabase(src, dst, { replace = false, dryRun = false, 
     let copied = 0, batch = [], bytes = 0
     const flush = async () => {
       if (!batch.length) return
-      await to.insertMany(batch, { ordered: false, bypassDocumentValidation: true })
+      // bypassDocumentValidation needs the dbAdmin/restore role; plain readWrite users get "not authorized"
+      await to.insertMany(batch, { ordered: false, bypassDocumentValidation: true }).catch((e) => {
+        if (e.code !== 13 && e.codeName !== 'Unauthorized' && !/not allowed to do action \[bypassDocumentValidation\]/.test(e.message)) throw e
+        return to.insertMany(batch, { ordered: false })
+      })
       copied += batch.length; batch = []; bytes = 0
       if (process.stdout.isTTY) process.stdout.write(`\r  ${name}: ${copied}/${total}`)
     }

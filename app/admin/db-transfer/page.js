@@ -52,10 +52,10 @@ export default function DbTransfer() {
       <div style={box}>
         <h3 style={{ margin: 0 }}>1. New database</h3>
         <label style={lbl}>New MongoDB address (mongodb+srv://…)</label>
-        <input style={inp} type="password" autoComplete="off" placeholder="mongodb+srv://user:password@cluster.xxxxx.mongodb.net/" value={f.targetUrl} onChange={(e) => setF({ ...f, targetUrl: e.target.value })} />
+        <input style={inp} type="text" name="lg-target-url" autoComplete="off" spellCheck={false} placeholder="mongodb+srv://user:password@cluster.xxxxx.mongodb.net/" value={f.targetUrl} onChange={(e) => setF({ ...f, targetUrl: e.target.value })} />
         <small style={{ color: '#64748b' }}>Used only for this copy. It is not saved anywhere.</small>
         <label style={lbl}>Database name in the new MongoDB</label>
-        <input style={inp} value={f.targetDb} onChange={(e) => setF({ ...f, targetDb: e.target.value })} />
+        <input style={inp} name="lg-target-db" autoComplete="off" spellCheck={false} value={f.targetDb} onChange={(e) => setF({ ...f, targetDb: e.target.value })} />
         <h3 style={{ margin: '18px 0 0' }}>2. Confirm</h3>
         <label style={lbl}>Your admin password</label>
         <input style={inp} type="password" autoComplete="current-password" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />
