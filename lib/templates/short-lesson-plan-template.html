@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Short Lesson Plan · LessonGuru Odisha</title>
+
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  LESSONGURU ODISHA — SHORT LESSON PLAN TEMPLATE (v2 · card style)
+  ─────────────────────────────────────────────────────────────────────────
+  The <meta name="em-*"> block below is REQUIRED.  The Short Lesson Plans
+  ingest pipeline reads these tags to auto-populate the DB — do NOT rename
+  them.  Everything visible on screen comes from the <body> HTML below;
+  replace the placeholder Odia text with your actual lesson content.
+
+  em-class          → Class name in English (Class 1 … Class 10 / Balvatika)
+  em-book           → Book / textbook name
+  em-subject        → Subject in Odia (e.g. ଓଡ଼ିଆ ଭାଷା, ପରିବେଶ ଅଧ୍ୟୟନ)
+  em-chapter        → Chapter title in Odia
+  em-chapter-order  → 0-based chapter index (0, 1, 2 …)
+  em-period         → Period number within the chapter (1, 2, 3 …)
+  em-day            → Global teaching day (1..190) — UNIQUE per subject/year
+  em-lo             → Learning Outcome code (e.g. LLD-9.3.2)
+  em-dakhyata       → Dakhyata (competency) code (e.g. LLD-9.3)
+  em-cg             → Curricular Goal code (e.g. CG-9)
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<meta name="em-class"          content="Class 1">
+<meta name="em-book"           content="ଝୁଲଣା-୧ (Jhulana-1)">
+<meta name="em-subject"        content="ଓଡ଼ିଆ ଭାଷା">
+<meta name="em-chapter"        content="ବିଦ୍ୟାଳୟ ପ୍ରସ୍ତୁତି କାର୍ଯ୍ୟକ୍ରମ">
+<meta name="em-chapter-order"  content="0">
+<meta name="em-period"         content="1">
+<meta name="em-day"            content="1">
+<meta name="em-lo"             content="LLD-9.3.2">
+<meta name="em-dakhyata"       content="LLD-9.3">
+<meta name="em-cg"             content="CG-9">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap');
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans Oriya', 'Nirmala UI', 'Kalinga', 'Lohit Odia', 'Inter', system-ui, sans-serif;
+    color: #0f172a;
+    background: #f5f7fb;
+    padding: 12px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  /* ── Diagonal "Premium" watermark repeated across the page ─────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(-24deg,
+        transparent 0 220px,
+        rgba(99, 102, 241, 0.055) 220px 245px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: 'LessonGuruOdisha Premium · Personal Use Only';
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(15, 23, 42, 0.045);
+    font-size: 42pt;
+    font-weight: 900;
+    transform: rotate(-30deg);
+    letter-spacing: 2px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .sheet {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px 18px 24px;
+    box-shadow: 0 10px 40px -20px rgba(15, 23, 42, 0.25),
+                0 3px 12px -8px rgba(15, 23, 42, 0.15);
+  }
+  h1, h2, h3, h4 { margin: 0; line-height: 1.35; font-weight: 800; }
+  p { margin: 0; }
+
+  /* Topic banner */
+  .topic-banner {
+    background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 100%);
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .topic-banner .label {
+    font-size: 10.5pt; font-weight: 900; color: #b91c1c;
+    letter-spacing: 0.4px; text-transform: uppercase;
+  }
+  .topic-banner .topic {
+    font-size: 12.5pt; color: #0f172a; font-weight: 700;
+    margin-top: 4px; line-height: 1.5;
+  }
+  .topic-banner .icon { font-size: 15pt; margin-right: 4px; }
+
+  /* Section heading */
+  .section-title {
+    font-size: 13pt; color: #b91c1c; font-weight: 900;
+    margin: 18px 0 10px; letter-spacing: 0.3px;
+  }
+  .section-title .em { font-size: 14pt; }
+
+  /* Panchapadi cards */
+  .step { border-radius: 14px; margin-bottom: 12px; overflow: hidden;
+          border: 1px solid rgba(15, 23, 42, 0.06); }
+  .step .step-header {
+    color: #fff; padding: 10px 14px;
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 800; font-size: 11.5pt;
+  }
+  .step .step-header .duration {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    padding: 3px 10px; font-size: 9.5pt;
+    font-weight: 800; white-space: nowrap;
+  }
+  .step .step-body { background: #ffffff; padding: 12px 14px 14px; }
+  .step .role {
+    font-size: 9.5pt; font-weight: 900; letter-spacing: 0.4px;
+    text-transform: uppercase; margin: 8px 0 4px;
+  }
+  .step .role.teacher { color: #2563eb; }
+  .step .role.example { color: #059669; }
+  .step .role .em { margin-right: 3px; }
+  .step .body-text { font-size: 10.5pt; color: #1e293b; line-height: 1.7; }
+
+  .step.adhiti  .step-header { background: linear-gradient(135deg, #3b82f6, #4338ca); }
+  .step.bodha   .step-header { background: linear-gradient(135deg, #10b981, #0d9488); }
+  .step.abhyasa .step-header { background: linear-gradient(135deg, #f97316, #ea580c); }
+  .step.prayoga .step-header { background: linear-gradient(135deg, #a855f7, #6d28d9); }
+  .step.prasara .step-header { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+
+  /* Visual cue (yellow) */
+  .visual-cue {
+    background: linear-gradient(90deg, #fefce8 0%, #fef9c3 100%);
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 10px 14px; margin: 14px 0;
+    font-size: 10.5pt; line-height: 1.6;
+  }
+  .visual-cue .label { font-weight: 900; color: #b45309; margin-right: 6px; }
+
+  /* Grid */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+  .info-card {
+    background: #faf5ff; border: 1px solid #ede9fe;
+    border-radius: 10px; padding: 10px 14px;
+    font-size: 10pt; line-height: 1.7;
+  }
+  .info-card .h {
+    font-weight: 900; color: #7c3aed;
+    font-size: 10pt; letter-spacing: 0.3px; margin-bottom: 4px;
+  }
+  .info-card ol, .info-card ul { margin: 4px 0 0; padding-left: 18px; }
+  .info-card.hots     .h { color: #db2777; }
+  .info-card.activity .h { color: #0284c7; }
+  .info-card.write    .h { color: #059669; }
+
+  /* Inclusive education */
+  .inclusive {
+    background: #fff1f2; border-left: 4px solid #e11d48;
+    border-radius: 6px; padding: 10px 14px;
+    margin: 14px 0; font-size: 10pt;
+  }
+  .inclusive .h { font-weight: 900; color: #be123c; margin-bottom: 4px; }
+  .inclusive ul { margin: 4px 0 0; padding-left: 20px; }
+  .inclusive li { margin: 3px 0; }
+  .inclusive li b { color: #0f172a; }
+
+  /* Tri-column footer */
+  .tri-col {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-top: 14px; padding-top: 14px;
+    border-top: 1px dashed #cbd5e1;
+  }
+  @media (max-width: 640px) { .tri-col { grid-template-columns: 1fr; } }
+  .tri-col .cell { font-size: 9.5pt; line-height: 1.5; }
+  .tri-col .cell .h {
+    font-weight: 900; font-size: 9.5pt;
+    letter-spacing: 0.4px; text-transform: uppercase;
+    margin-bottom: 4px; color: #7c3aed;
+  }
+  .tri-col .cell.century .h { color: #0284c7; }
+  .tri-col .cell.nep     .h { color: #059669; }
+
+  /* Nav row */
+  .nav-row {
+    display: flex; gap: 8px; margin-top: 18px; align-items: center;
+    justify-content: space-between;
+  }
+  .nav-row button {
+    font-family: inherit; font-size: 10pt; font-weight: 800;
+    padding: 8px 16px; border-radius: 8px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff; border: 0; cursor: pointer;
+  }
+  .nav-row button.secondary {
+    background: #ffffff; color: #4f46e5;
+    border: 1px solid #c7d2fe;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    body::before, body::after { display: none; }
+    .sheet { box-shadow: none; border-radius: 0; margin: 0; padding: 6mm 5mm; }
+    .step, .info-card, .visual-cue, .inclusive, .topic-banner { break-inside: avoid; }
+    .nav-row, .no-print { display: none !important; }
+    @page { size: A4 portrait; margin: 7mm; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<article class="sheet">
+
+  <!-- ═════ Topic banner ═════ -->
+  <div class="topic-banner">
+    <div class="label"><span class="icon">📘</span>ବିଷୟବସ୍ତୁ / TOPIC</div>
+    <div class="topic">ଆଜି ଚିତ୍ର ଦେଖି କଥା ଦେବା।</div>
+  </div>
+
+  <!-- ═════ Panchapadi Sopana — 5 teaching steps ═════ -->
+  <h2 class="section-title"><span class="em">🎯</span> ପଞ୍ଚପଦୀ ସୋପାନ / PANCHAPADI STEPS</h2>
+
+  <div class="step adhiti">
+    <div class="step-header">
+      <span>୧</span>
+      <span>ଅଧୀତି (Adhiti) — Introduction / Preparation</span>
+      <span class="duration">5 Min</span>
+    </div>
+    <div class="step-body">
+      <div class="role teacher"><span class="em">📘</span> ଶିକ୍ଷକ କାର୍ଯ୍ୟ (TEACHER)</div>
+      <div class="body-text">"ପିଲାମାନେ, ଆଜି ଦେଖନ୍ତୁ ପୁସ୍ତକର ଡାହାଣ ଦେଇ ମୋ ଚିତ୍ର ବିଡ଼ା ପଢ଼ି ଦେଉଛନ୍ତି।" ଏହାର ପିଲାକୁ ଉତ୍ସାହିତ କରନ୍ତୁ।</div>
+      <div class="role example"><span class="em">💡</span> ଉଦାହରଣ (EXAMPLE)</div>
+      <div class="body-text">"ମୁଁ ବାପା ଦେଖିଲି!" "ମୁଁ ମନ୍ଦିର ଦେଖିଲି!" ପିଲାମାନେ ଚିତ୍ର ଦେଖି ନିଜ ଅନୁଭୂତି କହିଥିବେ।</div>
+    </div>
+  </div>
+
+  <div class="step bodha">
+    <div class="step-header">
+      <span>୨</span>
+      <span>ବୋଧ (Bodha) — Conceptual Understanding / Comprehension</span>
+      <span class="duration">15 Min</span>
+    </div>
+    <div class="step-body">
+      <div class="role teacher"><span class="em">📘</span> ଶିକ୍ଷକ କାର୍ଯ୍ୟ (TEACHER)</div>
+      <div class="body-text">ପୃଷ୍ଠା ୧ ର ଚିତ୍ର ଦେଖାଇ ପଚାରନ୍ତୁ — "ଏହି ଚିତ୍ରରେ ପିଲାଟି କ'ଣ କରୁଛନ୍ତି? ପାଖରେ ପଶୁଟିର ପିତା କିଏ?"</div>
+      <div class="role example"><span class="em">💡</span> ଉଦାହରଣ (EXAMPLE)</div>
+      <div class="body-text">ଚିତ୍ର ଦେଖି ଉତ୍ତର ଦେବେ — "ଚିତ୍ରରେ ପାଛୋଟି, ଜଣା, ଗର, ପିଢ଼ାଟି ଓ ଗୋଟିଏ ଅଛି। ଅନ୍ୟ ପଶୁକୁ ପିଲାଟି ଛିଡ଼େଇ ଦେଉଛନ୍ତି।"</div>
+    </div>
+  </div>
+
+  <div class="step abhyasa">
+    <div class="step-header">
+      <span>୩</span>
+      <span>ଅଭ୍ୟାସ (Abhyasa) — Practice</span>
+      <span class="duration">10 Min</span>
+    </div>
+    <div class="step-body">
+      <div class="role teacher"><span class="em">📘</span> ଶିକ୍ଷକ କାର୍ଯ୍ୟ (TEACHER)</div>
+      <div class="body-text">"ଚିତ୍ରରେ ଥିବା ପ୍ରାଣୀକୁ ପାଖ ପାଇ ଦେଖିଦେଉ ପ୍ରାଣୀକୁ ଦେଖା ପାଇ ଦେଖା ଅଙ୍ଗୁଠାରେ ଦେଖନ୍ତୁ?" ପଚାରନ୍ତୁ କର।</div>
+      <div class="role example"><span class="em">💡</span> ଉଦାହରଣ (EXAMPLE)</div>
+      <div class="body-text">ପାଉସେ ଦେଉସେ ଓ କହିବେ — "ଆଣ୍ଟ ପାଣ, ଅଲୁଥ୍, ବିର୍ପିୟା, ଡାଉ ଓ ଏଡ଼ ଦେଖ୍ୟା।"</div>
+    </div>
+  </div>
+
+  <div class="step prayoga">
+    <div class="step-header">
+      <span>୪</span>
+      <span>ପ୍ରୟୋଗ (Prayoga) — Application</span>
+      <span class="duration">10 Min</span>
+    </div>
+    <div class="step-body">
+      <div class="role teacher"><span class="em">📘</span> ଶିକ୍ଷକ କାର୍ଯ୍ୟ (TEACHER)</div>
+      <div class="body-text">"ତୁମେ ନିଜ ମଙ୍ଗଳାରୁ ପାଖରୁ ଦେଖୁଥିବା ଏକ ଗାଁକୁ ପାଖ ପାଇ ଦେଖ୍ୟା ପାହୁଣ୍ଡ ଦେଖା ଏଡ଼ ଦେଖ୍ୟା ପାଇଁ କରନ୍ତି?"</div>
+      <div class="role example"><span class="em">💡</span> ଉଦାହରଣ (EXAMPLE)</div>
+      <div class="body-text">"ମାଆ, ଫୁଲ, କୋଡ଼ାଉ, ମୁଣ୍ଡଗୋଣ୍ଡ, ମନ୍ଦିରା ପାଇ ଦେଖୁଛି ମନ୍ଦିରା ମନ୍ଦିରାରୁ ମନ୍ଦିରା ଦେଖୁଛି।"</div>
+    </div>
+  </div>
+
+  <div class="step prasara">
+    <div class="step-header">
+      <span>୫</span>
+      <span>ପ୍ରସାର (Prasara) — Expansion / Extension</span>
+      <span class="duration">5 Min</span>
+    </div>
+    <div class="step-body">
+      <div class="role teacher"><span class="em">📘</span> ଶିକ୍ଷକ କାର୍ଯ୍ୟ (TEACHER)</div>
+      <div class="body-text">ପିଲାମାନଙ୍କୁ ଘର ଫେରାଇ ଚିତ୍ର ଉପରେ ୧ ଟି ଗଠିତ ବାକ୍ୟ ମନେ ମନେ ପ୍ରସ୍ତୁତ କରିବାକୁ କୁହନ୍ତୁ।</div>
+      <div class="role example"><span class="em">💡</span> ଉଦାହରଣ (EXAMPLE)</div>
+      <div class="body-text">ଚିତ୍ର ଆଧାରରେ ନୂଆ ବାକ୍ୟ ପ୍ରସ୍ତୁତ କରି ଘର ଫେରାନ୍ତି ଓ ପରଦିନ ଶ୍ରେଣୀରେ କୁହନ୍ତି।</div>
+    </div>
+  </div>
+
+  <!-- ═════ Visual Direction ═════ -->
+  <div class="visual-cue">
+    <span class="label">🖼️ ଚିତ୍ର / ଦୃଶ୍ୟ ନିର୍ଦ୍ଦେଶ :</span>
+    ପୃଷ୍ଠା ୧ର ଅଗ୍ରଭାଗରେ ମୁଦ୍ରିତ ଦେଉଥିବା ପରିବାରର ବଡ଼ ଚିତ୍ର — ଅଭ୍ୟାସ ସୋପାନରେ ବ୍ୟବହାର କରନ୍ତୁ।
+  </div>
+
+  <!-- ═════ Assessment + Activity ═════ -->
+  <div class="grid-2">
+    <div class="info-card">
+      <div class="h">📝 ମୂଲ୍ୟାୟନ — ମୌଖିକ</div>
+      <ol>
+        <li>ବାପା କେଉଁଠି ଅଛି?</li>
+        <li>ଚିତ୍ରରେ କେଉଁ ରଙ୍ଗ ଅଧିକ ଅଛି?</li>
+      </ol>
+    </div>
+    <div class="info-card activity">
+      <div class="h">🎨 କାର୍ଯ୍ୟକଳାପ</div>
+      <div>ଯୋଡ଼ିରେ ପ୍ରଶ୍ନୋଉର ଖେଳ।</div>
+    </div>
+  </div>
+
+  <!-- ═════ Write + HOTS ═════ -->
+  <div class="grid-2" style="margin-top: 10px;">
+    <div class="info-card write">
+      <div class="h">✍️ ଲିଖନ</div>
+      <ol>
+        <li>ଗୋଟିଏ ପ୍ରଶ୍ନ ଲେଖ।</li>
+        <li>ଅଜା ଶବ୍ଦଟି ଲେଖ।</li>
+      </ol>
+    </div>
+    <div class="info-card hots">
+      <div class="h">🧠 HOTS ପ୍ରଶ୍ନ</div>
+      <div>ଚିତ୍ରର କେଉଁ ଜିନିଷ ବାଦ ଦେଲେ ଚିତ୍ରଟି ବଦଳିଯିବ?</div>
+    </div>
+  </div>
+
+  <!-- ═════ Inclusive Education ═════ -->
+  <div class="inclusive">
+    <div class="h">♿ ସମାବେଶୀ ଶିକ୍ଷା</div>
+    <ul>
+      <li><b>ଧୀରଗତି ଶିକ୍ଷାର୍ଥୀ :</b> ଚିତ୍ରର ଗୋଟିଏ ଅଂଶ ଦେଖାଇ ଗୋଟିଏ ଶବ୍ଦ କହିବାକୁ କୁହନ୍ତୁ।</li>
+      <li><b>ଅଗ୍ରଗାମୀ ଶିକ୍ଷାର୍ଥୀ :</b> ଚିତ୍ର ଆଧାରରେ ପାଞ୍ଚ ବାକ୍ୟର ବର୍ଣ୍ଣନା ଦେବାକୁ କୁହନ୍ତୁ।</li>
+      <li><b>ବିଶେଷ ଆବଶ୍ୟକତା :</b> ବଡ଼ ଆକାରର ଚିତ୍ର କାର୍ଡ ଓ ଆଗ ଧାଡ଼ିରେ ବସିବାର ସୁବିଧା ଦିଅନ୍ତୁ।</li>
+    </ul>
+  </div>
+
+  <!-- ═════ Bottom tri-column ═════ -->
+  <div class="tri-col">
+    <div class="cell">
+      <div class="h">ମୂଲ୍ୟବୋଧ</div>
+      <div>ସହଯୋଗ, ପରସ୍ପରକୁ ଶୁଣିବା।</div>
+    </div>
+    <div class="cell century">
+      <div class="h">୨୧ଶ ଶତାବ୍ଦୀ ଦକ୍ଷତା</div>
+      <div>ଭାବ ବିନିମୟ, ପ୍ରଶ୍ନ ପଚାରିବା।</div>
+    </div>
+    <div class="cell nep">
+      <div class="h">NEP 2020 ସମନ୍ୱୟ</div>
+      <div>ଆଲୋଚନା ଓ ଅନ୍ଧେଷଣାଧିଉକ ଶିକ୍ଷଣ।</div>
+    </div>
+  </div>
+
+  <div class="nav-row no-print">
+    <button class="secondary" onclick="window.parent?.postMessage({type:'slp-prev'},'*')">‹ Previous</button>
+    <div style="font-size:9pt;color:#64748b;font-weight:600">🔒 Premium content — LessonGuru Odisha</div>
+    <button onclick="window.parent?.postMessage({type:'slp-next'},'*')">Next ›</button>
+  </div>
+
+</article>
+</body>
+</html>

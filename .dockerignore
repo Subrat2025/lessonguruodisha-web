@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.emergent
+android-app
+backups
+test_reports
+reports
+memory
+*.py
+backend_test*.txt
+**/*.log
+.env
+.env.*

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter Assessments — Official Template (v2)</title>
+<!--
+  ============================================================
+  LESSON GURU ODISHA — CHAPTER ASSESSMENTS OFFICIAL TEMPLATE (v2)
+  ============================================================
+
+  ✍️  HOW TO USE THIS FILE
+  1. Fill in the CLASS / SUBJECT / CHAPTER in <div class="chapter-assessments">.
+  2. Fill each Assessment 1..5 with:
+      • ONE   <div class="assessment-question-page"> containing ALL questions
+      • ONE   <div class="assessment-answer-page">   containing the COMPLETE answer key
+  3. Save the file with the .html extension and upload it in
+     Admin → Academic Resources → Chapter Assessments.
+
+  ⚠️  IMPORTANT
+    • Keep ALL QUESTIONS inside .assessment-question-page.
+    • Keep the COMPLETE ANSWER KEY inside .assessment-answer-page.
+    • DO NOT manually insert page-breaks between individual questions.
+    • DO NOT rename `data-assessment-number` or `data-resource-type`.
+    • DO NOT delete a <section class="assessment"> block.
+    • DO NOT add <script> or on*="..." handlers — they will be stripped.
+
+  ✅  SAFE elements: <h1>..<h6>, <p>, <ul>, <ol>, <li>, <table>, <tr>,
+      <td>, <th>, <strong>, <em>, <img>, <br>, <hr>, <blockquote>.
+
+  ℹ️  Backward compatibility — old assessments that used
+      `<div class="page">…</div>` will still work.  The renderer
+      auto-detects: (a) the two explicit containers below (preferred),
+      (b) two legacy `.page` blocks, or (c) an "Answer Key" heading.
+      Prefer (a) for every new upload.
+  ============================================================
+-->
+<style>
+  /* Presentation-only preview styles.  These are stripped by the
+     server-side sanitizer, but they let you see the two pages while
+     editing the file locally in a browser.  The server rebuilds the
+     PDF layout from scratch using its own compact print CSS. */
+  body { font-family: 'Noto Sans Oriya', system-ui, sans-serif; background: #eef2f7; margin: 0; padding: 20px; }
+  .assessment-question-page,
+  .assessment-answer-page {
+    width: 210mm; min-height: 297mm;
+    background: #fff;
+    margin: 12px auto;
+    padding: 14mm 14mm 18mm;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  }
+  .page-head { text-align: center; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 14px; }
+  .page-head h2 { margin: 0; }
+  .question { margin-bottom: 18px; }
+  .question > p:first-child { font-weight: 700; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+  th, td { border: 1px solid #333; padding: 4px 8px; }
+  .answer-key p { margin: 8px 0; }
+  @media print {
+    body { background: transparent; padding: 0; }
+    .assessment-question-page,
+    .assessment-answer-page { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="chapter-assessments"
+     data-resource-type="chapter-assessments"
+     data-version="2">
+
+  <header class="resource-header" style="display:none">
+    <h1>CHAPTER ASSESSMENTS</h1>
+    <!-- EDIT CLASS HERE -->
+    <div class="class">Class: <span data-field="class">Class 1</span></div>
+    <!-- EDIT SUBJECT HERE -->
+    <div class="subject">Subject: <span data-field="subject">Odia</span></div>
+    <!-- EDIT CHAPTER NAME HERE -->
+    <div class="chapter">Chapter: <span data-field="chapter">Chapter 1</span></div>
+  </header>
+
+  <!-- ============================================================
+       ASSESSMENT 1 — do NOT change the data-assessment-number
+       ============================================================ -->
+  <section class="assessment" data-assessment-number="1">
+
+    <!-- ✅ PAGE 1 — ALL QUESTIONS -->
+    <div class="assessment-question-page">
+      <div class="page-head">
+        <h2 data-field="assessment-title">Assessment 1</h2>
+        <p>Class / Subject / Chapter · Time · Total Marks</p>
+      </div>
+      <div class="questions" data-field="questions">
+        <div class="question" data-question-number="1">
+          <p>1. Sample question text here.</p>
+        </div>
+        <div class="question" data-question-number="2">
+          <p>2. Sample question text here.</p>
+        </div>
+        <div class="question" data-question-number="3">
+          <p>3. Sample question text here.</p>
+        </div>
+        <div class="question" data-question-number="4">
+          <p>4. Sample question text here.</p>
+          <p>(a) Sub-part (a) …</p>
+          <p>(b) Sub-part (b) …</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ PAGE 2 — COMPLETE ANSWER KEY -->
+    <div class="assessment-answer-page">
+      <div class="page-head">
+        <h2>Assessment 1 · ଉତ୍ତର ସୂଚୀ (Answer Key)</h2>
+      </div>
+      <div class="answer-key" data-field="answer-key">
+        <p><strong>1.</strong> …</p>
+        <p><strong>2.</strong> …</p>
+        <p><strong>3.</strong> …</p>
+        <p><strong>4.</strong> (a) … | (b) …</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       ASSESSMENT 2
+       ============================================================ -->
+  <section class="assessment" data-assessment-number="2">
+    <div class="assessment-question-page">
+      <div class="page-head"><h2 data-field="assessment-title">Assessment 2</h2></div>
+      <div class="questions" data-field="questions">
+        <div class="question" data-question-number="1"><p>1. Sample question text here.</p></div>
+      </div>
+    </div>
+    <div class="assessment-answer-page">
+      <div class="page-head"><h2>Assessment 2 · ଉତ୍ତର ସୂଚୀ (Answer Key)</h2></div>
+      <div class="answer-key" data-field="answer-key"><p><strong>1.</strong> …</p></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ASSESSMENT 3
+       ============================================================ -->
+  <section class="assessment" data-assessment-number="3">
+    <div class="assessment-question-page">
+      <div class="page-head"><h2 data-field="assessment-title">Assessment 3</h2></div>
+      <div class="questions" data-field="questions">
+        <div class="question" data-question-number="1"><p>1. Sample question text here.</p></div>
+      </div>
+    </div>
+    <div class="assessment-answer-page">
+      <div class="page-head"><h2>Assessment 3 · ଉତ୍ତର ସୂଚୀ (Answer Key)</h2></div>
+      <div class="answer-key" data-field="answer-key"><p><strong>1.</strong> …</p></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ASSESSMENT 4
+       ============================================================ -->
+  <section class="assessment" data-assessment-number="4">
+    <div class="assessment-question-page">
+      <div class="page-head"><h2 data-field="assessment-title">Assessment 4</h2></div>
+      <div class="questions" data-field="questions">
+        <div class="question" data-question-number="1"><p>1. Sample question text here.</p></div>
+      </div>
+    </div>
+    <div class="assessment-answer-page">
+      <div class="page-head"><h2>Assessment 4 · ଉତ୍ତର ସୂଚୀ (Answer Key)</h2></div>
+      <div class="answer-key" data-field="answer-key"><p><strong>1.</strong> …</p></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ASSESSMENT 5
+       ============================================================ -->
+  <section class="assessment" data-assessment-number="5">
+    <div class="assessment-question-page">
+      <div class="page-head"><h2 data-field="assessment-title">Assessment 5</h2></div>
+      <div class="questions" data-field="questions">
+        <div class="question" data-question-number="1"><p>1. Sample question text here.</p></div>
+      </div>
+    </div>
+    <div class="assessment-answer-page">
+      <div class="page-head"><h2>Assessment 5 · ଉତ୍ତର ସୂଚୀ (Answer Key)</h2></div>
+      <div class="answer-key" data-field="answer-key"><p><strong>1.</strong> …</p></div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

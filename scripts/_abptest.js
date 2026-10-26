@@ -1,0 +1,37 @@
+const fs = require('fs')
+const g = (k) => (fs.readFileSync('/app/.env', 'utf8').match(new RegExp('^' + k + '=(.*)$', 'm')) || [])[1].trim()
+const base = g('NEXT_PUBLIC_BASE_URL')
+const { MongoClient } = require('/app/node_modules/mongodb')
+let T
+const A = (p, o = {}) => fetch(base + '/api' + p, { ...o, headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + T, ...(o.headers || {}) } }).then(r => r.json().catch(() => ({})))
+async function reimport(path, cls, subject) {
+  const buf = fs.readFileSync(path)
+  const fd = new FormData(); fd.append('file', new Blob([buf]), 'x.zip'); fd.append('mode', 'update'); fd.append('class', cls); fd.append('subject', subject); fd.append('book', '')
+  const im = await (await fetch(base + '/api/abp/admin/import', { method: 'POST', headers: { Authorization: 'Bearer ' + T }, body: fd })).json()
+  for (let i = 0; i < 90; i++) { await new Promise(r => setTimeout(r, 3000)); const j = (await A('/abp/admin/import/jobs/' + im.jobId)).job; if (j && (j.status === 'done' || j.status === 'error')) return j }
+}
+;(async () => {
+  T = (await (await fetch(base + '/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mobile: '9692604577', password: 'Subrat@909e' }) })).json()).token
+  const c = await MongoClient.connect(g('MONGO_URL')); const d = c.db(g('DB_NAME'))
+  const c4 = await d.collection('abpChapters').find({ class: '4', trashedAt: { $exists: false } }).project({ id: 1 }).toArray()
+  const c4p = await d.collection('abpPeriods').find({ chapterId: { $in: c4.map(x => x.id) } }).project({ loCodes: 1 }).toArray()
+  console.log('A) Class4: chapters', c4.length, '| periods', c4p.length, '| withLO', c4p.filter(p => (p.loCodes || []).some(l => l.code)).length)
+  const before = await d.collection('abpChapters').countDocuments({ class: '1', subject: 'ଓଡ଼ିଆ', trashedAt: { $exists: false } })
+  const j = await reimport('/tmp/o.zip', '1', 'ଓଡ଼ିଆ')
+  const after = await d.collection('abpChapters').countDocuments({ class: '1', subject: 'ଓଡ଼ିଆ', trashedAt: { $exists: false } })
+  console.log('B) Odia re-import -> updated:', j.imported.updated, 'new:', j.imported.new, 'duplicates:', j.imported.duplicates, '| chapters before/after:', before + '/' + after, after === before ? '(NO DUP OK)' : '(DUP FAIL)')
+  const ord = await d.collection('abpChapters').find({ class: '1', subject: 'ଓଡ଼ିଆ', trashedAt: { $exists: false } }).sort({ order: 1 }).project({ order: 1, sourceFile: 1 }).limit(8).toArray()
+  console.log('   order:', ord.map(x => x.sourceFile.replace('_Lesson_Plan.html', '').replace(/^OD1_/, '') + '=' + x.order).join(', '))
+  const dup = await A('/abp/admin/duplicates'); console.log('C) duplicates found:', (dup.duplicates || []).length)
+  const pre = await A('/abp/admin/courses/delete-preview?class=1&subject=' + encodeURIComponent('ଗଣିତ'))
+  console.log('#3 Math delete-preview:', JSON.stringify(pre))
+  const bad = await A('/abp/admin/courses/delete', { method: 'POST', body: JSON.stringify({ class: '1', subject: 'ଗଣିତ', confirm: 'wrong' }) })
+  console.log('#3 wrong-confirm rejected:', !!bad.error)
+  const del = await A('/abp/admin/courses/delete', { method: 'POST', body: JSON.stringify({ class: '1', subject: 'ଗଣିତ', confirm: 'class 1 ଗଣିତ' }) })
+  console.log('#3 trashed:', JSON.stringify(del))
+  const trash = await A('/abp/admin/trash')
+  console.log('#3 trash size:', (trash.trash || []).length, '| math visible after trash (exp 0):', await d.collection('abpChapters').countDocuments({ class: '1', subject: 'ଗଣିତ', trashedAt: { $exists: false } }))
+  for (const t of (trash.trash || [])) await A('/abp/admin/trash/restore', { method: 'POST', body: JSON.stringify({ id: t.id }) })
+  console.log('#3 math visible after restore (exp 14):', await d.collection('abpChapters').countDocuments({ class: '1', subject: 'ଗଣିତ', trashedAt: { $exists: false } }))
+  await c.close()
+})().catch(e => console.error('ERR', e.message, e.stack))

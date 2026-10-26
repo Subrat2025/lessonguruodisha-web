@@ -1,0 +1,754 @@
+/* Self-hosted fonts (no Google Fonts network dependency) */
+@font-face { font-family: 'Noto Sans Oriya'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/NotoSansOriya-400.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans Oriya'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/NotoSansOriya-600.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans Oriya'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/NotoSansOriya-700.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans Oriya'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/NotoSansOriya-700.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans Devanagari'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/NotoSansDevanagari-400.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans Devanagari'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/NotoSansDevanagari-700.woff2') format('woff2'); }
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 160 84% 39%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --radius: 1rem;
+  }
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 160 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 38 92% 55%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 63% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 217 91% 60%;
+  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; -webkit-tap-highlight-color: transparent; font-family: 'Inter', 'Noto Sans Oriya', 'Segoe UI', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', system-ui, sans-serif; }
+  html, body { overscroll-behavior-y: none; }
+  /* Emoji font fallback — ensures color emojis (📘 🎯 ✅ 👨‍🏫 🧑‍🎓 etc.)
+     render on ALL platforms and in html2canvas/html2pdf PDF snapshots.
+     Without this stack, Chrome on Android/Linux + html2canvas render emojis
+     as tofu boxes (□). */
+  .emoji, .lesson-emoji {
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji Mozilla', 'EmojiOne Color', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .scroll-hide::-webkit-scrollbar { display: none; }
+  .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem); }
+  .glass {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .dark .glass {
+    background: rgba(20,24,38,0.75);
+  }
+  .no-select {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+  }
+  .lp-content h2 { @apply text-xl font-bold mt-4 mb-2 text-primary; }
+  .lp-content h3 { @apply text-base font-semibold mt-3 mb-1 text-secondary; }
+  .lp-content p { @apply mb-2 leading-relaxed; }
+  .lp-content ol { @apply list-decimal pl-6 space-y-1; }
+  .lp-content ul { @apply list-disc pl-6 space-y-1; }
+
+  /* Green rounded LO Code pill — matches the <Badge> style used in
+     LessonView.  Applied automatically to LO code tokens (OD 601,
+     CD 7.1.1, EN 605, C1-PD-1.3.1, CG-10, etc.) that appear inside
+     admin-uploaded HTML lesson content via the styleLoCodesInHtml()
+     post-processor in page.js. */
+  .lo-code-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    margin: 0 3px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 0.85em;
+    letter-spacing: 0.02em;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.15);
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+  }
+}
+
+/* ================================================================
+ * MOBILE-FIRST UX  ·  iOS safe areas + no zoom-on-focus
+ * High mobile user base — these rules make the PWA feel native on
+ * phones without touching component markup.
+ * ================================================================ */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Safe-area helpers (need viewport-fit=cover in the layout meta). */
+@supports (padding: max(0px)) {
+  .safe-top   { padding-top: env(safe-area-inset-top); }
+  .safe-x     { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  .safe-inset { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* iOS Safari auto-zooms a page whenever a focused field's font-size is
+   < 16px.  Force ≥16px on phones so tapping any input never triggers the
+   jarring zoom-in (fields still look normal thanks to compact padding). */
+@media (max-width: 640px) {
+  input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Comfortable, snappy tap targets on touch devices. */
+@media (hover: none) and (pointer: coarse) {
+  button, a[role='button'], [role='tab'], [role='button'] {
+    touch-action: manipulation;
+  }
+}
+
+/* Bottom-sheet slide-up for modals that dock to the bottom on mobile
+   (the app already uses `items-end sm:items-center`).  Add `.sheet-in`
+   to opt a panel into the animation. */
+@keyframes sheetUp { from { transform: translateY(100%); opacity: .6; } to { transform: translateY(0); opacity: 1; } }
+@media (max-width: 640px) {
+  .sheet-in { animation: sheetUp .22s cubic-bezier(.32,.72,0,1); }
+}
+
+
+/* ===== PRINT RULES =====
+   Default: BLOCK printing app content (anti-piracy for lessons).
+   EXCEPTION: pages wrapped in `.print-allowed` (Daily Plan Generator) are printable.
+   When `.print-allowed` is mounted, we add `body.print-mode` via the component so only
+   `.printable-area` renders during print. */
+/* ===== PRINT VIEW ARCHITECTURE =====
+   #print-view renders the EXACT same DOM that will be printed.
+   On screen: it's visible and styled as an A4-landscape paper preview (wrapped in .preview-scroll for mobile horizontal scrolling).
+   During print: all other content is hidden, and #print-view alone is shown across A4 landscape pages. */
+
+/* ===== SCREEN PREVIEW STYLES for #print-view ===== */
+#print-view {
+  display: block;
+  background: #fff;
+  color: #000;
+  width: 297mm;
+  min-width: 297mm;
+  max-width: 297mm;
+  margin: 12px auto;
+  padding: 8mm;
+  font-family: 'Inter', 'Noto Sans Oriya', system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1.3;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.18);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+.dark #print-view { box-shadow: 0 6px 28px rgba(0,0,0,0.55); }
+
+/* Register-style page (compact) */
+#print-view .print-page { width: 100%; margin-bottom: 18px; background: #fff; }
+#print-view .print-page:last-child { margin-bottom: 0; }
+#print-view .school-header {
+  font-size: 11px;
+  padding: 6px 10px;
+  border: 1.5pt solid #000;
+  border-bottom: 0;
+  background: #fff;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#print-view table.register {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #000;
+}
+#print-view table.register th {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 3px;
+  border: 1pt solid #000;
+  text-align: center;
+  background: #fde68a;
+  color: #000;
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+#print-view table.register td {
+  font-size: 9.5px;
+  padding: 3px 4px;
+  border: 1pt solid #000;
+  vertical-align: top;
+  color: #000;
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.2;
+}
+#print-view table.register td.nowrap-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#print-view .signature-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 4px;
+  gap: 8mm;
+  color: #000;
+}
+#print-view .signature-row > div {
+  flex: 1 1 0;
+  text-align: center;
+  font-weight: 700;
+  border-top: 1pt solid #000;
+  padding-top: 8px;
+  font-size: 11px;
+}
+
+
+/* ================================================================
+ * INSTANT DAILY PLAN · A4 LANDSCAPE OVERVIEW (v2)
+ * ----------------------------------------------------------------
+ * Redesigned 7-column layout — see PrintRegisterTemplate for JSX.
+ * Uses table-layout:fixed with explicit colgroup widths so columns
+ * never collapse.  Rows use break-inside:avoid so long rows move
+ * whole to the next page instead of splitting.  Table header
+ * repeats on every page via `thead { display: table-header-group }`.
+ * ================================================================ */
+#print-view .instant-daily-page {
+  padding: 6mm 4mm;
+  font-family: 'Noto Sans Oriya', 'Noto Sans', 'Segoe UI', Tahoma, sans-serif;
+}
+#print-view .idp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8mm;
+  padding: 4px 6px 8px;
+  border-bottom: 1.5pt solid #000;
+  margin-bottom: 6px;
+  color: #000;
+  flex-wrap: wrap;
+}
+#print-view .idp-brand-title {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #4c1d95;
+}
+#print-view .idp-brand-subtitle {
+  font-size: 10px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-top: 2px;
+}
+#print-view .idp-meta {
+  font-size: 10.5px;
+  line-height: 1.4;
+  text-align: right;
+}
+#print-view .idp-meta > div { white-space: nowrap; }
+#print-view table.register-v2 {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 10.5px;
+  line-height: 1.3;
+  color: #000;
+}
+#print-view table.register-v2 thead { display: table-header-group; }
+#print-view table.register-v2 tfoot { display: table-row-group; }
+#print-view table.register-v2 th {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 4px 3px;
+  border: 1pt solid #000;
+  text-align: center;
+  background: #fef3c7;
+  color: #000;
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.2;
+}
+#print-view table.register-v2 th .th-en {
+  display: block;
+  font-size: 8.5px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-top: 1px;
+}
+#print-view table.register-v2 td {
+  font-size: 10.5px;
+  padding: 4px 5px;
+  border: 1pt solid #000;
+  vertical-align: top;
+  color: #000;
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.3;
+}
+#print-view table.register-v2 td.cell-center { text-align: center; }
+#print-view table.register-v2 td .cell-time { font-size: 8.5px; font-weight: 500; opacity: 0.8; }
+#print-view table.register-v2 td.cell-lo { font-size: 9.5px; text-align: center; line-height: 1.25; }
+#print-view .instant-daily-page .lesson-row {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Teaching Plan card · Panchapadi Sopana + TLM per period */
+#print-view .teaching-plan-card {
+  margin-top: 5mm;
+  border: 1pt solid #000;
+  border-radius: 3px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  background: #fff;
+}
+#print-view .teaching-plan-card .tp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-bottom: 1pt solid #000;
+  background: #fafafa;
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+#print-view .tp-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 10px;
+  margin-right: 4px;
+  color: #000;
+}
+#print-view .tp-chapter { color: #4c1d95; font-weight: 600; }
+#print-view .tp-header-meta { font-size: 10px; color: #6b7280; font-weight: 600; }
+#print-view .tp-section-label {
+  padding: 3px 8px;
+  background: #eef2ff;
+  font-weight: 700;
+  font-size: 10.5px;
+  color: #3730a3;
+  border-bottom: 1pt solid #cbd5e1;
+}
+#print-view table.tp-panchapadi {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #000;
+}
+#print-view table.tp-panchapadi thead { display: table-header-group; }
+#print-view table.tp-panchapadi th {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 4px;
+  border: 1pt solid #000;
+  text-align: center;
+  background: #fef3c7;
+  color: #000;
+}
+#print-view table.tp-panchapadi th .th-en {
+  display: block;
+  font-size: 8.5px;
+  font-weight: 500;
+  color: #6b7280;
+}
+#print-view table.tp-panchapadi td {
+  font-size: 10px;
+  padding: 4px 5px;
+  border: 1pt solid #000;
+  vertical-align: top;
+  color: #000;
+  word-break: normal;
+  overflow-wrap: break-word;
+  line-height: 1.3;
+}
+#print-view .tp-step-label { text-align: center; font-weight: 700; }
+#print-view .tp-step-en { font-size: 8.5px; font-weight: 500; color: #6b7280; }
+#print-view .tp-step-time { text-align: center; font-weight: 600; color: #4c1d95; }
+#print-view .tp-step-row { break-inside: avoid; page-break-inside: avoid; }
+#print-view .tp-empty { color: #9ca3af; font-style: italic; }
+#print-view .tp-empty-block {
+  padding: 6px 8px;
+  font-size: 10px;
+  color: #6b7280;
+  font-style: italic;
+  border-bottom: 1pt solid #eee;
+}
+#print-view .tp-tlm {
+  padding: 5px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+#print-view .tp-tlm-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1pt solid #10b981;
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: #065f46;
+  font-size: 10px;
+  font-weight: 600;
+}
+@media print {
+  body.print-mode #print-view .teaching-plan-card {
+    margin-top: 5mm !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+/* Print-mode override — use full A4 landscape width, hide preview scaffolding. */
+@media print {
+  body.print-mode #print-view .instant-daily-page {
+    padding: 4mm 2mm;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    background: #fff !important;
+  }
+  body.print-mode #print-view .idp-header {
+    border-bottom: 2pt solid #000;
+    margin-bottom: 4mm;
+    padding: 2mm 3mm 3mm;
+  }
+  body.print-mode #print-view table.register-v2 {
+    font-size: 10pt;
+  }
+  body.print-mode #print-view table.register-v2 th,
+  body.print-mode #print-view table.register-v2 td {
+    padding: 3pt 4pt;
+    font-size: 10pt;
+    line-height: 1.25;
+  }
+  body.print-mode #print-view .lesson-row {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  body.print-mode #print-view .signature-row {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-top: 8mm;
+  }
+}
+
+/* Detailed page (one period per A4 landscape page) */
+#print-view .detailed-page {
+  width: 100%;
+  min-height: 185mm;
+  background: #fff;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin-bottom: 18px;
+  padding: 0;
+}
+#print-view .detailed-page:last-child { margin-bottom: 0; }
+#print-view .detailed-page table { width: 100%; border-collapse: collapse; }
+#print-view .detailed-page table th,
+#print-view .detailed-page table td {
+  border: 1px solid #888;
+  padding: 6px 10px;
+  font-size: 12px;
+  vertical-align: top;
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+#print-view .detailed-page .panchapadi-table tbody { flex: 1 1 auto; }
+#print-view .detailed-footer {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #4a5568;
+  padding-top: 12px;
+  border-top: 1px solid #ccc;
+}
+
+/* Horizontal scroll wrapper for the preview on small screens */
+.preview-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+.preview-scroll::-webkit-scrollbar { height: 10px; }
+.preview-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 4px; }
+.preview-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.35); border-radius: 4px; }
+.preview-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.5); }
+
+/* TOP-LEVEL @page rules — must NOT be nested inside @media print for Chrome reliability */
+@page {
+  size: A4 landscape;
+  size: 297mm 210mm;
+  margin: 8mm;
+}
+@page :first { size: A4 landscape; margin: 8mm; }
+@page :left  { size: A4 landscape; margin: 8mm; }
+@page :right { size: A4 landscape; margin: 8mm; }
+
+@media print {
+  /* Default block: when print-mode is NOT active, hide everything */
+  body:not(.print-mode) * { display: none !important; }
+  body:not(.print-mode)::before {
+    content: '🚫 Printing is disabled. Lesson Guru Odisha Premium content is protected.';
+    display: block !important;
+    font-size: 24px;
+    text-align: center;
+    padding: 50px;
+  }
+
+  /* Print-mode: hide ALL screen content using visibility, then absolutely position #print-view at page top */
+  body.print-mode { background: #fff !important; color: #000 !important; margin: 0 !important; padding: 0 !important; }
+  body.print-mode * { visibility: hidden !important; }
+  body.print-mode #print-view,
+  body.print-mode #print-view * { visibility: visible !important; }
+  body.print-mode #print-view {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;      /* let it fill the printable A4 landscape width */
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #000 !important;
+    background: #fff !important;
+    font-family: 'Inter', 'Noto Sans Oriya', system-ui, sans-serif !important;
+    z-index: 9999 !important;
+  }
+  body.print-mode #print-view .print-page {
+    width: 100% !important;
+    /* Make each printed page a full-height flex column so the register
+       table stretches to fill the entire A4 landscape sheet even when
+       the day has only 2-3 periods.  Prevents the "tiny table in the
+       top-left" issue teachers reported. */
+    min-height: calc(210mm - 20mm) !important;  /* A4 landscape height − page margins */
+    display: flex !important;
+    flex-direction: column !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+  }
+  body.print-mode #print-view .print-page:last-child { page-break-after: auto !important; break-after: auto !important; }
+
+  /* Detailed template — one period per A4 landscape page (matches attached HTML style) */
+  body.print-mode #print-view .detailed-page {
+    width: 277mm !important;
+    height: 185mm !important;
+    background: #fff !important;
+    color: #333 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    display: flex !important;
+    flex-direction: column !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+  body.print-mode #print-view .detailed-page:last-child { page-break-after: auto !important; break-after: auto !important; }
+  body.print-mode #print-view .detailed-page table { width: 100% !important; border-collapse: collapse !important; }
+  body.print-mode #print-view .detailed-page table th,
+  body.print-mode #print-view .detailed-page table td {
+    border: 1px solid #888 !important;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+    vertical-align: top !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    hyphens: none !important;
+  }
+  body.print-mode #print-view .detailed-page .panchapadi-table tbody { flex: 1 1 auto !important; }
+  body.print-mode #print-view .detailed-footer {
+    margin-top: auto !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    font-size: 14px !important;
+    color: #4a5568 !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #ccc !important;
+  }
+  body.print-mode #print-view .school-header { font-size: 12px !important; padding: 4px 8px !important; border: 1.5pt solid #000 !important; border-bottom: 0 !important; flex: 0 0 auto !important; }
+  body.print-mode #print-view table.register {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    /* Stretch to fill remaining vertical space on the page so 2-3 periods
+       don't leave the bottom half of the sheet blank. */
+    flex: 1 1 auto !important;
+    height: 100% !important;
+  }
+  body.print-mode #print-view table.register th {
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    padding: 5px 4px !important;
+    border: 1pt solid #000 !important;
+    text-align: center !important;
+    background: #fde68a !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    hyphens: none !important;
+  }
+  body.print-mode #print-view table.register td {
+    font-size: 11px !important;
+    padding: 6px 5px !important;
+    border: 1pt solid #000 !important;
+    vertical-align: top !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    hyphens: none !important;
+    line-height: 1.3 !important;
+    overflow: visible !important;
+  }
+  /* Bump child text (LO stack, DG stack) that had hard-coded 8-9px sizes so
+     the whole register stays legible when printed. */
+  body.print-mode #print-view table.register td span,
+  body.print-mode #print-view table.register td div { font-size: inherit !important; }
+  body.print-mode #print-view table.register td.nowrap-cell {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  body.print-mode #print-view .signature-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-top: 12px !important;
+    padding-top: 4px !important;
+    gap: 8mm !important;
+    flex: 0 0 auto !important;  /* pinned to the bottom of the flex column */
+  }
+  body.print-mode #print-view .signature-row > div {
+    flex: 1 1 0 !important;
+    text-align: center !important;
+    font-weight: 700 !important;
+    border-top: 1pt solid #000 !important;
+    padding-top: 8px !important;
+    font-size: 12px !important;
+  }
+}
+.print-mode .no-print { display: none !important; }
+.printable-area { color: #000; }
+.printable-area .pp-step-cell { background: #f8f9fa; }
+
+/* ===== Brand watermark for generated lesson plan outputs ===== */
+/* Positioned absolutely on TOP of content (Word-style overlay) at low opacity so it
+   shows across the entire page including over tables. html2canvas captures it. */
+#print-view .print-page,
+#print-view .detailed-page,
+.lesson-pdf-render .print-brand-watermark-host {
+  position: relative;
+}
+.print-brand-watermark,
+.print-brand-watermark-host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+.print-brand-watermark svg,
+.print-brand-watermark-host svg { display: block; width: 100%; height: 100%; }
+
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+
+.animate-blob { animation: blob 8s infinite; }
+@keyframes blob {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(20px,-30px) scale(1.1); }
+  66% { transform: translate(-15px,15px) scale(0.95); }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+
+/* LO Code Books · hover shine sweep */
+@keyframes shine {
+  0%   { transform: translateX(-120%) rotate(12deg); opacity: 0; }
+  50%  { opacity: 1; }
+  100% { transform: translateX(420%) rotate(12deg); opacity: 0; }
+}
+
+/* Baloo Bhaina 2 — titles/prices/numerals for the Unit-Test store (Phase C designs) */
+@font-face {
+  font-family: 'Baloo Bhaina 2';
+  src: url('/fonts/BalooBhaina2.ttf') format('truetype');
+  font-weight: 400 800;
+  font-display: swap;
+}
+.font-baloo { font-family: 'Baloo Bhaina 2', 'Noto Sans Oriya', system-ui, sans-serif; }
+.font-odia { font-family: 'Noto Sans Oriya', 'Noto Sans', system-ui, sans-serif; }

@@ -1,0 +1,179 @@
+{
+  "source": "NCF-FS Balvatika · Uploaded by Lesson Guru Odisha Admin (Jul-2026)",
+  "classCode": "BV3",
+  "className": "Balvatika",
+  "curricularGoals": [
+    {
+      "cgCode": "CG-1",
+      "domain": "PD/SED",
+      "titleOdia": "ପିଲାମାନେ ସୁସ୍ଥ ଏବଂ ସୁରକ୍ଷିତ ନିରାପଦ ରହିବା ପାଇଁ ଅଭ୍ୟାସର ବିକାଶ କରିବେ ।",
+      "titleEnglish": "Children will develop practices for being healthy and safe.",
+      "competencies": [
+        { "code": "C1.1", "odia": "ପୁଷ୍ଟିକର ଖାଦ୍ୟ ବିଷୟରେ ବୁଝିବେ ଓ ପୁଷ୍ଟିକର ଖାଦ୍ୟ ପ୍ରତି ଆଗ୍ରହ ପ୍ରକାଶ କରିବେ ଏବଂ ଖାଦ୍ୟର ଅପବ୍ୟବହାର କରିବେ ନାହିଁ ।", "english": "Will understand about nutritious food and express interest in nutritious food, and will not waste food." },
+        { "code": "C1.2", "odia": "ମୌଳିକ ସ୍ବ-ଯତ୍ନ ଓ ସ୍ବଚ୍ଛତା ର ଅଭ୍ୟାସ କରିବେ ।", "english": "Will practice basic self-care and hygiene." },
+        { "code": "C1.3", "odia": "ବିଦ୍ୟାଳୟ/ଶ୍ରେଣୀଗୃହକୁ ସ୍ୱଚ୍ଛ ଓ ସଂଗଠିତ କରିବେ ।", "english": "Will keep the school/classroom clean and organized." },
+        { "code": "C1.4", "odia": "ସାମଗ୍ରୀ ଏବଂ ସରଳ ଉପକରଣ ଗୁଡ଼ିକର ନିରାପଦ ବ୍ୟବହାର କରିବେ ।", "english": "Will use materials and simple equipment safely." },
+        { "code": "C1.5", "odia": "ଚଳନ ଜନିତ କାର୍ଯ୍ୟ ଯଥା ଚାଲିବା, ଦୌଡ଼ିବା ଏବଂ ସାଇକେଲ ଚଳାଇବା କାର୍ଯ୍ୟ କଲାବେଳେ ସଚେତନତା ଅବଲମ୍ବନ କରିବେ ଏବଂ ସେହି କାର୍ଯ୍ୟଗୁଡ଼ିକୁ ଠିକ୍ ଭାବରେ କରିବେ ।", "english": "Will exercise caution during motor activities like walking, running, and cycling." },
+        { "code": "C1.6", "odia": "ଅସୁରକ୍ଷିତ ପରିସ୍ଥିତିକୁ ବୁଝିବେ ଏବଂ ସାହାଯ୍ୟ ମାଗିବେ ।", "english": "Will understand unsafe situations and ask for help." }
+      ]
+    },
+    {
+      "cgCode": "CG-2",
+      "domain": "CD",
+      "titleOdia": "ପିଲାମାନେ ସଂବେଦନଶୀଳ ଧାରଣାରେ ତୀକ୍ଷ୍ଣତା ବିକାଶ କରିବେ ।",
+      "titleEnglish": "Children will develop sharpness in sensory perception.",
+      "competencies": [
+        { "code": "C2.1", "odia": "ବିଭିନ୍ନ ପ୍ରକାରର ଆକୃତି, ରଙ୍ଗ ଏବଂ ରଙ୍ଗର ଛାୟାଙ୍କନ ମଧ୍ଯରେ ପାର୍ଥକ୍ୟ ଦର୍ଶାଇବେ ।", "english": "Will differentiate between shapes, colors, and shades of colors." },
+        { "code": "C2.2", "odia": "ସଂକେତ ଏବଂ ଉପସ୍ଥାପନା ପାଇଁ ଦୃଶ୍ୟ ସ୍ମୃତି (Visual Memory) ଶକ୍ତି ବିକାଶ କରିବେ ।", "english": "Will develop visual memory power for cues and presentations." },
+        { "code": "C2.3", "odia": "ତୀବ୍ରତା, ପରିମାଣ ଓ ଗତି ଅନୁଯାୟୀ ଧ୍ୱନି ଓ ଏହାର ପ୍ରକାର, ପ୍ରକାରଭେଦ (Sound Pattern) କୁ ଚିହ୍ନେଇବେ ।", "english": "Will identify sound patterns according to intensity, magnitude, and speed." },
+        { "code": "C2.4", "odia": "ବିଭିନ୍ନ ପ୍ରକାରର ଗନ୍ଧ ଓ ସ୍ବାଦ ଗୁଡ଼ିକୁ ଅଲଗା କରିବେ ।", "english": "Will distinguish between various smells and tastes." },
+        { "code": "C2.5", "odia": "ସ୍ପର୍ଶ ଅନୁଭବ (Sense of touch) ଗୁଡ଼ିକୁ ପୃଥକୀକରଣ କରିବା ଦକ୍ଷତାର ବିକାଶ କରିବେ ।", "english": "Will develop the skill of differentiating sensory perceptions of touch." },
+        { "code": "C2.6", "odia": "ନିଜ ଅନୁଭୂତିର ସାମଗ୍ରିକ ସଚେତନତା ପାଇଁ ସମ୍ବେଦନଶୀଳ ଦୃଷ୍ଟିକୋଣ (Sensory Perceptions) ଗୁଡ଼ିକୁ ଏକତ୍ର କରିବେ ।", "english": "Will integrate sensory perceptions for overall awareness." }
+      ]
+    },
+    {
+      "cgCode": "CG-3",
+      "domain": "PD",
+      "titleOdia": "ପିଲାମାନେ ସୁସ୍ଥ ଏବଂ ନମନୀୟ ଶରୀର ବିକାଶ କରିବେ ।",
+      "titleEnglish": "Children will develop a healthy and flexible body.",
+      "competencies": [
+        { "code": "C3.1", "odia": "ବିଭିନ୍ନ ପ୍ରକାର କାର୍ଯ୍ୟରେ ସମ୍ବେଦନଶୀଳ ଧାରଣା ଏବଂ ଶାରୀରିକ ଅଙ୍ଗଚାଳନା ମଧ୍ୟରେ ସମନ୍ବୟ ଦେଖାଇବେ ।", "english": "Will show coordination between sensory perception and physical movements." },
+        { "code": "C3.2", "odia": "ବିଭିନ୍ନ ଶାରୀରିକ କାର୍ଯ୍ୟରେ ସନ୍ତୁଳନ, ସମନ୍ୱୟ ଏବଂ ନମନୀୟତା ଦେଖାଇବେ ।", "english": "Will demonstrate balance, coordination, and flexibility in physical activities." },
+        { "code": "C3.3", "odia": "ନିଜ ହାତ, ଆଙ୍ଗୁଠିରେ କାମ କରିବାରେ ସଠିକତା ଏବଂ ନମନୀୟତା ଦେଖାଇବେ ।", "english": "Will show accuracy and dexterity with hands and fingers." },
+        { "code": "C3.4", "odia": "ବହନ କରିବା, ଚାଲିବା ଏବଂ ଦୌଡ଼ିବାରେ ଶକ୍ତି ଓ ସାମର୍ଥ୍ୟ ଦେଖାଇବେ ।", "english": "Will show strength and stamina in carrying, walking, and running." }
+      ]
+    },
+    {
+      "cgCode": "CG-4",
+      "domain": "SED",
+      "titleOdia": "ପିଲାମାନେ ଭାବାବେଗ ବୃଦ୍ଧିମତାର ବିକାଶ କରନ୍ତି ଯଥା, ନିଜ ଭାବନାକୁ ବୁଝିବା ଏବଂ ପରିଚାଳନା କରିବାର କ୍ଷମତା ଏବଂ ସାମାଜିକ ନିୟମକୁ ସକାରାତ୍ମକ ଭାବରେ ପ୍ରତିକ୍ରିୟା ପ୍ରକାଶ କରିବେ ।",
+      "titleEnglish": "Children develop emotional intelligence — understanding and managing emotions, and responding positively to social norms.",
+      "competencies": [
+        { "code": "C4.1", "odia": "ଏକ ପରିବାର ଏବଂ ସମ୍ପ୍ରଦାୟର ବ୍ୟକ୍ତି ଭାବରେ ନିଜକୁ ଚିହ୍ନିବା ଆରମ୍ଭ କରିବେ ।", "english": "Will begin to identify themselves as individuals within family and community." },
+        { "code": "C4.2", "odia": "ବିଭିନ୍ନ ଭାବନାକୁ ଚିହ୍ନିବେ ଏବଂ ସେଗୁଡ଼ିକୁ ସଠିକ ଭାବରେ ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ସୁଚିନ୍ତିତ ପ୍ରୟାସ କରିବେ ।", "english": "Will identify emotions and make efforts to control them appropriately." },
+        { "code": "C4.3", "odia": "ଅନ୍ୟ ପିଲା ଏବଂ ବୟସ୍କଙ୍କ ସହ ଅନାୟାସରେ କଥାବାର୍ତ୍ତା କରିବେ ।", "english": "Will converse with other children and adults with ease." },
+        { "code": "C4.4", "odia": "ଅନ୍ୟ ପିଲାଙ୍କ ସହ ସହଜରେ ଯୋଗାଯୋଗ କରିବେ ।", "english": "Will communicate easily with other children." },
+        { "code": "C4.5", "odia": "ଶ୍ରେଣୀ ଗୃହରେ ଏବଂ ବିଦ୍ୟାଳୟରେ ସାମାଜିକ ନିୟମକୁ ସକାରାତ୍ମକ ଭାବରେ ବୁଝିବେ ଏବଂ ପ୍ରତିକ୍ରିୟା କରିବେ ।", "english": "Will understand and respond positively to social norms." },
+        { "code": "C4.6", "odia": "ଆବଶ୍ୟକସ୍ଥଳେ ଅନ୍ୟ ମାନଙ୍କୁ ଦୟା ଏବଂ ସହାୟତା ଦେଖାଇବେ (ପଶୁ ଏବଂ ଉଦ୍ଭିଦକୁ ମଧ୍ୟ) ।", "english": "Will show kindness and help to others (including animals and plants)." },
+        { "code": "C4.7", "odia": "ଅନ୍ୟ ପିଲାମାନଙ୍କର ବିଭିନ୍ନ ଚିନ୍ତାଧାରା, ପସନ୍ଦ ଏବଂ ଭାବପ୍ରବଣତା ବୁଝିବେ ଏବଂ ସକାରାତ୍ମକ ଭାବରେ ପ୍ରତିକ୍ରିୟା ଦେବେ ।", "english": "Will understand and respond positively to other children's thoughts, preferences, and emotions." }
+      ]
+    },
+    {
+      "cgCode": "CG-5",
+      "domain": "SED/ACD",
+      "titleOdia": "ପିଲାମାନେ ଉତ୍ପାଦନକାରୀ କାର୍ଯ୍ୟ ଏବଂ ସେବା ପ୍ରତି ଏକ ସକାରାତ୍ମକ ମନୋଭାବ ବିକାଶ କରିବେ ।",
+      "titleEnglish": "Children will develop a positive attitude towards productive work and service.",
+      "competencies": [
+        { "code": "C5.1", "odia": "ଅନ୍ୟମାନଙ୍କୁ ସାହାଯ୍ୟ କରିବା ପାଇଁ ବୟସ ଉପଯୁକ୍ତ ଶାରୀରିକ କାର୍ଯ୍ୟରେ ମନୋବୃତ୍ତି ଏବଂ ଅଂଶଗ୍ରହଣ ପ୍ରଦର୍ଶନ କରିବେ ।", "english": "Will demonstrate attitude and participation in age-appropriate physical activities to help others." }
+      ]
+    },
+    {
+      "cgCode": "CG-6",
+      "domain": "CD",
+      "titleOdia": "ପିଲାମାନେ ପ୍ରାକୃତିକ ପରିବେଶ ପାଇଁ ଏକ ସକାରାତ୍ମକ ମନୋଭାବ ବିକାଶ କରିବେ ।",
+      "titleEnglish": "Children will develop a positive attitude towards the natural environment.",
+      "competencies": [
+        { "code": "C6.1", "odia": "ସମସ୍ତ ଜୀବପାଇଁ ଯତ୍ନଶୀଳ ହେବେ ଏବଂ ସେମାନଙ୍କ ସହ ଆନନ୍ଦରେ ଜଡ଼ିତ ହେବେ ।", "english": "Will be caring towards all living beings and engage with them joyfully." }
+      ]
+    },
+    {
+      "cgCode": "CG-7",
+      "domain": "CD",
+      "titleOdia": "ପିଲାମାନେ ପର୍ଯ୍ୟବେକ୍ଷଣ ଓ ଯୁକ୍ତିଯୁକ୍ତ ଚିନ୍ତାଧାରା ମାଧ୍ୟମରେ ଆଖପାଖର ଦୁନିଆକୁ ବୁଝିବେ ।",
+      "titleEnglish": "Children will understand the world through observation and logical thinking.",
+      "competencies": [
+        { "code": "C7.1", "odia": "ବିଭିନ୍ନ ବର୍ଗର ବସ୍ତୁ ଏବଂ ସେମାନଙ୍କ ମଧ୍ୟରେ ଥିବା ସମ୍ପର୍କକୁ ନିରୀକ୍ଷଣ କରିବେ ଏବଂ ବୁଝିବେ ।", "english": "Will observe and understand different categories of objects and their relationships." },
+        { "code": "C7.2", "odia": "ସରଳ ଅନୁକଳ୍ପନା ଗଠନ କରି ପ୍ରକୃତିର କାରଣ ଏବଂ ପ୍ରଭାବ ସମ୍ପର୍କକୁ ନିରୀକ୍ଷଣ କରିବେ ଏବଂ ବୁଝିବେ । ସେମାନଙ୍କର ବ୍ୟାଖ୍ୟାକୁ ଉପସ୍ଥାପନ କରିବେ ।", "english": "Will form simple hypotheses, observe cause-and-effect in nature, and present interpretations." },
+        { "code": "C7.3", "odia": "ଦୈନନ୍ଦିନ ଜୀବନର ସମସ୍ୟା ଏବଂ ଶିକ୍ଷଣ ପାଇଁ ଉପଯୁକ୍ତ ସାଧନୀ ଏବଂ ପ୍ରଯୁକ୍ତିବିଦ୍ୟାର ବ୍ୟବହାର କରିବେ ।", "english": "Will use appropriate tools and technology for daily problems and learning." }
+      ]
+    },
+    {
+      "cgCode": "CG-8",
+      "domain": "CD",
+      "titleOdia": "ପିଲାମାନେ ଗାଣିତିକ ଅବବୋଧ ଏବଂ ଦକ୍ଷତା ବିକାଶ କରିବେ ଯାହାଦ୍ୱାରା ସେମାନେ ପରିମାଣ, ଆକୃତି ଓ ବିଭିନ୍ନ ପ୍ରକାର ମାପନର ବ୍ୟବହାର ପୂର୍ବକ ଆଖପାଖର ଦୁନିଆକୁ ବୁଝିବେ ।",
+      "titleEnglish": "Children will develop mathematical understanding — quantity, shape, and measurement.",
+      "competencies": [
+        { "code": "C8.1", "odia": "ଏକାଧିକ ଗୁଣାବଳୀକୁ ଆଧାର କରି ବସ୍ତୁ ଗୁଡ଼ିକୁ ଭାଗ ଏବଂ ଉପଭାଗରେ ସଜାଡ଼ିବେ ।", "english": "Will arrange objects into categories/sub-categories based on multiple attributes." },
+        { "code": "C8.2", "odia": "ଆକୃତି ଏବଂ ସଂଖ୍ୟାଗୁଡ଼ିକୁ ମାଧ୍ୟମରେ ସରଳ ସଂରଚନାକୁ ଚିହ୍ନଟ କରିବେ ଏବଂ ପ୍ରୟୋଗ କରିବେ ।", "english": "Will identify and apply simple patterns using shapes and numbers." },
+        { "code": "C8.3", "odia": "୧୦-୧୦ କରି, ୨୦-୨୦ କରି ୯୯ ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟାକୁ ଆଗୁଆ ଏବଂ ପଛୁଆ ଗଣିବେ ।", "english": "Will count numbers up to 99 forwards and backwards in steps of 10s and 20s." },
+        { "code": "C8.4", "odia": "୯୯ ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟାକୁ ଉର୍ଦ୍ଧ୍ବକ୍ରମରେ ଏବଂ ଅଧକ୍ରମରେ ସଜାଇବେ ।", "english": "Will arrange numbers up to 99 in ascending and descending order." },
+        { "code": "C8.5", "odia": "ଦଶମିକ ସ୍ଥାନର ବ୍ୟବହାର କରି ୯୯ ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟାର ପରିମାଣକୁ ଚିହ୍ନାଇବେ ଓ ବ୍ୟବହାର କରିବେ ।", "english": "Will identify/use quantity of numbers up to 99 using decimal places." },
+        { "code": "C8.6", "odia": "ନମନୀୟ ଯୋଡ଼ିବା ଓ ଭାଙ୍ଗିବା ପଦ୍ଧତି ବ୍ୟବହାର କରି ଦୁଇଅଙ୍କ ବିଶିଷ୍ଟ ସଂଖ୍ୟାର ଯୋଗ ଓ ବିୟୋଗ କରିବେ ।", "english": "Will add/subtract two-digit numbers using flexible regrouping." },
+        { "code": "C8.7", "odia": "ଗୁଣନକୁ ବାରମ୍ବାର ଯୋଗ ଓ ହରଣକୁ ସମାନ ବଣ୍ଟନ ବୋଲି ଚିହ୍ନଟ କରିବେ ।", "english": "Will identify multiplication as repeated addition and division as equal sharing." },
+        { "code": "C8.8", "odia": "ମୌଳିକ ଜ୍ୟାମିତିକ ଆକୃତି ଓ ପର୍ଯ୍ୟବେକ୍ଷଣ ଯୋଗ୍ୟ ଗୁଣଗୁଡ଼ିକୁ ଚିହ୍ନାଇବେ ।", "english": "Will identify basic geometric shapes and observable properties." },
+        { "code": "C8.9", "odia": "ନିକଟ ପରିବେଶରେ ଥିବା ବସ୍ତୁ ଗୁଡ଼ିକର ଦୈର୍ଘ୍ୟ, ଓଜନ ଓ ପରିମାଣର ସରଳ ମାପ କରିବେ ।", "english": "Will make simple measurements of length, weight, and volume." },
+        { "code": "C8.10", "odia": "ସମୟକୁ ମିନିଟ, ଘଣ୍ଟା, ଦିନ ଏବଂ ମାସରେ ସରଳ ମାପ କରିବେ ।", "english": "Will make simple measurements of time in minutes, hours, days, months." },
+        { "code": "C8.11", "odia": "୧୦୦ ପର୍ଯ୍ୟନ୍ତ ଟଙ୍କାକୁ ବ୍ୟବହାର କରି ସରଳ କାରବାର କରିବେ ।", "english": "Will conduct simple transactions using money up to 100." },
+        { "code": "C8.12", "odia": "ପରିମାଣ, ଆକୃତି, ମାପ ଓ ସ୍ଥାନ ସଂପର୍କିତ ଧାରଣା ଓ ପ୍ରକ୍ରିୟା ଗୁଡ଼ିକୁ ବୁଝିବା ଏବଂ ପ୍ରକାଶ କରିବା ପାଇଁ ପର୍ଯ୍ୟାପ୍ତ ଓ ଉପଯୁକ୍ତ ଶବ୍ଦଜ୍ଞାନ ବିକାଶ କରିବେ ।", "english": "Will develop vocabulary to understand/express concepts of quantity, shape, measurement, space." },
+        { "code": "C8.13", "odia": "ପରିମାଣ, ଆକୃତି, ମାପ ଓ ସ୍ଥାନ ସଂପର୍କିତ ସରଳ ଗାଣିତିକ ସମସ୍ୟାର ଗଠନ ଓ ସମାଧାନ କରିବେ ।", "english": "Will formulate/solve simple math problems related to quantity, shape, measurement, space." }
+      ]
+    },
+    {
+      "cgCode": "CG-9",
+      "domain": "LLD",
+      "titleOdia": "ପିଲାମାନେ ଦ୍ବି – ଭାଷିକ ଦୈନନ୍ଦିନ କ୍ରିୟା କଳାପ ପାଇଁ ଫଳପ୍ରଦ ଭାବ ବିନିମୟ କୌଶଳ ବିକାଶ କରିବେ ।",
+      "titleEnglish": "Children will develop effective communication skills for bilingual daily activities.",
+      "competencies": [
+        { "code": "C9.1", "odia": "ସରଳ ଗୀତ, ରାଇମ୍ ଓ କବିତାକୁ ଶୁଣିବେ ଓ ରସ ଓ ଭାବକୁ ଗ୍ରହଣ କରିବେ ।", "english": "Will listen to songs, rhymes, and poems and grasp essence and emotion." },
+        { "code": "C9.2", "odia": "ନିଜସ୍ବ ସରଳ କବିତା ଓ ଗୀତ ପ୍ରସ୍ତୁତ କରିବେ ।", "english": "Will create their own simple poems and songs." },
+        { "code": "C9.3", "odia": "ଫଳପ୍ରଦ ଓ ଅର୍ଥପୂର୍ଣ ଭାବେ ବାର୍ତ୍ତାଳାପ କରିବେ ।", "english": "Will converse productively and meaningfully." },
+        { "code": "C9.4", "odia": "ଏକ ଜଟିଳ କାର୍ଯ୍ୟ ପାଇଁ ମୌଖିକ ନିର୍ଦ୍ଦେଶାବଳୀକୁ ବୁଝିବେ ଓ ଅନ୍ୟମାନଙ୍କୁ ସ୍ପଷ୍ଟ ମୌଖିକ ନିର୍ଦ୍ଦେଶ ଦେବେ ।", "english": "Will understand oral instructions and give clear oral instructions to others." },
+        { "code": "C9.5", "odia": "ବର୍ଣ୍ଣିତ ତଥା ପଠିତ ଗଳ୍ପଗୁଡ଼ିକୁ ବୁଝିବେ ଓ ଗଳ୍ପର ଚରିତ୍ର, ଗଳ୍ପର ଧାରା ଓ ଲେଖକ କ’ଣ କହିବାକୁ ଚାହୁଁଛନ୍ତି ତାହା ଚିହ୍ନଟ କରିବେ ।", "english": "Will understand narrated/read stories and identify characters, plot, and author's intent." },
+        { "code": "C9.6", "odia": "ସ୍ପଷ୍ଟ କଥାବସ୍ତୁ (plot) ଏବଂ ଚରିତ୍ରକୁ ନେଇ କ୍ଷୁଦ୍ର ଗଳ୍ପ ସୃଷ୍ଟି କରିବେ ।", "english": "Will create short stories with clear plot and characters." },
+        { "code": "C9.7", "odia": "ଦୈନନ୍ଦିନ କାର୍ଯ୍ୟ କରିବା ପାଇଁ ଯଥେଷ୍ଟ ଶବ୍ଦ ଜାଣିବେ ଓ ବ୍ୟବହାର କରିବେ ଏବଂ ଦିଆଯାଇଥିବା ଶବ୍ଦକୋଷ ବ୍ୟବହାର କରି ନୂତନ ଶବ୍ଦର ଅର୍ଥ ଅନୁମାନ କରିବେ ।", "english": "Will know/use sufficient vocabulary and infer new word meanings." }
+      ]
+    },
+    {
+      "cgCode": "CG-10",
+      "domain": "LLD",
+      "titleOdia": "ପିଲାମାନେ ମାତୃଭାଷା (ଭାଷା-୧) ର ପ୍ରବାହ / ସୁଗମ ପଠନ ଓ ଲିଖନ କୌଶଳର ବିକାଶ କରିବେ ।",
+      "titleEnglish": "Children will develop fluency in reading/writing in their mother tongue (Language-1).",
+      "competencies": [
+        { "code": "C10.1", "odia": "ଧ୍ୱନି ସଚେତନତା ବିକାଶ କରିବେ ଓ ଶବ୍ଦଭିତରେ ଥିବା ଧ୍ୱନିକୁ ଭାଙ୍ଗିବେ ଓ ଯୋଡ଼ିବେ ।", "english": "Will develop phonemic awareness and blend sounds within words." },
+        { "code": "C10.2", "odia": "ବହିର ମୌଳିକ ଢ଼ାଞ୍ଚାକୁ ବୁଝିବେ, ବହିରେ ମୁଦ୍ରିତ ହୋଇଥିବା ଶବ୍ଦକୁ କେଉଁ ଦିଗରୁ ପଢ଼ାଯିବ ଓ ସେଥିରେ ଥିବା ବିରାମ ଚିହ୍ନକୁ ଚିହ୍ନାଇବେ ।", "english": "Will understand book structure, reading direction, and punctuation." },
+        { "code": "C10.3", "odia": "ବର୍ଣ୍ଣମାଳା ଭିତରେ ଥିବା ସମସ୍ତ ଅକ୍ଷରର ସଂକେତକୁ ଜାଣିବେ ଓ ସେହି ଆଧାରରେ ପଢ଼ିବା ଓ ଲେଖିବାର କୌଶଳକୁ ବୁଝିବେ ।", "english": "Will know all alphabet symbols and understand reading/writing skills." },
+        { "code": "C10.4", "odia": "ଗଳ୍ପ ଓ ପାଠକୁ ସଠିକ ଗତି, ଉପଯୁକ୍ତ ସ୍ବର ଓ ବିରାମ ଦେଇ ପଢ଼ିବେ ।", "english": "Will read texts with correct pace, intonation, and pauses." },
+        { "code": "C10.5", "odia": "କାହାଣୀକୁ ପଢ଼ିବେ ଓ ତା’ର ଅର୍ଥକୁ ବୁଝିବେ – ସେଥିରେ ଥିବା ଚରିତ୍ରକୁ ଚିହ୍ନଟ କରିବେ, କାହାଣୀର ମୁଖ୍ୟ ସନ୍ଦେଶକୁ ବୁଝିବେ ଓ ଲେଖକ କ’ଣ କହିବାକୁ ଚାହୁଁଛନ୍ତି ସେ ବିଷୟରେ ଜାଣିବେ ।", "english": "Will read and comprehend stories — characters, message, author intent." },
+        { "code": "C10.6", "odia": "କ୍ଷୁଦ୍ର କବିତାକୁ ପଢ଼ିବେ, କବିତାରେ ଥିବା ଶବ୍ଦ ଓ ଭାବନାର ଆଧାରରେ ତାହାକୁ ପ୍ରଶଂସା କରିବେ ।", "english": "Will read short poems and appreciate them based on words/emotions." },
+        { "code": "C10.7", "odia": "କ୍ଷୁଦ୍ର ସମ୍ବାଦ, ନିର୍ଦ୍ଦେଶ, ଖାଦ୍ୟ ସାମଗ୍ରୀ ପ୍ରସ୍ତୁତି ବିଜ୍ଞାପିତ ସାମଗ୍ରୀକୁ ପଢ଼ିବେ ଓ ତା’ର ଅର୍ଥ ବୁଝିବେ ।", "english": "Will read short notices, instructions, and understand them." },
+        { "code": "C10.8", "odia": "ନିଜେ ବୁଝିବା କବିତା ଓ ଅନୁଭୂତିକୁ ଅନୁଚ୍ଛେଦ ମାଧ୍ୟମରେ ଲେଖିକରି ପ୍ରକାଶ କରିବେ ।", "english": "Will express understood poems and experiences through paragraphs." },
+        { "code": "C10.9", "odia": "ପିଲାମାନଙ୍କ ପାଇଁ ଉଦ୍ଦିଷ୍ଟ ପୁସ୍ତକ ଗୁଡ଼ିକ ବାଛିବା ଓ ପଢ଼ିବା ପାଇଁ ଆଗ୍ରହ ପ୍ରକାଶ କରିବେ ।", "english": "Will express interest in selecting and reading children's books." }
+      ]
+    },
+    {
+      "cgCode": "CG-11",
+      "domain": "LLD",
+      "titleOdia": "ପିଲାମାନେ ମାତୃଭାଷା ଭିନ୍ନ ଅନ୍ୟ ଭାଷା (ଭାଷା-୨) ରେ ପଢ଼ିବା ଓ ଲେଖିବା ଆରମ୍ଭ କରିବେ ।",
+      "titleEnglish": "Children will begin to read and write in a second language (Language-2).",
+      "competencies": [
+        { "code": "C11.1", "odia": "ଧ୍ୱନି ସଚେତନତା ବିକାଶ କରିବେ ଓ ଶବ୍ଦଭିତରେ ଥିବା ଧ୍ୱନିକୁ ଭାଙ୍ଗିବେ ଓ ଯୋଡ଼ିବେ ।", "english": "Will develop phonemic awareness and blend sounds." },
+        { "code": "C11.2", "odia": "ଦତ୍ତ ଅନୁଚ୍ଛେଦରେ ବାରମ୍ବାର ବ୍ୟବହାର ହୋଇଥିବା ଅକ୍ଷରକୁ ଚିହ୍ନଟ କରିବେ ଓ ସେହି ଜ୍ଞାନ ଆଧାରରେ ସରଳ ଶବ୍ଦ ଏବଂ ବାକ୍ୟକୁ ଲେଖିବେ ।", "english": "Will identify frequent letters in passages and write simple words/sentences." }
+      ]
+    },
+    {
+      "cgCode": "CG-12",
+      "domain": "ACD",
+      "titleOdia": "ପିଲାମାନେ ଦୃଶ୍ୟ ଏବଂ ପ୍ରଦର୍ଶନ କଳାରେ ଦକ୍ଷତା ଏବଂ ସମ୍ବେଦନଶୀଳତା ବିକାଶ କରିବେ ଏବଂ କଳା ମାଧ୍ୟମରେ ସେମାନଙ୍କର ଭାବନାକୁ ଅର୍ଥପୂର୍ଣ ଏବଂ ଆନନ୍ଦଦାୟକ ଉପାୟରେ ଅଭିବ୍ୟକ୍ତ କରିବେ ।",
+      "titleEnglish": "Children will develop skills in visual/performing arts and express feelings through art.",
+      "competencies": [
+        { "code": "C12.1", "odia": "ବିଭିନ୍ନ ଆକାରର ଦ୍ବି-ମାତ୍ରିକ ଓ ତ୍ରି-ମାତ୍ରିକ ଚିତ୍ରକଳା (artwork) ସୃଷ୍ଟି କରିବାକୁ ବିଭିନ୍ନ ସାମଗ୍ରୀ ଏବଂ ଉପକରଣର ଅନୁସନ୍ଧାନ କରିବେ ଓ ସେଗୁଡ଼ିକ ସହ ଖେଳିବେ ।", "english": "Will explore materials/tools to create 2D and 3D artwork." },
+        { "code": "C12.2", "odia": "ନିଜ ସ୍ବର, ଶରୀର ଓ ବିଭିନ୍ନ ବସ୍ତୁଗୁଡ଼ିକୁ ଖୋଜିବେ ଏବଂ ସେଗୁଡ଼ିକୁ ଉପଯୋଗ କରି ସଙ୍ଗୀତ, ଅଭିନୟ, ନୃତ୍ୟ ଏବଂ ଗତିବିଧି ସୃଷ୍ଟି କରିବେ ।", "english": "Will explore voice/body/objects to create music, drama, dance, and movement." },
+        { "code": "C12.3", "odia": "ସେମାନଙ୍କ କଳା ମାଧ୍ୟମରେ ବିଭିନ୍ନ ଧାରଣା ଏବଂ ଭାବନାକୁ ପ୍ରକାଶ କରିବାକୁ କଳ୍ପନାତ୍ମକ ଭାବେ କାର୍ଯ୍ୟ କରିବେ ଓ ନୂତନ ଉଦ୍ଭାବନ କରିବେ ।", "english": "Will work imaginatively to express ideas and feelings through art." },
+        { "code": "C12.4", "odia": "ମିଳିତ ଭାବେ କଳାତ୍ମକ କାର୍ଯ୍ୟ କରିବେ ।", "english": "Will undertake collaborative artistic work." },
+        { "code": "C12.5", "odia": "ବିଭିନ୍ନ ପ୍ରକାର କଳା, ଆଞ୍ଚଳିକ ସଂସ୍କୃତି ଏବଂ ଐତିହ୍ୟ ଉପରେ ଆହରଣ କରୁଥିବା ଅନୁଭୂତିକୁ ଅନ୍ୟମାନଙ୍କୁ ଜଣାଇବେ ଏବଂ ପ୍ରଶଂସା କରିବେ ।", "english": "Will communicate and appreciate experiences from various art forms and cultures." }
+      ]
+    },
+    {
+      "cgCode": "CG-13",
+      "domain": "SED/CD",
+      "titleOdia": "ପିଲାମାନେ ଶିକ୍ଷାର ଅଭ୍ୟାସ ବିକାଶ କରିବେ ଯାହା ସେମାନଙ୍କୁ ବିଦ୍ୟାଳୟ, ଶ୍ରେଣୀଗୃହ ପରି ଆନୁଷ୍ଠାନିକ ଶିକ୍ଷଣ ପରିବେଶରେ ସକ୍ରିୟ ଭାବରେ ଜଡ଼ିତ ହେବାକୁ ଅନୁମତି ଦିଏ ।",
+      "titleEnglish": "Children will develop learning habits for active engagement in formal learning environments.",
+      "competencies": [
+        { "code": "C13.1", "odia": "ଧ୍ୟାନ ଓ ଉଦ୍ଦେଶ୍ୟ ମୂଳକ କାର୍ଯ୍ୟ: ଯୋଜନା ପ୍ରସ୍ତୁତି ପାଇଁ ଦକ୍ଷତା ହାସଲ କରିବେ, ଧ୍ୟାନ ଦେବେ ଓ ମୁଖ୍ୟ ଉଦ୍ଦେଶ୍ୟକୁ ପୂରଣ କରିବା ପାଇଁ କାର୍ଯ୍ୟ କରିବେ ।", "english": "Focus and Purposeful Work: skills for planning, focus, and objective fulfillment." },
+        { "code": "C13.2", "odia": "ସ୍ମରଣ ଶକ୍ତି ଓ ମାନସିକ ନମନୀୟତା: ନମନୀୟ ମାନସିକତା ଏବଂ ଆତ୍ମ ନିୟନ୍ତ୍ରଣର ବିକାଶ କରିବେ ।", "english": "Memory and Mental Flexibility: flexible mindset and self-control." },
+        { "code": "C13.3", "odia": "ପର୍ଯ୍ୟବେକ୍ଷଣ, ଭ୍ରମଣ, କୌତୁହଳ, ଅନ୍ୱେଷଣ: ବସ୍ତୁଗୁଡ଼ିକୁ ଗଭୀର ଭାବେ ନିରୀକ୍ଷଣ କରିବେ, ଇନ୍ଦ୍ରିୟ ଗୁଡ଼ିକୁ ବ୍ୟବହାର କରି ନୂଆକଥା ଶିଖିବେ, ବସ୍ତୁକୁ ନେଇ ପରୀକ୍ଷଣ କରିବେ ଓ ପ୍ରଶ୍ନ ପଚାରିବେ ।", "english": "Observation, Exploration, Curiosity, Investigation: deep observation, use of senses, experimentation, and questioning." },
+        { "code": "C13.4", "odia": "ଶ୍ରେଣୀଗୃହ ନିୟମ: ଅନୁଷ୍ଠାନର ନିୟମଗୁଡ଼ିକୁ ବୁଝିବା ସହ ଗ୍ରହଣ କରିବେ ଓ ଅନୁସରଣ କରିବେ ।", "english": "Classroom Rules: understand, accept, and follow institutional rules." }
+      ]
+    }
+  ]
+}

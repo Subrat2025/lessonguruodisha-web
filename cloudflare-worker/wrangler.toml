@@ -1,0 +1,21 @@
+# Cloudflare Worker config for the LessonGuru R2 gateway.
+# Deploy with:  npx wrangler deploy   (after `npx wrangler login`)
+# Then set the shared secret:  npx wrangler secret put GATEWAY_SECRET
+
+name = "lg-r2-gateway"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# Private bucket binding (PDFs, answer keys, originals)
+[[r2_buckets]]
+binding = "PRIVATE_BUCKET"
+bucket_name = "lg-private-assets"
+
+# Public bucket binding (covers, previews, OG/share images)
+[[r2_buckets]]
+binding = "PUBLIC_BUCKET"
+bucket_name = "lg-public-assets"
+
+# GATEWAY_SECRET is NOT stored here. Add it as an encrypted secret:
+#   npx wrangler secret put GATEWAY_SECRET
+# (or via the dashboard: Worker > Settings > Variables and Secrets)

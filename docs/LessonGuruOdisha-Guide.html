@@ -1,0 +1,486 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson Guru Odisha Guide</title><style>
+:root{--fg:#1e1b2e;--muted:#5b5670;--bg:#fff;--line:#e6e3ef;--accent:#6d28d9;--code:#f4f1fb}
+@media (prefers-color-scheme:dark){:root{--fg:#ece9f5;--muted:#aaa4bf;--bg:#14111d;--line:#2d2840;--accent:#b794f6;--code:#221d31}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans Oriya",sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:1.8em;line-height:1.25;color:var(--accent)}h2{margin-top:2em;padding-bottom:.3em;border-bottom:2px solid var(--line)}h3{margin-top:1.6em}
+a{color:var(--accent)}code{background:var(--code);padding:.1em .35em;border-radius:4px;font-size:.9em;word-break:break-word}
+pre{background:var(--code);padding:12px;border-radius:8px;overflow-x:auto}pre code{padding:0}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;font-size:.92em;margin:1em 0}th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}th{background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:2em 0}li{margin:.25em 0}img{max-width:100%}
+@media print{body{font-size:11.5pt}main{max-width:none;padding:0}h2{break-after:avoid}table,pre{break-inside:avoid}table{display:table}}
+</style></head><body><main><h1>Lesson Guru Odisha — production, Play Store &amp; updates guide</h1>
+<p>Written 26 Oct 2026; updated for app v1.3.0. It covers four things:</p>
+<ol>
+<li>What the backend and database should be for long-term production</li>
+<li>Whether you can publish on Google Play, and the step-by-step process</li>
+<li>How to update the website, backend and app in future</li>
+<li>What the admin panel does, with screenshots</li>
+</ol>
+<hr>
+<h2>0. Short answers</h2>
+<ul>
+<li><strong>Backend and database:</strong> keep what you have, Next.js with MongoDB. Don&#39;t rewrite it. For a lifelong product, move it onto infrastructure you control:<ul>
+<li><strong>MongoDB Atlas</strong> in Mumbai, with point-in-time backups;</li>
+<li>the app in a <strong>Docker container</strong> on Google Cloud Run (or a similar host) in Mumbai;</li>
+<li><strong>Cloudflare R2</strong> for files, which you already use;</li>
+<li>separate staging and production;</li>
+<li>monitoring and automatic tests on every deploy.</li>
+</ul>
+</li>
+<li><strong>Play Store:</strong> yes. The payments question (§2.1) is settled: <strong>v1.3.0 is a consumption-only app (option A)</strong>. Nothing is sold inside the app; teachers buy on the website and the app unlocks what their account has. Target API 36, account deletion and the privacy policy are also done.</li>
+<li><strong>Existing teachers (17,000+):</strong> they log in to the app with the same mobile number and password, or WhatsApp OTP. It is the same website, backend and database, so there is no new registration and subscriptions carry over. Note: the site allows one active login per account, so logging in on the app signs that teacher out of the browser (and the other way round).</li>
+<li><strong>Updates:</strong> most changes are website/backend deploys, and they reach the app immediately. Only changes to the app shell (its own screens, native code, version) need a new Play upload, which takes about 15 minutes.</li>
+</ul>
+<hr>
+<h2>1. Backend &amp; database for long-term production</h2>
+<h3>1.1 What runs today</h3>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Today</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Web + API</td>
+<td>One Next.js 14 app (<code>app/page.js</code> 25k lines, <code>app/api/[[...path]]/route.js</code> 26k lines)</td>
+<td>Works. The size makes changes risky without tests.</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>MongoDB, managed by Emergent (separate preview and live DBs)</td>
+<td>Several RCAs came from preview/live DB mix-ups and failed builds</td>
+</tr>
+<tr>
+<td>Files</td>
+<td>Cloudflare R2 (via a Worker gateway) + Cloudinary (legacy)</td>
+<td>R2 migration half-done, see <code>R2_LIVE_SWITCH_RUNBOOK.md</code></td>
+</tr>
+<tr>
+<td>Scheduled jobs</td>
+<td>Emergent crons → HTTP endpoints (<code>.emergent/crons.yml</code>)</td>
+<td>Easy to move: they&#39;re plain HTTP calls</td>
+</tr>
+<tr>
+<td>Payments</td>
+<td>Razorpay</td>
+<td></td>
+</tr>
+<tr>
+<td>WhatsApp</td>
+<td>BulkyMarketing (templates + OTP)</td>
+<td>UltraMsg retired</td>
+</tr>
+<tr>
+<td>AI</td>
+<td>Gemini / OpenAI</td>
+<td></td>
+</tr>
+<tr>
+<td>PDFs</td>
+<td>Server-side Chromium (<code>@sparticuz/chromium</code>, puppeteer)</td>
+<td>Needs a container host; serverless size limits break it</td>
+</tr>
+</tbody></table>
+<h3>1.2 Recommendation</h3>
+<p><strong>Keep Next.js + MongoDB.</strong> Your data is document-shaped (lessons, chapters, plans, orders), the code works, and a rewrite would cost months and add risk. What changes is <em>where</em> it runs and <em>how</em> you operate it.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Recommended</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Database</td>
+<td><strong>MongoDB Atlas, Mumbai region (AWS ap-south-1 or GCP asia-south1), dedicated M10 → M20 as you grow</strong></td>
+<td>Point-in-time restore (go back to any minute), automatic backups, alerts, separate projects for staging and production</td>
+</tr>
+<tr>
+<td>App hosting</td>
+<td><strong>Google Cloud Run (asia-south1)</strong> running a Docker image of the Next.js app, min 1 instance. Alternatives: Render or Railway (simpler), or one AWS Lightsail/DigitalOcean VPS in Mumbai with Docker (cheapest, more hands-on)</td>
+<td>Containers keep Chromium PDF generation working. Scales with traffic and you control the deploys. Avoid pure serverless (e.g. Vercel functions): body-size limits break 25 MB uploads, and Chromium is awkward there</td>
+</tr>
+<tr>
+<td>Files</td>
+<td><strong>Cloudflare R2</strong> (finish the runbook; once off Emergent use the direct S3 mode and drop the gateway)</td>
+<td>No egress fees, already in place</td>
+</tr>
+<tr>
+<td>CDN / DNS / protection</td>
+<td><strong>Cloudflare</strong> in front of lessonguruodisha.in</td>
+<td>Caching, DDoS protection, free TLS</td>
+</tr>
+<tr>
+<td>Scheduled jobs</td>
+<td><strong>Cloud Scheduler</strong> (or the host&#39;s cron) hitting the same URLs in <code>.emergent/crons.yml</code></td>
+<td>No code changes</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>Uptime check on <code>/api/health</code> (UptimeRobot / Better Stack), <strong>Sentry</strong> for errors, Atlas alerts, daily look at <strong>Admin → 📲 OTP Health</strong></td>
+<td>Find problems before teachers do</td>
+</tr>
+<tr>
+<td>Source &amp; CI</td>
+<td>GitHub as the source of truth. GitHub Actions on every push runs <code>yarn install --frozen-lockfile</code>, <code>next build</code>, the backend tests (<code>tests/cloud</code>) and the app launch test (<code>android-app/launch-test</code>), then deploys staging; production deploys only after manual approval</td>
+<td>Stops the lockfile and prerender failures in your RCAs from reaching production</td>
+</tr>
+</tbody></table>
+<p><strong>Rough monthly cost</strong> (verify current prices):</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Estimate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MongoDB Atlas M10, Mumbai</td>
+<td>≈ US$60–70</td>
+</tr>
+<tr>
+<td>Cloud Run, 1 always-on instance + traffic</td>
+<td>≈ US$20–60</td>
+</tr>
+<tr>
+<td>Cloudflare R2 (100 GB) + Workers</td>
+<td>≈ US$2–5</td>
+</tr>
+<tr>
+<td>Sentry + uptime monitor</td>
+<td>free tiers to start</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>≈ ₹8,000–12,000 / month</strong>, growing with traffic</td>
+</tr>
+</tbody></table>
+<h3>1.3 Staying on Emergent vs moving</h3>
+<ul>
+<li><strong>Staying on Emergent</strong> is fine short-term: it works, and someone else runs it. The risks for a &quot;lifelong&quot; product are limited control over backups and restore, no CLI on live, and being tied to one platform. If you stay, at least: export a backup of the live DB every week to R2, and use the admin &quot;Snapshot&quot; before every risky change (as the runbook says).</li>
+<li><strong>Moving</strong> (recommended within the next few months):<ol>
+<li>Create Atlas projects <code>lgo-staging</code> and <code>lgo-prod</code> (Mumbai). Use <code>mongodump</code> from Emergent live, then <code>mongorestore</code> into <code>lgo-prod</code>; rehearse on staging first.</li>
+<li>Add a <code>Dockerfile</code> (Node 20 + Chromium deps) and deploy the image to Cloud Run for staging. Set every env var from Emergent there; get the list from Emergent&#39;s settings.</li>
+<li>Test staging end to end: login with OTP, a Razorpay test payment, PDF downloads, Cloud Library upload.</li>
+<li>Pick a quiet night, put the site in read-only mode for ~30 minutes, do a final dump/restore, switch Cloudflare DNS to Cloud Run, and watch <code>/api/health</code> and the OTP Health screen.</li>
+<li>Keep Emergent untouched for 2 weeks as a fallback, then retire it.</li>
+</ol>
+</li>
+</ul>
+<h3>1.4 Rules for the database (whatever the host)</h3>
+<ul>
+<li>Backups: point-in-time restore on, plus a weekly <code>mongodump</code> copied to R2 and kept 90 days.</li>
+<li>Never point preview/staging code at the production DB (this caused past incidents). Use separate Atlas projects with different passwords.</li>
+<li>Add indexes when you add queries. The new collections create their own: <code>cloudFiles</code>, <code>cloudFileChunks</code>, <code>accountDeletionRequests</code>.</li>
+<li>Secrets live only in the host&#39;s secret manager. Set <code>CLOUD_LINK_SECRET</code> (new), and never commit <code>.env</code>.</li>
+</ul>
+<hr>
+<h2>2. Google Play — can you publish? Yes. Here&#39;s how.</h2>
+<h3>2.1 ✅ Decided: how Premium is paid for (option A, done in v1.3.0)</h3>
+<p>Google Play&#39;s <strong>Payments policy</strong> says that apps selling digital content or subscriptions (Premium plans, store packs, AI credits) must use <strong>Google Play Billing</strong>. India has an exception: Google&#39;s alternative-billing program, under which you may offer your own payment method <strong>alongside</strong> Google Play Billing. Today the app opens Razorpay checkout inside the app. Submitted as-is, it can be rejected or later removed. Choose one:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What you do</th>
+<th>Google&#39;s fee</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>A. Consumption-only app</strong> (recommended to launch)</td>
+<td>Inside the app, hide all buying: Premium prices, &quot;Go Premium&quot;, plans, store checkout. Teachers buy on the website as today; the app unlocks content for paying accounts</td>
+<td>0%</td>
+<td>Small. I can add an &quot;app mode&quot; that hides purchase UI only inside the app (it can recognise the app by its <code>LessonGuruApp/</code> user agent)</td>
+</tr>
+<tr>
+<td><strong>B. India alternative billing</strong></td>
+<td>Offer Google Play Billing <strong>and</strong> Razorpay side by side in the app (user&#39;s choice)</td>
+<td>≈11% on purchases through Razorpay, ≈15% through Google Play (Google&#39;s India program: 4% lower when users choose your payment method)</td>
+<td>Large: Play Billing Library, purchase verification on your server, enrolment and reporting to Google</td>
+</tr>
+<tr>
+<td><strong>C. Google Play Billing only</strong></td>
+<td>Replace Razorpay inside the app with Google Play Billing</td>
+<td>15% on subscriptions</td>
+<td>Large</td>
+</tr>
+</tbody></table>
+<p>Recommendation: <strong>launch with A</strong>, which is quick, policy-safe and keeps 100% of revenue. Revisit B once the app has users and you want in-app purchases. Google&#39;s rules on mentioning external purchase options are strict and change by country. Read the current pages before deciding: <a href="https://support.google.com/googleplay/android-developer/answer/10281818">Payments policy</a> and <a href="https://support.google.com/googleplay/android-developer/answer/13306652">India billing changes</a>.</p>
+<h3>2.2 Already handled in v1.3.0</h3>
+<ul>
+<li><p>✅ <strong>Target API 36 (Android 16)</strong>: required for new apps and updates since 31 Aug 2026 (<a href="https://developer.android.com/google/play/requirements/target-sdk">Google</a>). Includes the Android 16 back-gesture change.</p>
+</li>
+<li><p>✅ <strong>Account deletion in the app and on the web</strong>: Profile → Delete account, and <code>https://lessonguruodisha.in/delete-account</code>. Admins process requests in Admin → 🗑️ Account Deletions within 30 days.</p>
+</li>
+<li><p>✅ <strong>Privacy policy updated</strong>: now covers the Cloud Library, the WhatsApp provider and account deletion.</p>
+</li>
+<li><p>✅ <strong>Consumption-only app (option A)</strong>. Inside the app (detected by the <code>LessonGuruApp/</code> user agent):</p>
+<ul>
+<li>Premium plans become a status-only <strong>My Plan</strong> page (<code>/my-plan</code>): &quot;Premium active · valid until …&quot;, or &quot;Free plan&quot; with &quot;Purchases are not available in the app&quot;;</li>
+<li>hidden: prices, &quot;View Plans&quot;, Upgrade/Renew buttons, renewal reminders and pop-ups, home promo cards and admin promo ads, store/assessment-store cards, &quot;Buy More Credits&quot;, paid answer-key unlocks and bundles, Ajira add-on purchase, and the buy-credits pop-up;</li>
+<li>the app itself refuses to open <code>/plans</code>, <code>/store</code> (except <strong>My Library</strong> and <strong>orders</strong>), <code>/assessment</code> and <code>/my-qr-payments</code>, and shows &quot;Not available in the app&quot;;</li>
+<li>Razorpay checkout cannot open inside the app, even from a button that was missed.</li>
+</ul>
+<p>On the website nothing changes: teachers buy exactly as today, and the purchase shows up in the app after they reopen it. Don&#39;t tell teachers <em>inside the app</em> to go and pay on the website. Google restricts that too. WhatsApp messages and the website are fine.</p>
+</li>
+<li><p>✅ <strong>Signed AAB</strong> (<code>android-app/dist/LessonGuruOdisha-v1.3.0.aab</code>), listing text, icon, feature graphic and 8 phone screenshots (<code>android-app/dist/store/</code>).</p>
+</li>
+</ul>
+<h3>2.3 Step-by-step release</h3>
+<p><strong>Step 1: Developer account (once)</strong></p>
+<ol>
+<li>Go to <a href="https://play.google.com/console">https://play.google.com/console</a> and sign up with the business Google account you&#39;ll keep forever (not a personal Gmail that might be lost).</li>
+<li>Choose <strong>Organization</strong> (recommended for a business). You need a <strong>D-U-N-S number</strong> for &quot;Teacher Utility Tool Kit&quot;, free from Dun &amp; Bradstreet; it takes a few days. Pay the one-time <strong>US$25</strong> fee and complete identity verification.<ul>
+<li>With a <em>personal</em> account created after Nov 2023, Google requires a <strong>closed test with at least 12 testers for 14 days</strong> before you can publish to production. Organization accounts skip this.</li>
+</ul>
+</li>
+<li>Verify the developer email, phone and website (lessonguruodisha.in).</li>
+</ol>
+<p><strong>Step 2: Create the app</strong></p>
+<ol>
+<li>Play Console → <strong>Create app</strong>: name <em>Lesson Guru Odisha</em>, default language <em>English (India) – en-IN</em>, <em>App</em>, <em>Free</em>. Accept the declarations.</li>
+<li><strong>App signing:</strong> keep <strong>Play App Signing</strong> on (the default). Your file <code>android-app/keystore/lessonguru-upload.p12</code> becomes the <strong>upload key</strong>. Back up that file and <code>keystore.properties</code> in two safe places. If you lose them, you&#39;ll need Google support to reset the key.</li>
+</ol>
+<p><strong>Step 3: App content (Policy → App content); answer every item</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>What to enter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Privacy policy</td>
+<td><code>https://lessonguruodisha.in/privacy</code></td>
+</tr>
+<tr>
+<td>App access</td>
+<td><strong>&quot;All or some functionality is restricted&quot;</strong>. Give reviewers a test account with a <strong>mobile + password</strong> login (they can&#39;t receive WhatsApp OTPs) and Premium active. Create it in Admin → Users</td>
+</tr>
+<tr>
+<td>Ads</td>
+<td><strong>Yes</strong> if you show promotions from Admin → 📢 Advertisements (Google counts house ads); otherwise No</td>
+</tr>
+<tr>
+<td>Content rating</td>
+<td>Fill in the IARC questionnaire: category <em>Reference, News, or Educational</em>; no violence, sexual content, gambling or user-to-user chat. Usually rated <em>Everyone / 3+</em></td>
+</tr>
+<tr>
+<td>Target audience</td>
+<td><strong>18 and over</strong> (the app is for teachers). This keeps you out of the stricter Families programme</td>
+</tr>
+<tr>
+<td>News app</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Data safety</td>
+<td>See the table below</td>
+</tr>
+<tr>
+<td>Government apps</td>
+<td>Declare that you are <strong>not</strong> a government entity. The listing description already says the app is not affiliated with the Govt of Odisha/OSEPA/SCERT; keep that line</td>
+</tr>
+<tr>
+<td>Financial features</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Account deletion</td>
+<td><code>https://lessonguruodisha.in/delete-account</code></td>
+</tr>
+</tbody></table>
+<p><strong>Data safety answers</strong> (based on what the code actually does; review with your own knowledge):</p>
+<table>
+<thead>
+<tr>
+<th>Data type</th>
+<th>Collected?</th>
+<th>Purpose</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Name</td>
+<td>Yes</td>
+<td>Account management, app functionality</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Phone number</td>
+<td>Yes</td>
+<td>Account management, app functionality, communications (WhatsApp OTP)</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>Yes, if the teacher provides it</td>
+<td>Account management</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>Purchase history</td>
+<td>Yes</td>
+<td>App functionality, account management</td>
+<td>Subscription/orders</td>
+</tr>
+<tr>
+<td>Payment info</td>
+<td>Entered on Razorpay&#39;s page (processor)</td>
+<td>Payments</td>
+<td>You never store card/UPI details</td>
+</tr>
+<tr>
+<td>Files &amp; docs</td>
+<td>Yes (Cloud Library)</td>
+<td>App functionality</td>
+<td>Optional; teacher can delete</td>
+</tr>
+<tr>
+<td>App interactions</td>
+<td>Yes (lessons viewed, history, favourites)</td>
+<td>App functionality, analytics</td>
+<td></td>
+</tr>
+<tr>
+<td>Crash logs</td>
+<td><strong>No</strong> (the in-app report is sent only if the teacher chooses to share it on WhatsApp)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Location, contacts, photos, device IDs</td>
+<td>No</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Also answer: data is <strong>encrypted in transit</strong> (HTTPS): Yes. Users <strong>can request deletion</strong>: Yes, with the URL above. Data shared with third parties: <strong>No</strong> (Razorpay, WhatsApp and cloud hosts are <em>service providers</em>, which Google doesn&#39;t count as sharing).</p>
+<p><strong>Step 4: Store listing</strong>
+Main store listing: copy <code>android-app/dist/store/listing.md</code>, upload the icon, feature graphic and 8 screenshots from <code>android-app/dist/store/</code>. Category <strong>Education</strong>.</p>
+<p><strong>Step 5: Test, then release</strong></p>
+<ol>
+<li><strong>Testing → Internal testing → Create release</strong> → upload <code>LessonGuruOdisha-v1.3.0.aab</code> → add your own Gmail as a tester → install from the Play link on a real phone. Check:<ul>
+<li>login (OTP and password);</li>
+<li>My Plan shows your plan, and no prices or buy buttons appear anywhere;</li>
+<li>a Premium account opens Premium lessons;</li>
+<li>PDF download → &quot;Saved to phone &amp; Cloud Library&quot;;</li>
+<li>Back button and gesture;</li>
+<li>Delete account page opens.</li>
+</ul>
+</li>
+<li>(Personal accounts only) <strong>Closed testing</strong> with 12+ testers for 14 days.</li>
+<li><strong>Production → Create release</strong> → same AAB → release notes → <strong>staged rollout 20%</strong>, watch Play Console → Android vitals (crashes) for 2 days, then 100%.</li>
+<li>The first review usually takes a few days. Answer any policy email promptly.</li>
+</ol>
+<p><strong>Step 6: After the first release</strong></p>
+<ul>
+<li>Play Console → <strong>Setup → App integrity → App signing</strong> → copy the <strong>SHA-256 of the app signing key</strong> and add it to <code>public/.well-known/assetlinks.json</code> next to the upload key that&#39;s already there. Deploy the website, and <code>lessonguruodisha.in</code> links will open straight in the app.</li>
+</ul>
+<hr>
+<h2>3. How to update in future</h2>
+<h3>3.1 What needs which kind of update</h3>
+<table>
+<thead>
+<tr>
+<th>You change…</th>
+<th>What to do</th>
+<th>Teachers get it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Website pages, API, prices, lesson content, admin features</td>
+<td>Deploy the website as usual</td>
+<td>Immediately, on web <strong>and</strong> in the app (the app loads the live site)</td>
+</tr>
+<tr>
+<td>App hub screens (<code>android-app/src/main/assets/app</code>), native code, app icon, permissions</td>
+<td>New app version via Play</td>
+<td>After the Play update installs</td>
+</tr>
+</tbody></table>
+<h3>3.2 Releasing a new app version (≈15 minutes)</h3>
+<ol>
+<li>Make the change in <code>android-app/</code>.</li>
+<li>In <code>android-app/build-tools/build.py</code>, raise <code>VERSION_CODE</code> by 1 (it must always go up) and set <code>VERSION_NAME</code> (e.g. <code>1.3.0</code>).</li>
+<li>Build: <code>python3 build-tools/build.py --tools &lt;tools folder&gt;</code>. This produces the signed APK and AAB in <code>dist/</code> (see <code>android-app/README.md</code>).</li>
+<li>Test:<ul>
+<li><code>cd tests/cloud &amp;&amp; TEST_DEPS=../.. node --import ./register.mjs --test *.test.mjs</code> (backend: 23 tests);</li>
+<li><code>cd android-app/launch-test &amp;&amp; gradle test -Ptools=&lt;tools folder&gt;</code> (app on Android 7–16: 50 tests);</li>
+<li>install the APK on one real phone.</li>
+</ul>
+</li>
+<li>Play Console → Production → Create release → upload the new <code>.aab</code> → staged rollout.</li>
+</ol>
+<h3>3.3 Yearly / recurring</h3>
+<ul>
+<li><strong>Every August Google raises the required target API.</strong> Next: API 37 by about 31 Aug 2027. Change <code>TARGET_SDK</code> in <code>res_build.py</code>, read Android&#39;s behaviour changes for that version, run the launch tests (add the new version to <code>@Config(sdk=…)</code>), and release.</li>
+<li>Renew the domain, Razorpay KYC, the BulkyMarketing wallet and WhatsApp templates on time.</li>
+<li>Keep the privacy policy and Data safety form in line with any new data you collect.</li>
+<li>Keep the upload keystore safe. You need it for every update.</li>
+</ul>
+<hr>
+<h2>4. Admin panel (what each section does)</h2>
+<p>Screenshots: <code>android-app/dist/admin-screenshots/</code> (58 sections, sample data) and the overview sheet <code>android-app/dist/LessonGuruOdisha-admin-overview.png</code>. Admin works on phone or desktop at <code>lessonguruodisha.in/admin</code>.</p>
+<p><strong>Money &amp; users</strong></p>
+<ul>
+<li>📊 Analytics: users, active subscriptions, lessons, revenue, DAU, popular lessons and books</li>
+<li>💰 Revenue: daily/monthly revenue, plan breakdown, renewal mode (extend/replace), activation log</li>
+<li>📱 QR Payments: verify manual UPI-QR payments (UTR), approve or reject</li>
+<li>👥 Users / 🗓️ User Profiles: search, edit subscriptions, reset passwords, suspend, registration stats</li>
+<li>💎 Plans / 🔥 Offers / 🔄 Subscription Recovery / 🔁 Renewal Funnel: pricing, offers, win-back</li>
+<li>🎁 Referrals / ⭐ Reviews: leaderboard, reward reversal, review moderation</li>
+<li>💎 AI Credits: AI wallet sales, Gemini usage and cost, margins</li>
+</ul>
+<p><strong>Messaging</strong></p>
+<ul>
+<li>📱 WhatsApp Campaigns / 📣 Message Queue / 📣 Prompt / 📩 Inbox: campaigns, drip, support messages</li>
+<li><strong>📲 OTP Health (new)</strong>: is WhatsApp OTP working right now? Shows key and template status, the wallet estimate, 24-hour sent/failed/blocked counts, the provider&#39;s exact reply for each failure, and a <strong>Send test OTP</strong> button</li>
+</ul>
+<p><strong>Content</strong></p>
+<ul>
+<li>Lessons: ➕ Add Lesson, 📄 HTML Import, ⚡ CSV/JSON, 📑 Bulk Chapters, 🔢 Bulk Periods, 🗂️ Curriculum (+ Backfill), 📅 Academic Pacing</li>
+<li>Panchapadi: 📘 Panchapadi (ABP), 📘 Panchapadi HTML, 🌅 Ajira Pathya Jojana, ⭐ Short Lesson Plans</li>
+<li>Assessment: 🎯 Assessments, 📋 Instant Papers, 📝 Answer Keys, 🛒 Assessment Store, 📚 QB Import, 📝 Q&amp;A Worksheets, 🧠 MCM Test, 📘 MCM Notes</li>
+<li>LO codes: 📗 LO Master, 🎯 LO Code Correction, 🔧 LO Reconcile, 🈳 WS Language</li>
+<li>Books &amp; files: 📕 Books &amp; PDFs, ☁️ Drive Books, 📚 Sections Upload, 📚 Resources, 🗄️ R2 Migration</li>
+<li>AI: 🤖 AI Lesson Generator, ✨ AI Studio, 🎓 Class 9–10 5E</li>
+<li>Store &amp; other: 🛍️ Store, 📋 Teacher Observation, 🚀 Landing Page, 📢 Advertisements, 🔐 Security, 📄 Doc Security, 📈 WS Analytics, 📋 Logs</li>
+</ul>
+<p><strong>Privacy</strong></p>
+<ul>
+<li><strong>🗑️ Account Deletions (new)</strong>: requests from the app/website. <em>Delete account</em> removes the teacher&#39;s Cloud Library files and anonymises the account (payment records kept for tax law). Process every request within 30 days; overdue ones are marked red.</li>
+</ul>
+<p><strong>Suggested routine</strong></p>
+<ul>
+<li>Daily: QR Payments, OTP Health, Inbox</li>
+<li>Weekly: Revenue, Renewal Funnel, Account Deletions, Reviews</li>
+<li>Monthly: back up the DB, check the WhatsApp wallet and templates, review AI Credits margins</li>
+</ul>
+<hr>
+<h2>5. Fixes in this round, and how to confirm them on the live site</h2>
+<p><strong>UPI not showing in the app.</strong> Cause: Razorpay hides UPI inside Android WebViews unless checkout is opened with <code>webview_intent: true</code>. v1.2.0 fixed that, but from v1.3.0 the app sells nothing (option A), so payments only happen on the website, where UPI works normally. If you later move to option B, open Razorpay checkout with <code>webview_intent: true</code> inside the app.</p>
+<p><strong>Deploy the website together with app v1.3.0.</strong> The app blocks store/plans pages and Razorpay on its own, but hiding prices and buy buttons on other pages (home cards, dashboard, credits, answer keys, Ajira) is done by the website code. Deploy the website first, then submit the app.</p>
+<p><strong>WhatsApp OTP not arriving.</strong> I couldn&#39;t reach your live server or BulkyMarketing from here, so this isn&#39;t diagnosed against live data yet. What changed:</p>
+<ul>
+<li>The OTP sender now treats &quot;HTTP 200 but refused&quot; replies (e.g. empty wallet) as failures.</li>
+<li>Every send records the provider&#39;s reply (OTP masked).</li>
+<li>The per-network limit was raised from 5 to 30 per hour; Jio/Airtel share IPs, so the old limit blocked unrelated teachers.</li>
+<li>New <strong>Admin → 📲 OTP Health</strong> screen.</li>
+</ul>
+<p>After deploying the website, open OTP Health. It tells you which of these it is:</p>
+<ul>
+<li>keys missing;</li>
+<li>template not APPROVED;</li>
+<li>wallet empty;</li>
+<li>the provider rejecting sends (its reply is shown).</li>
+</ul>
+<p>Use <strong>Send test OTP</strong> to your own number. If the provider accepts it but WhatsApp never delivers, the problem is on BulkyMarketing&#39;s side (template category, sending number quality, or wallet); raise it with them, quoting the <code>ref</code> shown.</p>
+<p><strong>Admin Inbox crash.</strong> <code>useEffect(load, …)</code> returned a Promise to React, which crashes when you leave the Inbox tab. Fixed in <code>app/page.js</code>.</p>
+</main></body></html>

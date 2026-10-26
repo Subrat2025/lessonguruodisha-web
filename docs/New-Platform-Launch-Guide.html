@@ -1,0 +1,204 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>New Platform Launch Guide</title><style>
+:root{--fg:#1e1b2e;--muted:#5b5670;--bg:#fff;--line:#e6e3ef;--accent:#6d28d9;--code:#f4f1fb}
+@media (prefers-color-scheme:dark){:root{--fg:#ece9f5;--muted:#aaa4bf;--bg:#14111d;--line:#2d2840;--accent:#b794f6;--code:#221d31}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans Oriya",sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:1.8em;line-height:1.25;color:var(--accent)}h2{margin-top:2em;padding-bottom:.3em;border-bottom:2px solid var(--line)}h3{margin-top:1.6em}
+a{color:var(--accent)}code{background:var(--code);padding:.1em .35em;border-radius:4px;font-size:.9em;word-break:break-word}
+pre{background:var(--code);padding:12px;border-radius:8px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}pre code{padding:0}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;font-size:.92em;margin:1em 0}th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}th{background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:2em 0}li{margin:.25em 0}img{max-width:100%}
+@media print{body{font-size:11.5pt}main{max-width:none;padding:0}h2{break-after:avoid}table,pre{break-inside:avoid}table{display:table}}
+</style></head><body><main><h1>Launching Lesson Guru Odisha v1.6 on the new platform</h1>
+<p>The new website + backend runs on <strong>Render</strong>, and the database on <strong>MongoDB Atlas</strong> (Mumbai).
+<strong>Nothing is deployed to Emergent any more.</strong> Emergent is used only once, as the place your
+existing data is copied from. After the switch you can shut it down.</p>
+<p>Teachers notice nothing:</p>
+<ul>
+<li>the address stays <strong>lessonguruodisha.in</strong>;</li>
+<li>they log in as before;</li>
+<li>Premium and their saved work carry over;</li>
+<li>both Android apps (Play Store and Direct) keep working without an update.</li>
+</ul>
+<p>Plan on about <strong>3–4 hours of your time</strong>, spread over two days:</p>
+<ul>
+<li><strong>Day 1:</strong> set up and test on a temporary Render address.</li>
+<li><strong>Day 2:</strong> the switch, about 30 minutes, late at night.</li>
+</ul>
+<hr>
+<h2>What&#39;s in the website zip (<code>LessonGuruOdisha-website-v1.6.0.zip</code>)</h2>
+<ul>
+<li>The full v1.6 website and backend:<ul>
+<li>one-page lesson PDFs with teacher and headmaster signatures;</li>
+<li>no buying shown in the Play Store app;</li>
+<li>buying kept in the Direct app and the browser;</li>
+<li>Cloud Library, account deletion and OTP Health.</li>
+</ul>
+</li>
+<li><code>render.yaml</code> + <code>Dockerfile</code>: create the whole setup on Render in one click, including the 5 scheduled jobs.</li>
+<li><code>scripts/copy-database.mjs</code>: copies all data into Atlas and checks the counts.</li>
+<li><code>public/app/LessonGuruOdisha-Direct.apk</code>: the Direct app. Teachers download it from <strong><a href="https://lessonguruodisha.in/app/LessonGuruOdisha-Direct.apk">https://lessonguruodisha.in/app/LessonGuruOdisha-Direct.apk</a></strong>.</li>
+<li>Safety switch <code>BACKGROUND_JOBS_DISABLED=1</code>: the new server starts <strong>paused</strong>, so no duplicate WhatsApp messages are sent before the switch.</li>
+</ul>
+<h2>Monthly cost (approximate)</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Plan</th>
+<th>US$/month</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Render web service</td>
+<td>Standard, 2 GB</td>
+<td>25</td>
+</tr>
+<tr>
+<td>Render scheduled jobs</td>
+<td>5 × Starter</td>
+<td>~1–5</td>
+</tr>
+<tr>
+<td>MongoDB Atlas, Mumbai</td>
+<td>M10 (minute-by-minute backups)</td>
+<td>~57</td>
+</tr>
+<tr>
+<td></td>
+<td>or Flex to start</td>
+<td>~8–30</td>
+</tr>
+</tbody></table>
+<h2>What you need</h2>
+<ol>
+<li>A <strong>GitHub</strong> account.</li>
+<li>A <strong>Render</strong> account (render.com) with a card.</li>
+<li>A <strong>MongoDB Atlas</strong> account with a card.</li>
+<li>Login to where <strong>lessonguruodisha.in&#39;s DNS</strong> is managed (GoDaddy, Hostinger, Cloudflare…).</li>
+<li>Read-only access to the old data on Emergent, for the copy in step 4. You only need its <strong>settings list</strong> and <strong>database address</strong>. No code changes there.</li>
+</ol>
+<hr>
+<h2>Step 1: Put the code on GitHub (private)</h2>
+<p>The easiest way: create an <strong>empty private repository</strong> named <code>lessonguruodisha-web</code> on github.com (no README) and send me its name. I&#39;ll upload the code.</p>
+<p>Or yourself, with GitHub Desktop:</p>
+<ol>
+<li><strong>New repository</strong> <code>lessonguruodisha-web</code>.</li>
+<li>Unzip the website zip and copy everything inside <code>LessonGuruOdisha26102026-main/</code> into the repository folder.</li>
+<li>Commit to <strong>main</strong> → <strong>Publish</strong> (keep <strong>Private</strong>).</li>
+</ol>
+<h2>Step 2: Create the database on Atlas (Mumbai)</h2>
+<ol>
+<li><strong>Create cluster:</strong> M10 (or Flex), <strong>AWS · Mumbai (ap-south-1)</strong>, name <code>lessonguru</code>.</li>
+<li><strong>Database Access → Add user:</strong><ul>
+<li><code>lessonguru_app</code>;</li>
+<li>autogenerated password (save it);</li>
+<li>role <strong>Read and write to any database</strong>.</li>
+</ul>
+</li>
+<li><strong>Network Access → Allow access from anywhere (0.0.0.0/0).</strong> Render has no fixed IP; the strong password protects the database.</li>
+<li><strong>Connect → Drivers</strong> → copy the address and put your password in it:
+<code>mongodb+srv://lessonguru_app:&lt;password&gt;@lessonguru.xxxxx.mongodb.net/?retryWrites=true&amp;w=majority</code>
+This is your <strong>Atlas URL</strong>.</li>
+<li>(M10) <strong>Backup → Continuous Cloud Backup: On.</strong></li>
+</ol>
+<h2>Step 3: Get your settings from Emergent (read only)</h2>
+<p>In Emergent, ask its agent:</p>
+<blockquote>
+<p>Show me all environment variables of the deployed (production) app, values included, and the production MongoDB connection string.</p>
+</blockquote>
+<p>Save the list privately. The most important values:</p>
+<ul>
+<li><code>MONGO_URL</code> / <code>DB_NAME</code>: where the existing data is;</li>
+<li><code>JWT_SECRET</code>: it <strong>must stay exactly the same</strong>, or every teacher is logged out;</li>
+<li>the Razorpay, WhatsApp (BULKY…), Gemini and Cloudflare R2 keys.</li>
+</ul>
+<h2>Step 4: Create everything on Render (one click)</h2>
+<ol>
+<li><p>Render → <strong>New + → Blueprint</strong> → connect GitHub → <code>lessonguruodisha-web</code> → branch <code>main</code>.</p>
+</li>
+<li><p>Render shows <strong>lessonguru-web</strong> + 5 <strong>cron-…</strong> jobs and asks for a few values:</p>
+<ul>
+<li><code>MONGO_URL</code>: your <strong>Atlas URL</strong>;</li>
+<li><code>DB_NAME</code>: the same name as in step 3;</li>
+<li><code>JWT_SECRET</code>: <strong>exactly</strong> the old value;</li>
+<li>Razorpay, BULKY, Gemini and R2 keys from step 3.</li>
+</ul>
+<p>Click <strong>Apply</strong>.</p>
+</li>
+<li><p><strong>lessonguru-web → Environment → Add from .env</strong>: paste the rest of the step 3 list, but <strong>delete these lines first</strong>:</p>
+<ul>
+<li><code>MONGO_URL</code></li>
+<li><code>DB_NAME</code></li>
+<li><code>NEXT_PUBLIC_BASE_URL</code></li>
+<li><code>BACKGROUND_JOBS_DISABLED</code></li>
+<li><code>WEBHOOK_CRON_SECRET</code></li>
+</ul>
+<p>Then <strong>Save, rebuild and deploy</strong>.</p>
+</li>
+<li><p>Wait 10–20 minutes until the status shows <strong>Live</strong>. The site runs at <strong><a href="https://lessonguru-web.onrender.com">https://lessonguru-web.onrender.com</a></strong>.</p>
+</li>
+</ol>
+<h2>Step 5: Copy the data (test copy)</h2>
+<p>Render → <strong>lessonguru-web → Shell</strong>, then run these two commands. Paste your values for the parts in <code>&lt; &gt;</code>.</p>
+<pre><code>SOURCE_MONGO_URL=&quot;&lt;old production MONGO_URL from step 3&gt;&quot; SOURCE_DB=&quot;&lt;DB_NAME&gt;&quot; TARGET_MONGO_URL=&quot;$MONGO_URL&quot; TARGET_DB=&quot;$DB_NAME&quot; node scripts/copy-database.mjs --dry-run
+SOURCE_MONGO_URL=&quot;&lt;old production MONGO_URL from step 3&gt;&quot; SOURCE_DB=&quot;&lt;DB_NAME&gt;&quot; TARGET_MONGO_URL=&quot;$MONGO_URL&quot; TARGET_DB=&quot;$DB_NAME&quot; node scripts/copy-database.mjs
+</code></pre>
+<ul>
+<li>The first command (<code>--dry-run</code>) only lists what is there. The <strong><code>users</code> line must show about 17,000+</strong>.</li>
+<li>The second command copies everything and ends with <strong>&quot;All document counts match.&quot;</strong></li>
+<li>The old database is only <strong>read</strong>, never changed.</li>
+</ul>
+<p><strong>If Render can&#39;t connect to the old database</strong> (Emergent keeps it private): ask Emergent&#39;s agent to run the <strong>same command</strong> on their side, with <code>TARGET_MONGO_URL</code> set to your Atlas URL. Or ask Emergent support for a database export (<code>mongodump</code>) and send it to me; I&#39;ll load it into Atlas. You still change nothing on Emergent.</p>
+<h2>Step 6: Test on the temporary address</h2>
+<p>Open <strong><a href="https://lessonguru-web.onrender.com">https://lessonguru-web.onrender.com</a></strong> and check:</p>
+<ul>
+<li><input disabled="" type="checkbox"> login with password, and with WhatsApp OTP;</li>
+<li><input disabled="" type="checkbox"> a Premium lesson opens; <strong>download its PDF</strong> → one page, teacher signature left, headmaster right, Odia letters correct;</li>
+<li><input disabled="" type="checkbox"> Daily Plan → PDF;</li>
+<li><input disabled="" type="checkbox"> Cloud Library upload and open;</li>
+<li><input disabled="" type="checkbox"> Admin panel opens; <strong>Admin → 📲 OTP Health</strong>;</li>
+<li><input disabled="" type="checkbox"> <code>/api/health</code> shows OK;</li>
+<li><input disabled="" type="checkbox"> <code>/app/LessonGuruOdisha-Direct.apk</code> downloads.</li>
+</ul>
+<p>Don&#39;t make real payments on the temporary address. Anything done there is overwritten by the final copy.
+Problems? Copy the red lines from <strong>lessonguru-web → Logs</strong> and send them to me.</p>
+<h2>Step 7: The day before the switch</h2>
+<ol>
+<li>Render → lessonguru-web → <strong>Settings → Custom Domains → Add</strong> <code>lessonguruodisha.in</code> and <code>www.lessonguruodisha.in</code>. Note the DNS records Render shows.</li>
+<li>At your DNS provider, <strong>write down the current records</strong> (for rollback), then set their <strong>TTL to 60–300 seconds</strong>.</li>
+</ol>
+<h2>Step 8: Switch day (late at night, about 30 minutes)</h2>
+<ol>
+<li><strong>Final copy:</strong> run the step 5 copy command again, adding <code>--replace</code> at the end. Wait for <strong>&quot;All document counts match.&quot;</strong></li>
+<li><strong>Point the domain to Render:</strong> replace the <code>lessonguruodisha.in</code> and <code>www</code> records with Render&#39;s. Then press <strong>Verify</strong> in Render. HTTPS turns on automatically.</li>
+<li><strong>Turn on background jobs:</strong> Render → lessonguru-web → Environment → <strong>delete <code>BACKGROUND_JOBS_DISABLED</code></strong> → Save and deploy. WhatsApp campaigns, the message queue and the 5 scheduled jobs start.</li>
+<li><strong>Stop the old site:</strong> in Emergent, <strong>stop/pause the deployment</strong>. Don&#39;t delete it yet; it&#39;s your backup.</li>
+<li><strong>Check:</strong><ul>
+<li>open lessonguruodisha.in on your phone and in both apps;</li>
+<li>log in, open a lesson, download a PDF;</li>
+<li>Render <strong>Logs</strong> show teachers arriving.</li>
+</ul>
+</li>
+<li><strong>Next morning:</strong><ul>
+<li>compare the Razorpay dashboard payments since the final copy with <strong>Admin → Revenue</strong>;</li>
+<li>restore any missing one with <strong>Admin → 🔄 Subscription Recovery</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>Razorpay, BulkyMarketing and Google settings stay as they are, because the domain doesn&#39;t change.</p>
+<h2>If something goes wrong</h2>
+<p>Put the DNS records back to the values you wrote down, and restart the Emergent deployment. Data created on Render in the meantime can be copied back with the same script, <strong>only with my help</strong>. After 7 good days, delete the Emergent project.</p>
+<h2>Updating in future</h2>
+<ul>
+<li><strong>Code:</strong> push to <code>main</code> on GitHub. Render rebuilds and deploys by itself in about 10 minutes, with no downtime. If a build fails, the old version keeps running.</li>
+<li><strong>Rollback:</strong> lessonguru-web → <strong>Events</strong> → an earlier deploy → <strong>Rollback</strong>.</li>
+<li><strong>Settings:</strong> lessonguru-web → <strong>Environment</strong>. After changing a <code>NEXT_PUBLIC_…</code> value, use <strong>Manual Deploy → Clear build cache &amp; deploy</strong>.</li>
+<li><strong>New app version:</strong> I build the Play <code>.aab</code> (upload to Play Console) and the Direct <code>.apk</code>. Replace <code>public/app/LessonGuruOdisha-Direct.apk</code> in the repository so the download link always gives the newest one.</li>
+<li><strong>Backups:</strong> Atlas → cluster → <strong>Backup</strong> (restore to any minute with M10).</li>
+<li><strong>Health:</strong> Render → <strong>Metrics</strong> (if memory stays near 2 GB, move to the <strong>Pro</strong> plan); Atlas → <strong>Monitoring</strong>.</li>
+</ul>
+<h2>One small leftover</h2>
+<p>One ad image (&quot;PM Poshan&quot;) still points to Emergent&#39;s file server (<code>customer-assets-…emergentagent.net</code>). Save that image from the Admin panel&#39;s ad settings and send it to me. I&#39;ll move it into the website, so nothing depends on Emergent.</p>
+</main></body></html>

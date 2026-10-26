@@ -1,0 +1,166 @@
+{
+  "generatedAt": "2026-10-07T10:16:16.401Z",
+  "totalResources": 27181,
+  "byFolder": {
+    "lg-qr-payments": {
+      "files": 148,
+      "srcBytes": 72265487,
+      "toPublic": 0,
+      "toPrivate": 148,
+      "skipped": 0,
+      "objectsToWrite": 148
+    },
+    "lg-store": {
+      "files": 12521,
+      "srcBytes": 289799145,
+      "toPublic": 12487,
+      "toPrivate": 34,
+      "skipped": 0,
+      "objectsToWrite": 25008
+    },
+    "lg-official-papers": {
+      "files": 526,
+      "srcBytes": 99783166,
+      "toPublic": 526,
+      "toPrivate": 0,
+      "skipped": 0,
+      "objectsToWrite": 526
+    },
+    "lg-ads": {
+      "files": 1,
+      "srcBytes": 67,
+      "toPublic": 1,
+      "toPrivate": 0,
+      "skipped": 0,
+      "objectsToWrite": 1
+    },
+    "lg-lo-code-books": {
+      "files": 10,
+      "srcBytes": 16769601,
+      "toPublic": 10,
+      "toPrivate": 0,
+      "skipped": 0,
+      "objectsToWrite": 10
+    },
+    "lessonguru-odisha": {
+      "files": 6,
+      "srcBytes": 2254,
+      "toPublic": 6,
+      "toPrivate": 0,
+      "skipped": 0,
+      "objectsToWrite": 6
+    },
+    "lg-edu-library": {
+      "files": 668,
+      "srcBytes": 847476156,
+      "toPublic": 668,
+      "toPrivate": 0,
+      "skipped": 0,
+      "objectsToWrite": 668
+    },
+    "main-sample": {
+      "files": 0,
+      "srcBytes": 0,
+      "toPublic": 0,
+      "toPrivate": 0,
+      "skipped": 1,
+      "objectsToWrite": 0
+    },
+    "cld-sample-5": {
+      "files": 0,
+      "srcBytes": 0,
+      "toPublic": 0,
+      "toPrivate": 0,
+      "skipped": 1,
+      "objectsToWrite": 0
+    },
+    "cld-sample-4": {
+      "files": 0,
+      "srcBytes": 0,
+      "toPublic": 0,
+      "toPrivate": 0,
+      "skipped": 1,
+      "objectsToWrite": 0
+    },
+    "cld-sample-3": {
+      "files": 0,
+      "srcBytes": 0,
+      "toPublic": 0,
+      "toPrivate": 0,
+      "skipped": 1,
+      "objectsToWrite": 0
+    },
+    "cld-sample": {
+      "files": 0,
+      "srcBytes": 0,
+      "toPublic": 0,
+      "toPrivate": 0,
+      "skipped": 1,
+      "objectsToWrite": 0
+    },
+    "cld-sample-2": {
+      "files": 0,
+      "srcBytes": 0,
+      "toPublic": 0,
+      "toPrivate": 0,
+      "skipped": 1,
+      "objectsToWrite": 0
+    },
+    "samples": {
+      "files": 0,
+      "srcBytes": 0,
+      "toPublic": 0,
+      "toPrivate": 0,
+      "skipped": 57,
+      "objectsToWrite": 0
+    },
+    "sample": {
+      "files": 0,
+      "srcBytes": 0,
+      "toPublic": 0,
+      "toPrivate": 0,
+      "skipped": 1,
+      "objectsToWrite": 0
+    },
+    "lessonguru": {
+      "files": 12290,
+      "srcBytes": 524619830,
+      "toPublic": 0,
+      "toPrivate": 12290,
+      "skipped": 0,
+      "objectsToWrite": 12290
+    },
+    "lesson-guru": {
+      "files": 333,
+      "srcBytes": 69168445,
+      "toPublic": 0,
+      "toPrivate": 333,
+      "skipped": 0,
+      "objectsToWrite": 333
+    },
+    "lg-answer-key": {
+      "files": 178,
+      "srcBytes": 196961,
+      "toPublic": 0,
+      "toPrivate": 178,
+      "skipped": 0,
+      "objectsToWrite": 178
+    },
+    "lg-abp": {
+      "files": 69,
+      "srcBytes": 37622196,
+      "toPublic": 0,
+      "toPrivate": 69,
+      "skipped": 0,
+      "objectsToWrite": 69
+    },
+    "lg-tob": {
+      "files": 367,
+      "srcBytes": 170408607,
+      "toPublic": 0,
+      "toPrivate": 367,
+      "skipped": 0,
+      "objectsToWrite": 367
+    }
+  }
+}

@@ -1,0 +1,167 @@
+# Render Blueprint for lessonguruodisha.in
+# Render dashboard → New → Blueprint → pick this GitHub repo. Render reads this file and creates:
+#   • lessonguru-web: the website + API (Docker, Singapore, 2 GB RAM)
+#   • 5 cron jobs that replace .emergent/crons.yml (times converted from IST to UTC)
+# Secrets marked `sync: false` are asked for once when the Blueprint is created. Every other value
+# from Emergent's environment can be pasted in bulk afterwards: lessonguru-web → Environment →
+# "Add from .env".
+
+services:
+  - type: web
+    name: lessonguru-web
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    region: singapore
+    plan: standard            # 2 GB RAM: Chromium PDF generation needs it. Do not pick Starter (512 MB).
+    healthCheckPath: /api/health
+    autoDeploy: true          # every push to the main branch deploys
+    numInstances: 1
+    envVars:
+      - key: MONGO_URL        # MongoDB Atlas connection string (Mumbai cluster)
+        sync: false
+      - key: DB_NAME          # same database name as on Emergent
+        sync: false
+      - key: JWT_SECRET       # MUST be the same value as on Emergent, or every teacher is logged out
+        sync: false
+      - key: NEXT_PUBLIC_BASE_URL
+        value: https://lessonguruodisha.in
+      - key: WEBHOOK_CRON_SECRET
+        generateValue: true   # protects the cron endpoints; the cron jobs read it from here
+      - key: BACKGROUND_JOBS_DISABLED
+        value: "1"            # pause WhatsApp campaigns/queue, Drive sync and cron jobs while Emergent is still live.
+                              # Delete this variable (or set 0) right after lessonguruodisha.in points to Render.
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+      - key: BULKY_AUTHKEY
+        sync: false
+      - key: BULKY_APPKEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: R2_ACCOUNT_ID
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+
+  # ---- scheduled jobs (Render cron schedules are in UTC; IST = UTC + 5:30) ----
+  - type: cron
+    name: cron-assess-health-alert          # 07:30 IST daily
+    runtime: docker
+    dockerfilePath: ./deploy/cron/Dockerfile
+    dockerContext: ./deploy/cron
+    region: singapore
+    plan: starter
+    schedule: "0 2 * * *"
+    dockerCommand: /bin/sh /call.sh /api/assess/cron/health-alert
+    envVars:
+      - key: SITE_URL
+        value: https://lessonguruodisha.in
+      - key: WEBHOOK_CRON_SECRET
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: WEBHOOK_CRON_SECRET
+      - key: BACKGROUND_JOBS_DISABLED
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: BACKGROUND_JOBS_DISABLED
+
+  - type: cron
+    name: cron-answer-key-bundle-expiry     # 01:00 IST daily
+    runtime: docker
+    dockerfilePath: ./deploy/cron/Dockerfile
+    dockerContext: ./deploy/cron
+    region: singapore
+    plan: starter
+    schedule: "30 19 * * *"
+    dockerCommand: /bin/sh /call.sh /api/answer-key/cron/expire-bundles
+    envVars:
+      - key: SITE_URL
+        value: https://lessonguruodisha.in
+      - key: WEBHOOK_CRON_SECRET
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: WEBHOOK_CRON_SECRET
+      - key: BACKGROUND_JOBS_DISABLED
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: BACKGROUND_JOBS_DISABLED
+
+  - type: cron
+    name: cron-answer-key-sla-alert         # every hour at :15 IST
+    runtime: docker
+    dockerfilePath: ./deploy/cron/Dockerfile
+    dockerContext: ./deploy/cron
+    region: singapore
+    plan: starter
+    schedule: "45 * * * *"
+    dockerCommand: /bin/sh /call.sh /api/answer-key/cron/sla-alert
+    envVars:
+      - key: SITE_URL
+        value: https://lessonguruodisha.in
+      - key: WEBHOOK_CRON_SECRET
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: WEBHOOK_CRON_SECRET
+      - key: BACKGROUND_JOBS_DISABLED
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: BACKGROUND_JOBS_DISABLED
+
+  - type: cron
+    name: cron-store-access-repair          # 01:30 IST daily
+    runtime: docker
+    dockerfilePath: ./deploy/cron/Dockerfile
+    dockerContext: ./deploy/cron
+    region: singapore
+    plan: starter
+    schedule: "0 20 * * *"
+    dockerCommand: /bin/sh /call.sh /api/cron/store-repair
+    envVars:
+      - key: SITE_URL
+        value: https://lessonguruodisha.in
+      - key: WEBHOOK_CRON_SECRET
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: WEBHOOK_CRON_SECRET
+      - key: BACKGROUND_JOBS_DISABLED
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: BACKGROUND_JOBS_DISABLED
+
+  - type: cron
+    name: cron-tob-purge-trash              # 02:00 IST daily
+    runtime: docker
+    dockerfilePath: ./deploy/cron/Dockerfile
+    dockerContext: ./deploy/cron
+    region: singapore
+    plan: starter
+    schedule: "30 20 * * *"
+    dockerCommand: /bin/sh /call.sh /api/tob/cron/purge-trash
+    envVars:
+      - key: SITE_URL
+        value: https://lessonguruodisha.in
+      - key: WEBHOOK_CRON_SECRET
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: WEBHOOK_CRON_SECRET
+      - key: BACKGROUND_JOBS_DISABLED
+        fromService:
+          type: web
+          name: lessonguru-web
+          envVarKey: BACKGROUND_JOBS_DISABLED

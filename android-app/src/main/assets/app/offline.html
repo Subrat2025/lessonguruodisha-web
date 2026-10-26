@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>You're offline</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="off">
+  <div class="art"><i class="c"></i><i class="c c2"></i><div class="em">📡</div></div>
+  <h1>No internet connection</h1>
+  <p>Check your mobile data or Wi-Fi and try again.<br><span class="od">ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଯାଞ୍ଚ କରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।</span></p>
+  <button class="btn btn-primary tap" id="retry">Try again</button>
+  <button class="btn btn-ghost tap" id="home">Go to app home</button>
+</div>
+<script>
+(function () {
+  var from = new URLSearchParams(location.search).get('from') || '/'
+  try {
+    var u = new URL(from, location.origin)
+    from = u.origin === location.origin ? u.href : '/'
+  } catch (e) { from = '/' }
+  var info = {}
+  try { info = window.LGApp ? JSON.parse(LGApp.getInfo()) : {} } catch (e) {}
+  if (info.sat != null) document.documentElement.style.setProperty('--sat', info.sat + 'px')
+  if (info.sab != null) document.documentElement.style.setProperty('--sab', info.sab + 'px')
+  try { window.LGApp && LGApp.setStatusBarStyle('dark') } catch (e) {}
+  function online() { try { return window.LGApp ? LGApp.isOnline() : navigator.onLine } catch (e) { return navigator.onLine } }
+  function retry() {
+    var b = document.getElementById('retry')
+    if (!online()) {
+      b.textContent = 'Still offline…'
+      setTimeout(function () { b.textContent = 'Try again' }, 1400)
+      return
+    }
+    location.replace(from)
+  }
+  document.getElementById('retry').onclick = retry
+  document.getElementById('home').onclick = function () { location.replace('/__app/index.html#home') }
+  window.addEventListener('online', retry)
+})()
+</script>
+</body>
+</html>

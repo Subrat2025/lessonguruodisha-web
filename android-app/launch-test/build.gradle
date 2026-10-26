@@ -1,0 +1,58 @@
+// Launch test: runs the real MainActivity on real Android framework code (Robolectric),
+// using the classes and binary resources.arsc produced by build-tools/build.py.
+// Run:  gradle test -Ptools=/path/to/tools     (after python3 build-tools/build.py)
+plugins { id 'java' }
+
+def appRoot = file('..')
+def tools = project.findProperty('tools') ?: '/home/user/tools'
+
+repositories { mavenCentral() }
+
+configurations.all {
+    // androidx.* artifacts are published only on Google Maven, which the build sandbox can't reach
+    exclude group: 'androidx.test'
+    exclude group: 'androidx.test.espresso'
+    exclude group: 'androidx.annotation'
+    exclude group: 'androidx.tracing'
+    exclude group: 'androidx.concurrent'
+    exclude group: 'androidx.lifecycle'
+    exclude group: 'androidx.core'
+}
+
+java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.16.1'
+    // androidx.test:monitor lives only on Google Maven (unreachable from the build sandbox);
+    // build-monitor.sh compiles the needed classes from the official android/android-test sources.
+    testImplementation files("$buildDir/monitor/monitor.jar")
+    testImplementation files("${appRoot}/build/classes")
+    testCompileOnly files("${tools}/android-35.jar")
+    testRuntimeOnly files("${tools}/android-all-35.jar")   // annotation/type lookup outside the sandbox
+}
+
+tasks.register('writeTestConfig') {
+    def out = file("$buildDir/test-config/com/android/tools/test_config.properties")
+    outputs.file out
+    doLast {
+        out.parentFile.mkdirs()
+        out.text = """android_merged_manifest=${file('src/test/AndroidManifest.xml').absolutePath}
+android_merged_assets=${appRoot}/src/main/assets
+android_resource_apk=${appRoot}/build/app-unsigned.apk
+android_custom_package=com.lessonguruodisha.app
+"""
+    }
+}
+sourceSets.test.resources.srcDir "$buildDir/test-config"
+processTestResources.dependsOn writeTestConfig
+
+test {
+    maxHeapSize = '3g'
+    testLogging { events 'passed', 'failed', 'skipped'; exceptionFormat 'full'; showStandardStreams = false }
+}
+
+tasks.register('copyDeps', Copy) {
+    from configurations.testRuntimeClasspath.filter { it.name.endsWith('.jar') && !it.name.startsWith('monitor') && it.exists() }
+    into "$buildDir/deps"
+}

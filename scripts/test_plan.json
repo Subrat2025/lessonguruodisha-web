@@ -1,0 +1,43 @@
+{
+  "plan": {
+    "date": "2026-08-26",
+    "day": "ମଙ୍ଗଳବାର",
+    "duration": "45 min",
+    "learners": 30,
+    "className": "୫ମ",
+    "subject": "ପରିବେଶ ଅଧ୍ୟୟନ",
+    "bookName": "ଆମ ବିଚିତ୍ର ବିଶ୍ୱ",
+    "chapterName": "ପାଠ ୧: ଜଳ ହିଁ ଜୀବନ",
+    "periods": [
+      {
+        "periodNum": 1,
+        "time": "45 min",
+        "className": "୫ମ",
+        "subject": "ପରିବେଶ ଅଧ୍ୟୟନ",
+        "chapterName": "ପାଠ ୧: ଜଳ ହିଁ ଜୀବନ",
+        "topic": "ପୃଥିବୀରେ ଜଳର ପରିମାଣ ଓ ମଧୁର ଜଳର ଉତ୍ସ",
+        "cgCodes": ["CG-2"],
+        "curricularGoalOcf": "ପାର୍ଶ୍ୱପରିବେଶ ଓ ଅନୁଭୂତି ମାଧ୍ୟମରେ ପ୍ରାକୃତିକ ସମ୍ପଦର ସଂରକ୍ଷଣ ପ୍ରତି ଦାୟିତ୍ୱବୋଧ ଗଠନ",
+        "competencyCodes": ["C-2.13"],
+        "competencyOcf": "ଗୋଟିଏ ପ୍ରାକୃତିକ ସମ୍ପଦ (ଜଳ, ମାଟି, ବାୟୁ) ର ଉପଯୋଗ ଓ ସଂରକ୍ଷଣ ଉପାୟ ବର୍ଣ୍ଣନା କରିପାରିବେ",
+        "loCodes": ["E 510", "E 511", "E 505", "E 502"],
+        "loDescription": "ପୃଥିବୀରେ ମଧୁର ଜଳର ପରିମାଣ ଅଳ୍ପ ବୋଲି ବୁଝିପାରିବେ। ଜଳ ଅପଚୟର ତିନୋଟି କାରଣ ଚିହ୍ନଟ କରିପାରିବେ।",
+        "panchapadi": {
+          "adhiti":  { "duration": "୫ ମିନିଟ୍",  "teacherActivity": "ଏକ ଗ୍ଲାସ୍ ପାଣି ଆଣିବେ", "studentActivity": "ପିଲାମାନେ ଦେଖିବେ" },
+          "bodha":   { "duration": "୧୨ ମିନିଟ୍", "teacherActivity": "ଗ୍ଲୋବ୍ ଦେଖାଇ ମହାସାଗର ଚିହ୍ନଟ କରାଇବେ", "studentActivity": "ଦଳଗତ ଆଲୋଚନା କରି ଉତ୍ତର ଦେବେ" },
+          "abhyasa": { "duration": "୧୦ ମିନିଟ୍", "teacherActivity": "ଅଭ୍ୟାସ ୧ ଓ ୨ ପୂରଣ କରାଇବେ", "studentActivity": "ପୁସ୍ତକରେ ଉତ୍ତର ଲେଖିବେ" },
+          "prayoga": { "duration": "୧୦ ମିନିଟ୍", "teacherActivity": "ଦଳରେ ତାଲିକା ପ୍ରସ୍ତୁତ କରାଇବେ", "studentActivity": "ପ୍ରତିକାର ଲେଖିବେ" },
+          "prasar":  { "duration": "୮ ମିନିଟ୍",  "teacherActivity": "ଗୃହକାର୍ଯ୍ୟ: ସପ୍ତାହର ଜଳ ଡାଏରୀ", "studentActivity": "ଉପସ୍ଥାପନ କରିବେ" }
+        },
+        "tlm": ["ଗ୍ଲାସ୍", "ଗ୍ଲୋବ୍", "ଚାର୍ଟ ପେପର"],
+        "assessment": {
+          "questions": [
+            "ପୃଥିବୀପୃଷ୍ଠର କେତେ ଭାଗ ଜଳ?",
+            "ଜଳ ଅପଚୟର ତିନୋଟି କାରଣ ଲେଖ।",
+            "ଆଜିଠାରୁ ଜଳ ସଞ୍ଚୟ ପାଇଁ କେଉଁ କାମ କରିବେ?"
+          ]
+        }
+      }
+    ]
+  }
+}

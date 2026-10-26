@@ -1,0 +1,35 @@
+# dependencies / builds
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# secrets — never commit
+.env
+.env.*
+android-app/keystore/
+*.p12
+*.jks
+
+# Android build outputs (shared separately; the Direct APK lives in public/app/)
+android-app/dist/
+android-app/build/
+android-app/launch-test/build/
+android-app/launch-test/.gradle/
+
+# data exports, caches and test leftovers
+backups/
+memory/
+test_reports/
+reports/
+scripts/r2_resources_cache.json
+test_result.md
+*_test_report.md
+backend_test_output.txt
+backend_test_focused_output.txt
+
+# Emergent platform files (not used on the new platform)
+.emergent/
+
+.DS_Store
+*.log

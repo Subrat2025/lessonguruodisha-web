@@ -1,0 +1,26 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.lessonguruodisha.app",
+      "sha256_cert_fingerprints": [
+        "F7:33:01:62:7D:13:C9:2A:E1:9F:F8:40:EB:B5:F7:1B:0B:66:E1:0A:14:DF:16:32:02:8D:28:75:89:07:7D:5D"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.lessonguruodisha.app.direct",
+      "sha256_cert_fingerprints": [
+        "F7:33:01:62:7D:13:C9:2A:E1:9F:F8:40:EB:B5:F7:1B:0B:66:E1:0A:14:DF:16:32:02:8D:28:75:89:07:7D:5D"
+      ]
+    }
+  }
+]

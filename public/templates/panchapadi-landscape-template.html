@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panchapadi Lesson Plan Template (Landscape) — Lesson Guru Odisha</title>
+<!-- ===== Curriculum auto-detect meta tags (REQUIRED — fill these in) ===== -->
+<meta name="em-class" content="Class ___">
+<meta name="em-book" content="Book name here">
+<meta name="em-chapter" content="ପାଠ - ___">
+<meta name="em-chapter-order" content="1">
+<meta name="em-period" content="1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+Oriya:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#1A2B5F; --violet:#5B2A86; --magenta:#C2187C; --orange:#F2762E; --teal:#00909E; --gold:#FFC53D;
+    --blue:#E3F2FD; --palegold:#FFF4D6; --green:#E6F8EE; --purple:#F3EBFC; --pink:#FDEBF2;
+    --blueD:#1565C0; --greenD:#1E7F4F; --goldD:#B7791F; --purpleD:#6D28D9; --pinkD:#C2187C;
+    --line:#B9C6D3; --text:#22304A; --muted:#5A6579;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#eef1f8; color:var(--text);
+         font-family:'Poppins','Noto Sans Oriya',Arial,Helvetica,sans-serif;
+         font-size:13px; line-height:1.42; }
+  .page { max-width:1500px; margin:22px auto; background:#fff; padding:22px 26px 30px;
+          border-radius:14px; box-shadow:0 5px 26px rgba(26,43,95,.16); }
+
+  /* ===== Hero header ===== */
+  .hero { position:relative; overflow:hidden; color:#fff; text-align:center; border-radius:12px;
+          padding:18px 16px 16px;
+          background:linear-gradient(115deg,var(--navy) 0%,var(--violet) 34%,var(--magenta) 68%,var(--orange) 100%); }
+  .hero::after { content:""; position:absolute; inset:auto 0 0 0; height:6px;
+                 background:linear-gradient(90deg,var(--gold),var(--teal),var(--blueD),var(--purpleD),var(--pinkD),var(--orange)); }
+  .hero .badge { display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.4);
+                 border-radius:999px; padding:2px 14px; font-size:11.5px; letter-spacing:1.6px; margin-bottom:6px; }
+  .hero h1 { margin:0 0 3px; font-size:25px; letter-spacing:.5px; font-weight:800; }
+  .hero p { margin:0; font-size:13px; opacity:.95; }
+
+  /* ===== Section headings ===== */
+  h2 { color:var(--navy); font-size:15.5px; margin:18px 0 8px; display:flex; align-items:center; gap:8px; }
+  h2 .num { flex:0 0 auto; width:25px; height:25px; border-radius:50%; color:#fff;
+            font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  h2.c1 .num { background:linear-gradient(135deg,var(--teal),var(--blueD)); box-shadow:0 2px 6px rgba(0,144,158,.45); }
+  h2.c2 .num { background:linear-gradient(135deg,var(--gold),var(--orange)); box-shadow:0 2px 6px rgba(242,118,46,.45); }
+  h2.c3 .num { background:linear-gradient(135deg,var(--magenta),var(--violet)); box-shadow:0 2px 6px rgba(194,24,124,.45); }
+  h2.c4 .num { background:linear-gradient(135deg,var(--greenD),var(--teal)); box-shadow:0 2px 6px rgba(30,127,79,.45); }
+  h2 small { font-weight:500; color:var(--muted); font-size:12px; margin-left:2px; }
+
+  table { width:100%; border-collapse:collapse; margin-bottom:10px; }
+  td, th { border:1px solid var(--line); padding:7px 9px; vertical-align:top; }
+  th { color:#fff; text-align:center; font-size:12px; letter-spacing:.3px;
+       background:linear-gradient(120deg,var(--navy),var(--violet)); }
+  .label { font-weight:700; background:var(--blue); width:24%; color:var(--navy); }
+  .label small, .stage small { display:block; font-weight:500; color:var(--muted); font-size:10.5px; margin-top:1px; }
+  .curriculum .label { background:var(--palegold); width:24%; }
+  .fill { color:#697887; }
+  .blank { display:inline-block; min-width:140px; border-bottom:1.5px dashed #718093; height:17px; }
+
+  /* ===== Two-column landscape layout ===== */
+  .cols { display:grid; grid-template-columns:1fr 1.15fr; gap:0 26px; align-items:start; }
+
+  /* ===== Panchapadi table ===== */
+  .panchapadi td { height:96px; }
+  .panchapadi th:first-child { border-top-left-radius:8px; }
+  .panchapadi th:last-child { border-top-right-radius:8px; }
+  .stage { width:11%; font-weight:800; font-size:14px; }
+  .stage .odia { font-size:14.5px; display:block; }
+  .stage .en { display:block; font-weight:600; font-size:11.5px; }
+  .time { width:6%; text-align:center; font-weight:600; color:var(--muted); }
+  .aditi  td { background:var(--blue); }    .aditi  .stage { color:var(--blueD);  border-left:6px solid var(--blueD); }
+  .bodh   td { background:var(--green); }   .bodh   .stage { color:var(--greenD); border-left:6px solid var(--greenD); }
+  .abhyas td { background:var(--palegold);} .abhyas .stage { color:var(--goldD);  border-left:6px solid var(--orange); }
+  .prayog td { background:var(--purple); }  .prayog .stage { color:var(--purpleD);border-left:6px solid var(--purpleD); }
+  .prasar td { background:var(--pink); }    .prasar .stage { color:var(--pinkD);  border-left:6px solid var(--pinkD); }
+  .guide { color:#506070; font-size:11.5px; }
+  .lines { margin-top:7px; min-height:40px;
+           background:repeating-linear-gradient(to bottom, transparent 0, transparent 21px, #b7c1c9 22px, transparent 23px); }
+
+  /* ===== Signatures ===== */
+  .signatures { margin-top:26px; }
+  .signatures td { text-align:center; font-weight:700; border:0; border-top:1.5px solid var(--navy);
+                   padding-top:7px; color:var(--navy); }
+  .signatures small { display:block; font-weight:500; color:var(--muted); font-size:10.5px; }
+
+  .footer { margin-top:16px; padding-top:8px; border-top:3px solid transparent;
+            border-image:linear-gradient(90deg,var(--teal),var(--magenta),var(--orange)) 1;
+            color:var(--muted); font-size:11px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; }
+
+  @page { size: A4 landscape; margin:8mm; }
+  @media print {
+    body { background:#fff; }
+    .page { max-width:none; margin:0; box-shadow:none; border-radius:0; padding:2mm; }
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+  @media (max-width:900px) {
+    .cols { grid-template-columns:1fr; }
+    .page { margin:0; padding:14px; border-radius:0; }
+    .hero h1 { font-size:20px; }
+    table, tbody, tr, td, th { font-size:11.5px; }
+    .panchapadi { min-width:820px; }
+    .scroll { overflow-x:auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="badge">LESSON GURU ODISHA</div>
+    <h1>📘 ପଞ୍ଚପଦୀ ଶିକ୍ଷଣ ଯୋଜନା · PANCHAPADI LESSON PLAN</h1>
+    <p>ସମସ୍ତ ବିଷୟ ପାଇଁ (All Subjects) • NEP 2020 / Competency-Based Learning Template • Landscape</p>
+  </header>
+
+  <div class="cols">
+    <div>
+      <!-- ===== 1. Lesson Profile ===== -->
+      <h2 class="c1"><span class="num">୧</span> ପାଠ ପରିଚୟ <small>(Lesson Profile)</small></h2>
+      <table>
+        <tr><td class="label">ବିଦ୍ୟାଳୟ<small>School name</small></td><td><span class="blank"></span></td></tr>
+        <tr><td class="label">ଶିକ୍ଷକଙ୍କ ନାମ<small>Teacher name</small></td><td><span class="blank"></span></td></tr>
+        <tr><td class="label">ତାରିଖ<small>Date</small></td><td><span class="blank"></span></td></tr>
+        <tr><td class="label">ଶ୍ରେଣୀ / ବିଭାଗ<small>Class / Section</small></td><td><span class="blank"></span></td></tr>
+        <tr><td class="label">ବିଷୟ<small>Subject</small></td><td><span class="blank"></span></td></tr>
+        <tr><td class="label">ଅବଧି / ପିରିୟଡ୍<small>Duration / Period</small></td><td><span class="blank" style="min-width:55px"></span> ମିନିଟ୍ &nbsp;•&nbsp; P <span class="blank" style="min-width:35px"></span></td></tr>
+        <tr><td class="label">ଅଧ୍ୟାୟ / ପ୍ରସଙ୍ଗ<small>Chapter / Topic</small></td><td><span class="blank"></span></td></tr>
+        <tr><td class="label">ଶିକ୍ଷାର୍ଥୀ ସଂଖ୍ୟା<small>No. of learners</small></td><td><span class="blank" style="min-width:70px"></span></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <!-- ===== 2. Curriculum Alignment ===== -->
+      <h2 class="c2"><span class="num">୨</span> ପାଠ୍ୟକ୍ରମ ସଂଯୋଜନା <small>(Curriculum Alignment)</small></h2>
+      <table class="curriculum">
+        <tr><td class="label">ପାଠ୍ୟକ୍ରମ ଲକ୍ଷ୍ୟ<small>Curriculum goal</small></td>
+            <td class="fill">_______________________________________________________________<br>_______________________________________________________________</td></tr>
+        <tr><td class="label">ଦକ୍ଷତା<small>Competency</small></td>
+            <td class="fill">_______________________________________________________________</td></tr>
+        <tr><td class="label">LO ସଂକେତ<small>LO code</small></td>
+            <td class="fill">_______________________________________</td></tr>
+        <tr><td class="label">ଶିକ୍ଷଣ ଫଳାଫଳ<small>Learning outcomes</small></td>
+            <td class="fill">ପାଠ ଶେଷରେ ଶିକ୍ଷାର୍ଥୀମାନେ ସକ୍ଷମ ହେବେ — Learners will be able to:<br>1. ____________________________________________________________<br>2. ____________________________________________________________</td></tr>
+        <tr><td class="label">ପୂର୍ବ ଜ୍ଞାନ<small>Prerequisite knowledge</small></td>
+            <td class="fill">_______________________________________________________________</td></tr>
+        <tr><td class="label">ଶିକ୍ଷଣ ସାମଗ୍ରୀ (TLM)<small>Teaching-learning materials</small></td>
+            <td class="fill">ଚାର୍ଟ · ଚିତ୍ର · ବାସ୍ତବ ବସ୍ତୁ · କାର୍ଡ · ପାଠ୍ୟପୁସ୍ତକ — ____________________</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 3. Panchapadi 5-step process ===== -->
+  <h2 class="c3"><span class="num">୩</span> ପଞ୍ଚପଦୀ ଶିକ୍ଷଣ ପ୍ରକ୍ରିୟା <small>(Panchapadi Teaching-Learning Process)</small></h2>
+  <div class="scroll"><table class="panchapadi">
+    <tr>
+      <th style="width:11%">ସୋପାନ (Stage)</th>
+      <th style="width:6%">ସମୟ (Time)</th>
+      <th>ଶିକ୍ଷକଙ୍କ କାର୍ଯ୍ୟ (Teacher facilitation)</th>
+      <th>ଶିକ୍ଷାର୍ଥୀଙ୍କ କାର୍ଯ୍ୟ (Learner engagement)</th>
+      <th style="width:14%">ମୂଲ୍ୟାୟନ ପ୍ରମାଣ (Assessment evidence)</th>
+    </tr>
+    <tr class="aditi">
+      <td class="stage"><span class="odia">୧. ଅଧୀତି</span><span class="en">Aditi</span><small>Introduction</small></td>
+      <td class="time">୫<br>ମିନିଟ୍<br><span style="font-size:10px">(5 min)</span></td>
+      <td><div class="guide">ପ୍ରଶ୍ନ, ସ୍ଥାନୀୟ ଉଦାହରଣ, ଗପ, ବସ୍ତୁ, ଚିତ୍ର ବା ଖେଳ ମାଧ୍ୟମରେ ପୂର୍ବ ଅଭିଜ୍ଞତା ସହ ପ୍ରସଙ୍ଗକୁ ଯୋଡ଼ନ୍ତୁ। (Connect the topic with learners’ prior experience through a question, local example, story, object, picture or game.)</div><div class="lines"></div></td>
+      <td><div class="guide">ଦେଖନ୍ତି, ମନେ ପକାନ୍ତି, ଅନୁମାନ କରନ୍ତି, ଅଭିଜ୍ଞତା ବାଣ୍ଟନ୍ତି ଓ ଉତ୍ତର ଦିଅନ୍ତି। (Observe, recall, predict, share experiences and answer questions.)</div><div class="lines"></div></td>
+      <td><div class="guide">ମୌଖିକ ଉତ୍ତର / ପର୍ଯ୍ୟବେକ୍ଷଣ (Oral response / observation)</div><div class="lines"></div></td>
+    </tr>
+    <tr class="bodh">
+      <td class="stage"><span class="odia">୨. ବୋଧ</span><span class="en">Bodh</span><small>Conceptual understanding</small></td>
+      <td class="time">୧୦–୧୨<br>ମିନିଟ୍<br><span style="font-size:10px">(10–12 min)</span></td>
+      <td><div class="guide">ଅନ୍ୱେଷଣ, ପ୍ରଦର୍ଶନ, ଆଲୋଚନା, ବ୍ୟାଖ୍ୟା ବା ମାର୍ଗଦର୍ଶିତ ଆବିଷ୍କାର ମାଧ୍ୟମରେ ଧାରଣା ଗଠନ କରାନ୍ତୁ। (Facilitate exploration, demonstration, discussion, explanation or guided discovery.)</div><div class="lines"></div></td>
+      <td><div class="guide">ସାମଗ୍ରୀ ଅନ୍ୱେଷଣ, ଆଲୋଚନା, ଯୁକ୍ତି, ବ୍ୟାଖ୍ୟା କରି ବୁଝାମଣା ଗଢ଼ନ୍ତି। (Explore materials, discuss, reason, explain and construct understanding.)</div><div class="lines"></div></td>
+      <td><div class="guide">ପ୍ରଶ୍ନୋତ୍ତର / ପ୍ରଦର୍ଶନ (Questions / demonstration)</div><div class="lines"></div></td>
+    </tr>
+    <tr class="abhyas">
+      <td class="stage"><span class="odia">୩. ଅଭ୍ୟାସ</span><span class="en">Abhyas</span><small>Practice</small></td>
+      <td class="time">୧୦<br>ମିନିଟ୍<br><span style="font-size:10px">(10 min)</span></td>
+      <td><div class="guide">ଏକକ, ଯୋଡ଼ି ବା ଦଳଗତ ସ୍ତରୀକୃତ ଅଭ୍ୟାସ ଦେଇ ସମୟୋଚିତ ମତାମତ ଦିଅନ୍ତୁ। (Provide graded individual, pair or group practice with timely feedback.)</div><div class="lines"></div></td>
+      <td><div class="guide">ଲେଖିବା, ପଢ଼ିବା, ସମାଧାନ, ଅଙ୍କନ, ବର୍ଗୀକରଣ ବା କୌଶଳ ଅଭ୍ୟାସ କରନ୍ତି। (Write, read, solve, draw, classify or practise the skill.)</div><div class="lines"></div></td>
+      <td><div class="guide">କାର୍ଯ୍ୟପତ୍ର / ଖାତା / ପର୍ଯ୍ୟବେକ୍ଷଣ (Worksheet / notebook / observation)</div><div class="lines"></div></td>
+    </tr>
+    <tr class="prayog">
+      <td class="stage"><span class="odia">୪. ପ୍ରୟୋଗ</span><span class="en">Prayog</span><small>Application</small></td>
+      <td class="time">୮–୧୦<br>ମିନିଟ୍<br><span style="font-size:10px">(8–10 min)</span></td>
+      <td><div class="guide">ଧାରଣାର ବ୍ୟବହାର ଆବଶ୍ୟକ କରୁଥିବା ନୂତନ ବା ଦୈନନ୍ଦିନ ଜୀବନର କାର୍ଯ୍ୟ / ସମସ୍ୟା ଦିଅନ୍ତୁ। (Give a new or everyday-life task or problem that requires use of the concept.)</div><div class="lines"></div></td>
+      <td><div class="guide">ସ୍ୱାଧୀନ ବା ମିଳିତ ଭାବେ ଶିକ୍ଷଣ ପ୍ରୟୋଗ କରନ୍ତି; ପଦ୍ଧତି ବୁଝାନ୍ତି। (Apply learning independently or collaboratively; explain the method used.)</div><div class="lines"></div></td>
+      <td><div class="guide">ପ୍ରୟୋଗ କାର୍ଯ୍ୟ / ସମାଧାନ (Application task / solution)</div><div class="lines"></div></td>
+    </tr>
+    <tr class="prasar">
+      <td class="stage"><span class="odia">୫. ପ୍ରସାର</span><span class="en">Prasar</span><small>Extension &amp; sharing</small></td>
+      <td class="time">୩–୫<br>ମିନିଟ୍<br><span style="font-size:10px">(3–5 min)</span></td>
+      <td><div class="guide">ଚିନ୍ତନ, ସାଥୀ-ଶିକ୍ଷଣ, ଉପସ୍ଥାପନା, ପ୍ରଶ୍ନ ତିଆରି ବା ସୃଜନାତ୍ମକ ସମ୍ପ୍ରସାରଣ ପାଇଁ ଆମନ୍ତ୍ରଣ କରନ୍ତୁ। (Invite reflection, peer teaching, presentation, question-making or creative extension.)</div><div class="lines"></div></td>
+      <td><div class="guide">ଉପସ୍ଥାପନ, ଚିନ୍ତନ, ନୂଆ ଉଦାହରଣ ସୃଷ୍ଟି, ବାଣ୍ଟିବା ବା ସାଥୀଙ୍କୁ ଶିଖାଇବା। (Present, reflect, create a new example, share or teach peers.)</div><div class="lines"></div></td>
+      <td><div class="guide">ଏକ୍ଜିଟ୍ ଟିକେଟ୍ / ଉପସ୍ଥାପନା (Exit ticket / presentation)</div><div class="lines"></div></td>
+    </tr>
+  </table></div>
+
+  <!-- ===== 4. Assessment, Inclusion and Reflection ===== -->
+  <h2 class="c4"><span class="num">୪</span> ମୂଲ୍ୟାୟନ, ସମାବେଶନ ଓ ଚିନ୍ତନ <small>(Assessment, Inclusion &amp; Reflection)</small></h2>
+  <div class="cols">
+    <div>
+      <table class="curriculum">
+        <tr><td class="label">ମୂଲ୍ୟାୟନ ପ୍ରଶ୍ନ / ଏକ୍ଜିଟ୍ ଟିକେଟ୍<small>Assessment questions / exit ticket</small></td>
+            <td class="fill">1. ____________________________________________________________<br>2. ____________________________________________________________<br>3. ____________________________________________________________</td></tr>
+        <tr><td class="label">ସହାୟତା ଆବଶ୍ୟକ ଶିକ୍ଷାର୍ଥୀଙ୍କ ପାଇଁ<small>Support for learners needing help</small></td>
+            <td class="fill">ଚିତ୍ର/ସାମଗ୍ରୀ ସହାୟତା, ସାଥୀ ସହାୟତା, ସରଳ ସୋପାନ, ମାତୃଭାଷାରେ ବୁଝାମଣା ବା ଅତିରିକ୍ତ ଅଭ୍ୟାସ:<br>_______________________________________________________________</td></tr>
+        <tr><td class="label">ଅଗ୍ରଣୀ ଶିକ୍ଷାର୍ଥୀଙ୍କ ପାଇଁ<small>Enrichment for advanced learners</small></td>
+            <td class="fill">_______________________________________________________________</td></tr>
+      </table>
+    </div>
+    <div>
+      <table class="curriculum">
+        <tr><td class="label">🏠 ଗୃହକାର୍ଯ୍ୟ<small>Homework / extension activity</small></td>
+            <td class="fill">_______________________________________________________________<br>_______________________________________________________________</td></tr>
+        <tr><td class="label">ଶିକ୍ଷକଙ୍କ ଆତ୍ମଚିନ୍ତନ<small>Teacher reflection</small></td>
+            <td class="fill">କ’ଣ ଭଲ ହେଲା? (What worked well?)<br>_______________________________________________________________<br>ପରବର୍ତ୍ତୀ ଥର କ’ଣ ସୁଧାରିବି? (What will I improve?)<br>_______________________________________________________________</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== Signatures ===== -->
+  <table class="signatures">
+    <tr>
+      <td style="width:50%">ଶିକ୍ଷକଙ୍କ ସ୍ୱାକ୍ଷର<small>Teacher’s signature</small></td>
+      <td style="width:50%">ପ୍ରଧାନ ଶିକ୍ଷକଙ୍କ ସ୍ୱାକ୍ଷର<small>Headmaster’s signature</small></td>
+    </tr>
+  </table>
+
+  <footer class="footer">
+    <span>ପଞ୍ଚପଦୀ ଶିକ୍ଷଣ ଯୋଜନା — Lesson Guru Odisha</span>
+    <span>All Subjects • Landscape • Printable • Colour-coded • Editable</span>
+  </footer>
+</div>
+</body>
+</html>

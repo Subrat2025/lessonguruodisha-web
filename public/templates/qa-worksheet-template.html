@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--
+    ══════════════════════════════════════════════════════════════════════════
+    Q&A WORKSHEET TEMPLATE — Lesson Guru Odisha (2026)
+    ══════════════════════════════════════════════════════════════════════════
+    ✏️  HOW TO USE:
+      1. Edit the <title>, hero heading, and every <section class="page"> block
+         to match your chapter's questions & answers.
+      2. Keep the CSS class hooks intact — the app relies on them to parse & style:
+             .hero .page .page__eyebrow .qa .q .a .ans .tips .tbl .note
+             .remember .rgrid .rcard .k .v .reveal .num .hl .c
+      3. You can duplicate <section class="page">…</section> blocks for more pages.
+      4. Each <div class="qa">…</div> is one Q&A pair.
+      5. Answer element choices (mix as needed):
+            <p class="a">        — plain answer text
+            <div class="ans">    — highlighted "final answer" block
+            <ul class="tips">    — bulleted list / multiple points
+            <div class="tbl">    — table (wrap a <table> inside)
+            <div class="note">   — extra note / discussion (yellow accent)
+            <span class="reveal">— content hidden until "Exam Mode" reveal
+      6. Save as .html and upload via Admin → 📝 Q&A Worksheets → drop file
+         → pick target Chapter → Save.
+    ══════════════════════════════════════════════════════════════════════════
+-->
+<html lang="or">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[Chapter Name in Odia] — ପ୍ରଶ୍ନ ଓ ଉତ୍ତର</title>
+  <style>
+    /* Inline styling — auto-replaced by app's QA_PRINT_CSS on view / print.
+       Kept here so the file is readable / previewable in any browser. */
+    body { font-family: 'Noto Sans Oriya', 'Kohinoor Devanagari', system-ui, sans-serif; color: #222; line-height: 1.55; margin: 0; padding: 16px; max-width: 900px; margin-inline: auto; }
+    .hero { padding: 20px; border-radius: 14px; background: linear-gradient(135deg,#e0f2fe,#f5f3ff); margin-bottom: 20px; }
+    .hero__tag { display: inline-block; padding: 3px 10px; border-radius: 999px; background: #0891b2; color: #fff; font-size: 12px; font-weight: 700; }
+    .hero h1 { font-size: 26px; font-weight: 800; margin: 10px 0 6px; }
+    .hero p  { font-size: 13px; color: #444; }
+    .page { border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; margin-bottom: 16px; page-break-inside: avoid; background: #fff; }
+    .page__eyebrow { font-size: 12px; font-weight: 700; color: #0891b2; margin-bottom: 6px; }
+    .page h2 { font-size: 17px; font-weight: 800; color: #1e293b; margin: 0 0 10px; border-bottom: 2px solid #06b6d4; padding-bottom: 6px; }
+    .qa { padding: 10px 12px; border-left: 3px solid #06b6d4; background: #f0f9ff; border-radius: 6px; margin: 8px 0; }
+    .qa .q { font-weight: 700; color: #0f172a; margin: 0 0 5px; font-size: 14px; }
+    .qa .num { display: inline-block; background: #06b6d4; color: #fff; padding: 1px 7px; border-radius: 999px; margin-right: 5px; font-size: 12px; font-weight: 700; }
+    .qa .a  { margin: 5px 0; font-size: 14px; color: #334155; }
+    .ans    { background: #ecfdf5; border: 1px solid #6ee7b7; padding: 7px 12px; border-radius: 6px; margin: 5px 0; font-size: 14px; }
+    .tips   { padding-left: 20px; margin: 5px 0; font-size: 14px; }
+    .tips li{ margin: 3px 0; }
+    .note   { background: #fef3c7; border-left: 3px solid #f59e0b; padding: 7px 12px; margin: 8px 0; border-radius: 4px; font-size: 13px; }
+    .tbl table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+    .tbl th, .tbl td { border: 1px solid #cbd5e1; padding: 5px 8px; text-align: left; }
+    .tbl th { background: #06b6d4; color: #fff; font-weight: 700; }
+    .tbl td.c, .tbl th.c { text-align: center; }
+    .hl     { background: #fef3c7; font-weight: 700; }
+    .reveal { background: #ecfdf5; padding: 1px 4px; border-radius: 3px; color: #047857; font-weight: 700; }
+    .remember { padding: 14px; border-radius: 12px; background: linear-gradient(135deg,#fef3c7,#fde68a); margin-top: 20px; }
+    .rgrid  { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 10px; margin-top: 10px; }
+    .rcard  { background: #fff; border-radius: 10px; padding: 10px; border: 1px solid #f59e0b; }
+    .rcard .k { font-size: 12px; font-weight: 700; color: #92400e; }
+    .rcard .v { font-size: 13px; color: #78350f; margin-top: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════ HERO / TITLE ═══════════════════ -->
+  <section class="hero">
+    <span class="hero__tag">[Subject in Odia] · ପ୍ରଶ୍ନ ଓ ଉତ୍ତର</span>
+    <h1>[Chapter Name — e.g. ଆମ ଚାରିପାଖର ଆକୃତି]</h1>
+    <p>[Short intro line — e.g. "ଏହି ଅଧ୍ୟାୟର ସମସ୍ତ ପ୍ରଶ୍ନ ଓ ସେମାନଙ୍କ ସମାଧାନ"]</p>
+  </section>
+
+  <!-- ═══════════════════ PAGE 1 ═══════════════════ -->
+  <section class="page" id="p1">
+    <div class="page__eyebrow">ପୃଷ୍ଠା ୧</div>
+    <h2>[Page 1 Section Heading — e.g. ଘରର ମଡେଲ]</h2>
+
+    <!-- Question 1 -->
+    <div class="qa">
+      <p class="q"><span class="num">୧</span>[Type your first question here…]</p>
+      <p class="a">[Type the answer paragraph here…]</p>
+      <div class="ans">✅ [Highlighted final answer — optional]</div>
+    </div>
+
+    <!-- Question 2 — with a bulleted answer list -->
+    <div class="qa">
+      <p class="q"><span class="num">୨</span>[Question with multiple points…]</p>
+      <ul class="tips">
+        <li>[Point 1]</li>
+        <li>[Point 2]</li>
+        <li>[Point 3]</li>
+      </ul>
+    </div>
+
+    <!-- Question 3 — with a note -->
+    <div class="qa">
+      <p class="q"><span class="num">୩</span>[Question that needs a discussion note…]</p>
+      <p class="a">[Main answer paragraph…]</p>
+      <div class="note">💡 <b>ମନେ ରଖନ୍ତୁ:</b> [Additional tip / clarification note]</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PAGE 2 ═══════════════════ -->
+  <section class="page" id="p2">
+    <div class="page__eyebrow">ପୃଷ୍ଠା ୨</div>
+    <h2>[Page 2 Section Heading]</h2>
+
+    <!-- Question with a table -->
+    <div class="qa">
+      <p class="q"><span class="num">୪</span>[Question that needs a comparison table…]</p>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr>
+              <th>[Column 1]</th>
+              <th>[Column 2]</th>
+              <th class="c">[Column 3]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>[Row 1 · Col 1]</td>
+              <td>[Row 1 · Col 2]</td>
+              <td class="c">[Row 1 · Col 3]</td>
+            </tr>
+            <tr>
+              <td>[Row 2 · Col 1]</td>
+              <td>[Row 2 · Col 2]</td>
+              <td class="c">[Row 2 · Col 3]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Question with hide-and-reveal answer -->
+    <div class="qa">
+      <p class="q"><span class="num">୫</span>[Fill-in-the-blank style question with the answer masked…]</p>
+      <p class="a">The correct answer is <span class="reveal">[hidden answer]</span> because …</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PAGE 3 ═══════════════════
+       Duplicate this pattern for as many pages as needed.
+       Change id="pN" and eyebrow text accordingly.
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="page" id="p3">
+    <div class="page__eyebrow">ପୃଷ୍ଠା ୩</div>
+    <h2>[Another Section Heading]</h2>
+
+    <div class="qa">
+      <p class="q"><span class="num">୬</span>[Question…]</p>
+      <p class="a">[Answer…]</p>
+    </div>
+
+    <div class="qa">
+      <p class="q"><span class="num">୭</span>[Another question…]</p>
+      <div class="ans">[Direct one-line answer]</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ SUMMARY / REMEMBER ═══════════════════
+       Optional — appears at the bottom as a "Key Points" card grid.
+       The app parses this into structured summary.cards[].
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="remember">
+    <h2>🌟 ମନେ ରଖିବା ପାଇଁ</h2>
+    <p class="intro">[Optional intro line — Key points to remember from this chapter]</p>
+    <div class="rgrid">
+      <div class="rcard"><div class="k">[Key term 1]</div><div class="v">[Meaning / definition of key term 1]</div></div>
+      <div class="rcard"><div class="k">[Key term 2]</div><div class="v">[Meaning / definition of key term 2]</div></div>
+      <div class="rcard"><div class="k">[Key term 3]</div><div class="v">[Meaning / definition of key term 3]</div></div>
+      <div class="rcard"><div class="k">[Key term 4]</div><div class="v">[Meaning / definition of key term 4]</div></div>
+    </div>
+  </section>
+
+</body>
+</html>

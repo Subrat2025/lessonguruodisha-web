@@ -1,0 +1,10 @@
+import { MongoClient } from 'mongodb'
+const c=new MongoClient(process.env.MONGO_URL); await c.connect(); const d=c.db(process.env.DB_NAME)
+const agg=await d.collection('storeProducts').aggregate([{$group:{_id:'$type',n:{$sum:1}}},{$sort:{n:-1}}]).toArray()
+console.log('PREVIEW types:',JSON.stringify(agg))
+const withCover=await d.collection('storeProducts').countDocuments({'cover.url':{$exists:true,$ne:null}})
+const total=await d.collection('storeProducts').countDocuments({})
+console.log('PREVIEW total products=',total,'withCover=',withCover)
+const ak=await d.collection('storeProducts').find({type:'answer_key'}).project({id:1,titleOdia:1}).toArray()
+console.log('PREVIEW answer_key count=',ak.length)
+await c.close()
