@@ -99,11 +99,17 @@ async function main() {
   }
   if (!dryRun && srcUrl === dstUrl && srcName === dstName) { console.error('Source and target are the same database.'); process.exit(2) }
 
-  const src = new MongoClient(srcUrl, { readPreference: 'secondaryPreferred' })
-  const dst = dryRun ? null : new MongoClient(dstUrl, { retryWrites: true })
+  const src = new MongoClient(srcUrl, { readPreference: 'secondaryPreferred', serverSelectionTimeoutMS: 20000 })
+  const dst = dryRun ? null : new MongoClient(dstUrl, { retryWrites: true, serverSelectionTimeoutMS: 20000 })
   const started = Date.now()
   try {
-    await src.connect(); if (dst) await dst.connect()
+    log('Connecting to the old database (up to 20 s)...')
+    await src.connect().catch((e) => { throw new Error(`cannot reach the OLD database: ${e.message}`) })
+    if (dst) {
+      log('Connecting to the new database...')
+      await dst.connect().catch((e) => { throw new Error(`cannot reach the NEW database: ${e.message}`) })
+    }
+    log('Connected.')
     const stats = await src.db(srcName).stats().catch(() => null)
     log(`Source: ${srcName}${stats ? ` (${stats.collections} collections, ${mb(stats.dataSize)} data)` : ''}`)
     if (!dryRun) log(`Target: ${dstName}${replace ? '  (existing collections will be replaced)' : ''}`)
