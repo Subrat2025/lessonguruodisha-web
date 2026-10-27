@@ -79,7 +79,7 @@ export default function PrivacyPage() {
           <li>Deletion of your account (subject to retention obligations)</li>
           <li>Export of your account data</li>
         </ul>
-        <p>Email <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a> with your request.</p>
+        <p>Email <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a> with your request.</p>
         <p><strong>Deleting your account:</strong> you can request deletion yourself at <Link href="/delete-account">lessonguruodisha.com/delete-account</Link> or in the Android app (Profile → Delete account). We remove your profile and Cloud Library files within 30 days. Payment records are kept, without your name or number, as Indian tax law requires.</p>
 
         <h2>9. Changes to This Policy</h2>
@@ -87,7 +87,7 @@ export default function PrivacyPage() {
 
         <h2>10. Contact</h2>
         <ul>
-          <li>📧 <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a></li>
+          <li>📧 <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a></li>
           <li>📱 WhatsApp: <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a></li>
         </ul>
 

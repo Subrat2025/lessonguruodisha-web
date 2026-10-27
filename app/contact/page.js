@@ -18,10 +18,10 @@ export default function Page() {
         <p><strong>Lesson Guru Odisha</strong> is an online platform of ready lesson plans, Panchapadi, question papers and teaching tools for Odisha school teachers (Balvatika to Class 10).</p>
         <h2>Get in touch</h2>
         <ul>
-          <li>📧 Email: <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a></li>
+          <li>📧 Email: <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a></li>
           <li>📱 WhatsApp / Phone: <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a></li>
           <li>🌐 Website: <a href="https://lessonguruodisha.com">lessonguruodisha.com</a></li>
-          <li>📍 Location: Odisha, India</li>
+          <li>📍 Address: Bada Sahi, Kalabada, Chikiti, Ganjam, Odisha – 761010, India</li>
           <li>⏰ Support hours: Monday to Saturday, 10:00 AM – 6:00 PM IST. We reply within 2 business days.</li>
         </ul>
         <h2>Payments and subscriptions</h2>

@@ -60,10 +60,10 @@ export default function AboutPage() {
         <h2>Contact Us</h2>
         <p>We love hearing from teachers. Reach out anytime:</p>
         <ul>
-          <li>📧 Email: <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a></li>
+          <li>📧 Email: <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a></li>
           <li>📱 WhatsApp: <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a></li>
           <li>🌐 Website: <a href={SITE_URL}>{SITE_URL.replace('https://','')}</a></li>
-          <li>📍 Location: Odisha, India</li>
+          <li>📍 Location: Bada Sahi, Kalabada, Chikiti, Ganjam, Odisha – 761010, India</li>
         </ul>
 
         <p><Link href="/">← Back to Home</Link></p>

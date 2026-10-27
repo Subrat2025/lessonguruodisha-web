@@ -56,7 +56,7 @@ export default function RefundPage() {
 
         <h2>4. Refund Process</h2>
         <ol>
-          <li>Email <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a> or WhatsApp <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a> with subject "Refund Request"</li>
+          <li>Email <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a> or WhatsApp <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a> with subject "Refund Request"</li>
           <li>Include your registered mobile number, Razorpay transaction ID, and reason</li>
           <li>We will review and respond within <strong>2 business days</strong></li>
           <li>If approved, refunds are processed via Razorpay to the original payment method</li>
@@ -65,7 +65,7 @@ export default function RefundPage() {
 
         <h2>5. Cancellation</h2>
         <p>Subscriptions do <strong>not</strong> auto-renew. You don’t need to "cancel" — your access simply expires at the end of the paid period unless you manually renew.</p>
-        <p>If you wish to delete your account entirely, email <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a>.</p>
+        <p>If you wish to delete your account entirely, email <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a>.</p>
 
         <h2>6. Disputes &amp; Chargebacks</h2>
         <p>Before initiating a payment dispute or chargeback with your bank/card, please contact us first. We aim to resolve all genuine issues amicably. Unjustified chargebacks may result in account termination.</p>
@@ -75,7 +75,7 @@ export default function RefundPage() {
 
         <h2>8. Contact for Refunds</h2>
         <ul>
-          <li>📧 Email: <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a></li>
+          <li>📧 Email: <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a></li>
           <li>📱 WhatsApp: <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a></li>
           <li>⏰ Response time: Within 2 business days</li>
         </ul>

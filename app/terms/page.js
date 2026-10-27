@@ -88,8 +88,9 @@ export default function TermsPage() {
 
         <h2>14. Contact</h2>
         <ul>
-          <li>📧 <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a></li>
+          <li>📧 <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a></li>
           <li>📱 WhatsApp: <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a></li>
+          <li>📍 Bada Sahi, Kalabada, Chikiti, Ganjam, Odisha – 761010, India</li>
         </ul>
 
         <p><Link href="/">← Back to Home</Link></p>

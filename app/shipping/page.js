@@ -28,7 +28,7 @@ export default function Page() {
         <ol>
           <li>Log out and log in again with the same mobile number.</li>
           <li>If access is still missing after 24 hours, contact us with your registered mobile number and Razorpay payment ID:
-            email <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a> or WhatsApp <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a>.</li>
+            email <a href="mailto:teacherutilitytoolkit@gmail.com">teacherutilitytoolkit@gmail.com</a> or WhatsApp <a href="https://wa.me/918093414633" target="_blank" rel="noopener">+91 80934 14633</a>.</li>
           <li>We will activate your access or refund the payment as per our <Link href="/refund">Refund &amp; Cancellation Policy</Link>.</li>
         </ol>
         <h2>4. Shipping charges</h2>
