@@ -1800,6 +1800,8 @@ const HomeView = ({ go, user }) => {
             <a href="/privacy" className="font-semibold hover:text-primary flex items-center gap-1.5">🔒 Privacy Policy</a>
             <a href="/terms" className="font-semibold hover:text-primary flex items-center gap-1.5">📜 Terms &amp; Conditions</a>
             <a href="/refund" className="font-semibold hover:text-primary flex items-center gap-1.5">💰 Refund Policy</a>
+            <a href="/shipping" className="font-semibold hover:text-primary flex items-center gap-1.5">🚚 Shipping &amp; Delivery</a>
+            <a href="/contact" className="font-semibold hover:text-primary flex items-center gap-1.5">📞 Contact Us</a>
           </div>
           <div className="border-t mt-3 pt-3 space-y-1.5">
             <a href="mailto:teacherutilitytoolkit@gmail.com" className="text-xs flex items-center gap-2 text-muted-foreground hover:text-primary">

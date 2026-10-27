@@ -31,6 +31,8 @@ export default async function sitemap() {
     { url: `${SITE_URL}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${SITE_URL}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${SITE_URL}/refund`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${SITE_URL}/shipping`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${SITE_URL}/contact`, lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
     { url: `${SITE_URL}/?view=plans`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE_URL}/?view=classes`, lastModified: now, changeFrequency: 'daily', priority: 0.95 },
     { url: `${SITE_URL}/?view=search`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
