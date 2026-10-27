@@ -8,7 +8,7 @@ const { handler, PREMIUM_USER, FREE_USER, NEW_USER } = require('./native-mocks')
 const ROOT = process.argv[2] || path.join(__dirname, '..')
 const ASSETS = path.join(ROOT, 'src/main/assets/app')
 const OUT = path.join(ROOT, 'dist/screenshots-native')
-const ORIGIN = 'https://lessonguruodisha.in'
+const ORIGIN = 'https://lessonguruodisha.com'
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.webp': 'image/webp', '.json': 'application/json' }
 const VIEW = { width: 412, height: 915 }, SAT = 32
 const errors = []

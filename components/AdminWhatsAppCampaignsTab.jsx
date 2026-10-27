@@ -436,7 +436,7 @@ export const PRESETS = [
       language: 'en_US',
       message: 'Namaskar {{1}}! Welcome to LessonGuru Odisha — your one-stop lesson plan companion.',
       variables: { 1: 'Teacher' },
-      ctaLink: 'https://lessonguruodisha.in',
+      ctaLink: 'https://lessonguruodisha.com',
       filter: { audience: 'no_sub' },
     }),
   },
@@ -448,7 +448,7 @@ export const PRESETS = [
       templateId: 'upgrade_premium',
       language: 'en_US',
       variables: { 1: 'Teacher', 2: '₹199' },
-      ctaLink: 'https://lessonguruodisha.in/plans',
+      ctaLink: 'https://lessonguruodisha.com/plans',
       filter: { audience: 'no_sub' },
     }),
   },
@@ -460,7 +460,7 @@ export const PRESETS = [
       templateId: 'plan_expiring_soon',
       language: 'en_US',
       variables: { 1: 'Teacher', 2: '3 days' },
-      ctaLink: 'https://lessonguruodisha.in/plans',
+      ctaLink: 'https://lessonguruodisha.com/plans',
       filter: { audience: 'active' },
     }),
   },
@@ -472,7 +472,7 @@ export const PRESETS = [
       templateId: 'special_offer_today',
       language: 'en_US',
       variables: { 1: 'Teacher', 2: '30%' },
-      ctaLink: 'https://lessonguruodisha.in/plans',
+      ctaLink: 'https://lessonguruodisha.com/plans',
       filter: { audience: 'no_sub' },
     }),
   },
@@ -484,7 +484,7 @@ export const PRESETS = [
       templateId: 'referral_invite',
       language: 'en_US',
       variables: { 1: 'Teacher' },
-      ctaLink: 'https://lessonguruodisha.in/referrals',
+      ctaLink: 'https://lessonguruodisha.com/referrals',
       filter: { audience: 'active' },
     }),
   },
@@ -496,7 +496,7 @@ export const PRESETS = [
       templateId: 'new_material_alert',
       language: 'en_US',
       variables: { 1: 'Teacher' },
-      ctaLink: 'https://lessonguruodisha.in',
+      ctaLink: 'https://lessonguruodisha.com',
       filter: { audience: 'all' },
     }),
   },
@@ -692,7 +692,7 @@ const CampaignEditor = ({ initial, templates, onSaved, onCancel }) => {
         </div>
         <div>
           <Label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground"><LinkIcon className="w-3 h-3 inline mr-1" />CTA / Deep Link <span className="text-slate-400">(optional)</span></Label>
-          <Input value={form.ctaLink} onChange={e => setField('ctaLink', e.target.value)} placeholder="https://lessonguruodisha.in/plans" className="h-8 text-xs rounded-lg" />
+          <Input value={form.ctaLink} onChange={e => setField('ctaLink', e.target.value)} placeholder="https://lessonguruodisha.com/plans" className="h-8 text-xs rounded-lg" />
         </div>
       </div>
 

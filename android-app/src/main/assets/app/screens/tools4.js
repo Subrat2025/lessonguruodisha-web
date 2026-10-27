@@ -109,7 +109,7 @@
       <p>This is to certify that</p><h1>${esc(c.userName || LG.state.user && LG.state.user.name || 'Teacher')}</h1>
       <p>has successfully passed the <b>${esc(c.monthEn || c.monthLabel || '')} MCM Test</b><br>with a score of <b>${esc(c.percentage)}%</b> (${esc(c.correctCount)}/${esc(c.total)} correct).</p>
       <div class="cert-f"><span>${esc(d)}</span><span>ID: ${esc(c.certificateId)}</span></div>
-      <small>Verify at lessonguruodisha.in/verify-mcm?id=${esc(c.certificateId)}</small></div></div>`
+      <small>Verify at lessonguruodisha.com/verify-mcm?id=${esc(c.certificateId)}</small></div></div>`
   }
   LG.page('mcm', {
     paths: ['/mcm-test'], title: 'MCM Test', subtitle: 'MCM ପରୀକ୍ଷା', tone: 'night', login: true,
@@ -181,7 +181,7 @@
       ctx.on('click', '[data-start]', () => take())
       ctx.on('click', '[data-lb]', () => ctx.push('mcm-board'))
       ctx.on('click', '[data-cert]', () => ctx.push('mcm-cert', { key: JSON.stringify(ctx.lastResult || { ...attempt, certificateTitle: test.certificateTitle, monthEn: test.monthEn, monthLabel: test.monthLabel, total: attempt && attempt.total }) }))
-      ctx.on('click', '[data-share-c]', () => { const r = ctx.lastResult; LG.native.share('MCM certificate', `🏆 I passed the ${r.monthEn || ''} MCM Test with ${r.percentage}% on Lesson Guru Odisha!\nVerify: https://lessonguruodisha.in/verify-mcm?id=${r.certificateId}`) })
+      ctx.on('click', '[data-share-c]', () => { const r = ctx.lastResult; LG.native.share('MCM certificate', `🏆 I passed the ${r.monthEn || ''} MCM Test with ${r.percentage}% on Lesson Guru Odisha!\nVerify: https://lessonguruodisha.com/verify-mcm?id=${r.certificateId}`) })
       intro()
       return () => clearInterval(timer)
     },
@@ -193,7 +193,7 @@
       ctx.body.innerHTML = `<div class="print-area">${certificateHtml(c)}</div><div class="dock">${ui.btn('Save / print PDF', 'data-print', 'primary', 'download')}${ui.btn('Share', 'data-sh', 'soft', 'share')}</div>`
       LG.hydrateIcons(ctx.body)
       ctx.on('click', '[data-print]', () => LG.printNow('MCM certificate'))
-      ctx.on('click', '[data-sh]', () => LG.native.share('MCM certificate', `🏆 I passed the ${c.monthEn || ''} MCM Test with ${c.percentage}% on Lesson Guru Odisha!\nVerify: https://lessonguruodisha.in/verify-mcm?id=${c.certificateId}`))
+      ctx.on('click', '[data-sh]', () => LG.native.share('MCM certificate', `🏆 I passed the ${c.monthEn || ''} MCM Test with ${c.percentage}% on Lesson Guru Odisha!\nVerify: https://lessonguruodisha.com/verify-mcm?id=${c.certificateId}`))
     },
   })
   LG.page('mcm-board', {

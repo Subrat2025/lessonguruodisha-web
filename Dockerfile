@@ -1,4 +1,4 @@
-# Production image for lessonguruodisha.in (Render, or any Docker host).
+# Production image for lessonguruodisha.com (Render, or any Docker host).
 # Next.js "standalone" server + system Chromium (PDF generation) + Odia/Indic fonts.
 # The app reads fonts from /app/public/fonts, so it must run from /app.
 

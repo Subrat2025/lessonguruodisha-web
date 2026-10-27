@@ -277,7 +277,7 @@
       ctx.on('click', '[data-dl]', (b) => download(ctx, data, b.dataset.dl, b))
       ctx.el.querySelector('.pg-act').onclick = async (e) => {
         const f = e.target.closest('[data-fav]'), s = e.target.closest('[data-lshare]')
-        if (s) LG.native.share(L.title || 'Lesson plan', `📚 ${L.title || 'Lesson plan'}${cls ? ' · ' + className(cls) : ''}\nhttps://lessonguruodisha.in/lesson?id=${L.id}`)
+        if (s) LG.native.share(L.title || 'Lesson plan', `📚 ${L.title || 'Lesson plan'}${cls ? ' · ' + className(cls) : ''}\nhttps://lessonguruodisha.com/lesson?id=${L.id}`)
         if (f) {
           const add = !f.classList.contains('on')
           f.classList.toggle('on', add); LG.native.haptic(add ? 'success' : 'tap')

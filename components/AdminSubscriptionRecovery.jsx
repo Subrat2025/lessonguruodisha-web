@@ -80,7 +80,7 @@ export default function AdminSubscriptionRecovery({ onBack }) {
   useEffect(() => { load() }, [load])
 
   const buildMsg = useCallback((u) => {
-    const link = (typeof window !== 'undefined' ? window.location.origin : 'https://lessonguruodisha.in') + '/'
+    const link = (typeof window !== 'undefined' ? window.location.origin : 'https://lessonguruodisha.com') + '/'
     return VARIANTS[variant].build({ name: u.name || 'Teacher', plan: u.plan || 'premium', expiry: fmtDate(u.expiryDate), days: u.daysExpired ?? '', link })
   }, [variant])
 

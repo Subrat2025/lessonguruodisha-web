@@ -2,7 +2,7 @@
 import { getDb } from '@/lib/mongodb'
 import { seedDatabase } from '@/lib/seed-data'
 
-const SITE_URL = 'https://lessonguruodisha.in'
+const SITE_URL = 'https://lessonguruodisha.com'
 
 // Built on request (not at build time): the build has no database access on Render, and a sitemap
 // frozen at build time would never show new classes or books.

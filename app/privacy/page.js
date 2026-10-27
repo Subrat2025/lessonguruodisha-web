@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const SITE_URL = 'https://lessonguruodisha.in'
+const SITE_URL = 'https://lessonguruodisha.com'
 
 export const metadata = {
   title: 'Privacy Policy - Lesson Guru Odisha',
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
           <li>Export of your account data</li>
         </ul>
         <p>Email <a href="mailto:support@teacherutilitytoolkit.com">support@teacherutilitytoolkit.com</a> with your request.</p>
-        <p><strong>Deleting your account:</strong> you can request deletion yourself at <Link href="/delete-account">lessonguruodisha.in/delete-account</Link> or in the Android app (Profile → Delete account). We remove your profile and Cloud Library files within 30 days. Payment records are kept, without your name or number, as Indian tax law requires.</p>
+        <p><strong>Deleting your account:</strong> you can request deletion yourself at <Link href="/delete-account">lessonguruodisha.com/delete-account</Link> or in the Android app (Profile → Delete account). We remove your profile and Cloud Library files within 30 days. Payment records are kept, without your name or number, as Indian tax law requires.</p>
 
         <h2>9. Changes to This Policy</h2>
         <p>We may update this Privacy Policy from time to time. Material changes will be posted on this page with an updated date.</p>

@@ -239,11 +239,11 @@ Need help? Reply to this message.`
           </div>
           <div>
             <p className="text-[10px] font-bold uppercase text-muted-foreground">Footer (optional)</p>
-            <p className="text-[11px]">Lesson Guru Odisha · lessonguruodisha.in</p>
+            <p className="text-[11px]">Lesson Guru Odisha · lessonguruodisha.com</p>
           </div>
           <div>
             <p className="text-[10px] font-bold uppercase text-muted-foreground">URL Button (optional)</p>
-            <p className="text-[11px]">Text: <b>Open Ajira Pathya Jojana</b> — URL: <span className="font-mono">https://lessonguruodisha.in/ajira-pathya-jojana</span></p>
+            <p className="text-[11px]">Text: <b>Open Ajira Pathya Jojana</b> — URL: <span className="font-mono">https://lessonguruodisha.com/ajira-pathya-jojana</span></p>
           </div>
         </div>
       )}
@@ -507,7 +507,7 @@ const CheckUserCard = ({ api }) => {
       {data && !data.found && (
         <div className="rounded-xl border-2 border-red-300 bg-red-50 dark:bg-red-950/40 dark:border-red-800 p-3">
           <p className="text-[12px] font-bold text-red-700 dark:text-red-200">❌ No user found for mobile <span className="font-mono">{data.mobile}</span></p>
-          <p className="text-[10.5px] text-muted-foreground mt-0.5">This mobile is not registered on lessonguruodisha.in yet.</p>
+          <p className="text-[10.5px] text-muted-foreground mt-0.5">This mobile is not registered on lessonguruodisha.com yet.</p>
         </div>
       )}
 

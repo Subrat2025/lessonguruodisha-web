@@ -56,12 +56,12 @@ import java.util.Map;
 
 /**
  * Single-activity shell. The bundled hub (assets/app) is served from
- * https://lessonguruodisha.in/__app/ so it shares origin, cookies and
+ * https://lessonguruodisha.com/__app/ so it shares origin, cookies and
  * localStorage with the live platform it wraps.
  */
 public class MainActivity extends Activity {
 
-    static final String HOST = "lessonguruodisha.in";
+    static final String HOST = "lessonguruodisha.com";
     static final String BASE = "https://" + HOST;
     static final String APP_PREFIX = BASE + "/__app/";
     static final String HUB_URL = APP_PREFIX + "index.html";

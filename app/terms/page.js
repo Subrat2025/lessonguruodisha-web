@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const SITE_URL = 'https://lessonguruodisha.in'
+const SITE_URL = 'https://lessonguruodisha.com'
 
 export const metadata = {
   title: 'Terms & Conditions - Lesson Guru Odisha',

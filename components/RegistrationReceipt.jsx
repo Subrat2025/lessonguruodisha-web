@@ -294,7 +294,7 @@ const ReceiptCardVisual = React.forwardRef(function ReceiptCardVisual({ data }, 
           fontSize: '8.5px', color: '#94a3b8',
           letterSpacing: '1.8px', fontWeight: 800,
         }}>
-          LESSON GURU ODISHA · lessonguruodisha.in
+          LESSON GURU ODISHA · lessonguruodisha.com
         </div>
       </div>
     </div>

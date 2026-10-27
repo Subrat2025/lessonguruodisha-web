@@ -142,7 +142,7 @@ export default function SecureViewer() {
                 <div className="absolute inset-0 flex flex-wrap content-center justify-center gap-x-10 gap-y-14 -rotate-[30deg] scale-125">
                   {Array.from({ length: 12 }).map((_, k) => (
                     <span key={k} className="text-[11px] font-bold whitespace-nowrap" style={{ color: 'rgba(30,40,90,0.10)' }}>
-                      LessonGuruOdisha.in · {doc.trace_code} · {teacher?.profile?.user_mobile || ''}
+                      LessonGuruOdisha.com · {doc.trace_code} · {teacher?.profile?.user_mobile || ''}
                     </span>
                   ))}
                 </div>

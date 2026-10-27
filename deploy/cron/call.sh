@@ -2,8 +2,8 @@
 # Usage: call.sh /api/some/cron/path
 # Needs SITE_URL and WEBHOOK_CRON_SECRET in the environment.
 set -eu
-case "${BACKGROUND_JOBS_DISABLED:-}" in
-  1|true|yes|on) echo "Paused: BACKGROUND_JOBS_DISABLED is set on lessonguru-web. Nothing sent."; exit 0 ;;
+case "${CRONS_DISABLED:-}" in
+  1|true|yes|on) echo "Paused: CRONS_DISABLED is set in env group lessonguru-shared. Nothing sent."; exit 0 ;;
 esac
 url="${SITE_URL%/}$1"
 echo "POST $url"

@@ -1,5 +1,5 @@
 /* Lesson Guru Odisha — in-app hub.
- * Served at https://lessonguruodisha.in/__app/ so it shares localStorage (em_token)
+ * Served at https://lessonguruodisha.com/__app/ so it shares localStorage (em_token)
  * and cookies with the live platform. Works offline from bundled assets.
  */
 (function () {
@@ -917,7 +917,7 @@
     if (t.dataset.cat) { state.cat = t.dataset.cat; native.haptic('tap'); drawTools(); return }
     if (t.dataset.cls) { LS.set('lgapp_fav_class', t.dataset.cls); go('/lessons?cls=' + encodeURIComponent(t.dataset.cls)); return }
     if (t.hasAttribute('data-share')) {
-      native.share('Lesson Guru Odisha', '📚 I plan my classes with Lesson Guru Odisha — ready lesson plans, Panchapadi, question papers & more for Odisha teachers.\nhttps://lessonguruodisha.in')
+      native.share('Lesson Guru Odisha', '📚 I plan my classes with Lesson Guru Odisha — ready lesson plans, Panchapadi, question papers & more for Odisha teachers.\nhttps://lessonguruodisha.com')
       return
     }
     if (t.hasAttribute('data-rate')) { native.rate(); return }

@@ -59,7 +59,7 @@ export default async function Image() {
 
         {/* Footer */}
         <div style={{ marginTop: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 24, opacity: 0.9 }}>
-          <div>🇮🇳 lessonguruodisha.in</div>
+          <div>🇮🇳 lessonguruodisha.com</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>From ₹99/month</div>
         </div>
       </div>

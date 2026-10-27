@@ -703,7 +703,7 @@ export const DashboardSlider = () => {
                 <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                 <div className="mx-auto text-[10.5px] font-semibold text-slate-300 flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-slate-700/60">
-                  <Lock className="w-3 h-3" /> lessonguruodisha.in
+                  <Lock className="w-3 h-3" /> lessonguruodisha.com
                 </div>
                 <span
                   className="text-[9.5px] font-black text-white px-2 py-0.5 rounded-full uppercase tracking-widest"
@@ -1134,7 +1134,7 @@ export const Footer = () => (
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-[#22C55E] font-bold flex items-center gap-2" onClick={() => track({ fb: 'Contact', ga: 'whatsapp_click', props: { location: 'footer' } })}>
             <MessageCircle className="w-4 h-4" /> WhatsApp · 8093414633
           </a>
-          <a href="https://lessonguruodisha.in" className="opacity-80 hover:opacity-100">LessonGuruOdisha.in</a>
+          <a href="https://lessonguruodisha.com" className="opacity-80 hover:opacity-100">LessonGuruOdisha.com</a>
         </div>
       </div>
       <div className="mt-8 border-t border-white/10 pt-4 flex flex-wrap gap-4 text-[11px] opacity-70">

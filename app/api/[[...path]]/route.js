@@ -1163,22 +1163,22 @@ async function checkSignupThresholdAndAlert(d) {
 const DEFAULT_CAMPAIGN_PRESETS = [
   { key: 'welcome',  emoji: '🎉', label: 'Welcome',              tagline: 'Greet fresh signups',
     name: '🎉 Welcome to LessonGuru Odisha', templateId: 'welcome_lessonguru',      language: 'en_US',
-    ctaLink: 'https://lessonguruodisha.in',            audience: 'no_sub',   variables: { 1: 'Teacher' }, order: 1 },
+    ctaLink: 'https://lessonguruodisha.com',            audience: 'no_sub',   variables: { 1: 'Teacher' }, order: 1 },
   { key: 'upgrade',  emoji: '⭐', label: 'Upgrade Premium',      tagline: 'Nudge free users to buy',
     name: '⭐ Upgrade to Premium',           templateId: 'upgrade_premium',         language: 'en_US',
-    ctaLink: 'https://lessonguruodisha.in/plans',      audience: 'no_sub',   variables: { 1: 'Teacher', 2: '₹199' }, order: 2 },
+    ctaLink: 'https://lessonguruodisha.com/plans',      audience: 'no_sub',   variables: { 1: 'Teacher', 2: '₹199' }, order: 2 },
   { key: 'expiring', emoji: '⏰', label: 'Expiring Soon',        tagline: 'Warn users before plan ends',
     name: '⏰ Your Premium Plan Expires Soon', templateId: 'plan_expiring_soon',    language: 'en_US',
-    ctaLink: 'https://lessonguruodisha.in/plans',      audience: 'active',   variables: { 1: 'Teacher', 2: '3 days' }, order: 3 },
+    ctaLink: 'https://lessonguruodisha.com/plans',      audience: 'active',   variables: { 1: 'Teacher', 2: '3 days' }, order: 3 },
   { key: 'offer',    emoji: '🎁', label: 'Special Offer',        tagline: 'Time-boxed discount push',
     name: '🎁 Special Offer — Ends Today',   templateId: 'special_offer_today',     language: 'en_US',
-    ctaLink: 'https://lessonguruodisha.in/plans',      audience: 'no_sub',   variables: { 1: 'Teacher', 2: '30%' }, order: 4 },
+    ctaLink: 'https://lessonguruodisha.com/plans',      audience: 'no_sub',   variables: { 1: 'Teacher', 2: '30%' }, order: 4 },
   { key: 'invite',   emoji: '👥', label: 'Invite & Earn',        tagline: 'Referral push to premium users',
     name: '👥 Invite Teachers & Earn Rewards', templateId: 'referral_invite',       language: 'en_US',
-    ctaLink: 'https://lessonguruodisha.in/referrals',  audience: 'active',   variables: { 1: 'Teacher' }, order: 5 },
+    ctaLink: 'https://lessonguruodisha.com/referrals',  audience: 'active',   variables: { 1: 'Teacher' }, order: 5 },
   { key: 'material', emoji: '📚', label: 'New Study Material',   tagline: 'Announce fresh content',
     name: '📚 New Study Material Available', templateId: 'new_material_alert',      language: 'en_US',
-    ctaLink: 'https://lessonguruodisha.in',            audience: 'all',      variables: { 1: 'Teacher' }, order: 6 },
+    ctaLink: 'https://lessonguruodisha.com',            audience: 'all',      variables: { 1: 'Teacher' }, order: 6 },
   { key: 'otp',      emoji: '🔒', label: 'Password Reset OTP',   tagline: 'Auth flow (auto-triggered)',
     name: '🔒 Password Reset OTP',           templateId: process.env.BULKY_OTP_TEMPLATE || 'otp',    language: 'en_US',
     ctaLink: '',                                       audience: 'csv',      variables: { 1: '123456' }, order: 7 },
@@ -10212,7 +10212,7 @@ async function handler(request, { params }) {
       if (!u) return json({ error: 'User not found' }, { status: 404 })
       if (!u.mobile) return json({ error: 'User has no mobile number' }, { status: 400 })
       if (!u.lastKnownPassword) return json({ error: 'User has no admin-set password. Use "Generate & Share" first.' }, { status: 400 })
-      const site = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.in'
+      const site = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.com'
       const msg =
         `🙏 ନମସ୍କାର ${u.name}!\n\n` +
         `Lesson Guru Odisha ପାଇଁ ଆପଣଙ୍କର Login Details:\n\n` +
@@ -10296,7 +10296,7 @@ async function handler(request, { params }) {
       try {
         const rr = await fetch(`https://api.ultramsg.com/${instance}/instance/status?token=${token}`, { method: 'GET' })
         const j = await rr.json().catch(() => ({}))
-        const site = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.in'
+        const site = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.com'
         return json({
           ok: true, configured: true, enabled,
           instance,
@@ -10504,7 +10504,7 @@ async function handler(request, { params }) {
       if (!messageBody || typeof messageBody !== 'string' || messageBody.trim().length < 10) {
         return json({ error: 'messageBody is required (min 10 chars)' }, { status: 400 })
       }
-      const site = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.in'
+      const site = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.com'
       const payLink = `${site}/?offer=special199`
 
       // Determine audience
@@ -21977,7 +21977,7 @@ async function handler(request, { params }) {
         }
         await d.collection('users').updateOne({ id: me.id }, { $set: { referralCode: code } })
       }
-      const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.in').replace(/\/+$/, '')
+      const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.com').replace(/\/+$/, '')
       const link = `${baseUrl}/?ref=${code}`
       const { computeReferralStats, getEffectiveMilestones, evaluateAndApplyRewards } = await import('@/lib/referral-engine.js')
       const refreshedMe = await d.collection('users').findOne({ id: me.id })
@@ -23522,7 +23522,7 @@ async function handler(request, { params }) {
     }
     // GET /api/official-papers/:id/print → subscriber-only PRINT-ONLY view.
     //   Returns { printUrl, title, pages, bytes } — printUrl points to a
-    //   watermarked Cloudinary transform (LessonGuruOdisha.in text overlay)
+    //   watermarked Cloudinary transform (LessonGuruOdisha.com text overlay)
     //   so the paper carries our branding on every page.
     //   No `downloadUrl` is returned — clients render this in an iframe and
     //   trigger window.print() to discourage plain-text copying.
@@ -23609,7 +23609,7 @@ async function handler(request, { params }) {
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>${esc(doc2.title)} — Print · LessonGuruOdisha.in</title>
+<title>${esc(doc2.title)} — Print · LessonGuruOdisha.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <style>
   * { box-sizing: border-box; }
@@ -23637,13 +23637,13 @@ async function handler(request, { params }) {
 </head>
 <body>
   <div class="toolbar" role="toolbar">
-    <div class="brand">📘 LessonGuruOdisha.in</div>
+    <div class="brand">📘 LessonGuruOdisha.com</div>
     <div class="title">${esc(doc2.title)} · Set ${esc(doc2.setLetter)} · ${esc(doc2.year)}</div>
     <button class="btn" id="printBtn" type="button">🖨️ Print All Pages</button>
   </div>
   <div class="stage">
     <iframe id="pdfFrame" src="${esc(pdfSrc)}#toolbar=1&navpanes=0&scrollbar=1&statusbar=0&view=FitH" title="paper"></iframe>
-    <div class="watermark">LessonGuruOdisha.in</div>
+    <div class="watermark">LessonGuruOdisha.com</div>
   </div>
   <script>
     // ── Print helper ───────────────────────────────────────────────────────
@@ -23752,7 +23752,7 @@ async function handler(request, { params }) {
     // POST /api/official-papers/:id/download — subscriber-only WATERMARKED
     //   download. Body: { schoolName: string }.  Fetches the source PDF from
     //   Cloudinary, uses `pdf-lib` to stamp a diagonal semi-transparent
-    //   watermark ("School: <name> · LessonGuruOdisha.in") on every page,
+    //   watermark ("School: <name> · LessonGuruOdisha.com") on every page,
     //   and streams the modified PDF back as an attachment.  Falls back to
     //   the raw PDF (no watermark) if pdf-lib fails on a specific document.
     if (path.match(/^\/official-papers\/[^/]+\/download$/) && method === 'POST') {
@@ -23786,7 +23786,7 @@ async function handler(request, { params }) {
         const { PDFDocument, StandardFonts, degrees, rgb } = await import('pdf-lib')
         const pdfDoc = await PDFDocument.load(srcBytes, { ignoreEncryption: true })
         const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold)
-        const stampFooter = `LessonGuruOdisha.in`
+        const stampFooter = `LessonGuruOdisha.com`
         // Show the school name diagonally across each page + a small footer
         // stamp at the bottom identifying the source app.  Uses gray at 0.18
         // opacity so it's visible without hiding question text.

@@ -109,8 +109,8 @@ def manifest():
             el('category', [('name', 'str', 'android.intent.category.DEFAULT')]),
             el('category', [('name', 'str', 'android.intent.category.BROWSABLE')]),
             el('data', [('scheme', 'str', 'https')]),
-            el('data', [('host', 'str', 'lessonguruodisha.in')]),
-            el('data', [('host', 'str', 'www.lessonguruodisha.in')]),
+            el('data', [('host', 'str', 'lessonguruodisha.com')]),
+            el('data', [('host', 'str', 'www.lessonguruodisha.com')]),
         ]),
     ])
     app = el('application', [

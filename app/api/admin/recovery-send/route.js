@@ -31,7 +31,7 @@ export async function POST(request) {
   try {
     const d = await getDb()
     // Real request host (set by the platform per-environment; can't be faked by a
-    // copied env var). Threaded into the allowlist so LIVE (lessonguruodisha.in)
+    // copied env var). Threaded into the allowlist so LIVE (lessonguruodisha.com)
     // is ALWAYS unguarded and PREVIEW is guarded.
     const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || ''
     const items = await resolveRecovery(d, userIds, { host })

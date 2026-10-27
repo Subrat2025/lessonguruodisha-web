@@ -19,8 +19,8 @@ ROOT = os.path.dirname(HERE)
 BUILD = os.path.join(ROOT, 'build')
 DIST = os.path.join(ROOT, 'dist')
 
-VERSION_CODE = 8
-VERSION_NAME = '1.6.0'
+VERSION_CODE = 9
+VERSION_NAME = '1.7.0'
 MIN_SDK = 24
 APP_ID = 'com.lessonguruodisha.app'          # Play Store version: nothing sold in the app
 DIRECT_APP_ID = APP_ID + '.direct'           # direct APK (website / WhatsApp): Razorpay + UPI inside

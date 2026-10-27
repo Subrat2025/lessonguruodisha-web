@@ -1,5 +1,5 @@
 // Captures phone-sized screenshots of every hub screen.
-// The hub is served at its real in-app origin (https://lessonguruodisha.in/__app/) via request
+// The hub is served at its real in-app origin (https://lessonguruodisha.com/__app/) via request
 // interception; account/plan APIs are mocked with demo data.
 // Usage: node screenshots.js <android-app dir> [nextBaseUrl]
 const { chromium } = require('playwright')
@@ -10,7 +10,7 @@ const ROOT = process.argv[2]
 const NEXT = process.argv[3] || ''
 const ASSETS = path.join(ROOT, 'src/main/assets/app')
 const OUT = path.join(ROOT, 'dist/screenshots')
-const ORIGIN = 'https://lessonguruodisha.in'
+const ORIGIN = 'https://lessonguruodisha.com'
 const VIEW = { width: 412, height: 915 }
 const DPR = 2.625
 const SAT = 32 // simulated status bar height (css px)

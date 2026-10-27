@@ -23,7 +23,7 @@ export async function GET(request) {
   try {
     const d = await getDb()
     const template = await getReferralShareTemplate(d)
-    const sampleLink = (process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.in').replace(/\/+$/, '') + '/?ref=LGSAMPLE'
+    const sampleLink = (process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.com').replace(/\/+$/, '') + '/?ref=LGSAMPLE'
     const preview = renderReferralShareMessage(template, { link: sampleLink })
     return json({ ok: true, template, default: DEFAULT_REFERRAL_SHARE_TEMPLATE, preview })
   } catch (e) {
@@ -47,7 +47,7 @@ export async function PUT(request) {
       return json({ error: `Message contains ${bad.length} non-Odia character(s): ${sample}. Please use only Odia letters, English, ₹ and emojis.` }, { status: 400 })
     }
     await setReferralShareTemplate(d, text, payload.id)
-    const sampleLink = (process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.in').replace(/\/+$/, '') + '/?ref=LGSAMPLE'
+    const sampleLink = (process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.com').replace(/\/+$/, '') + '/?ref=LGSAMPLE'
     const preview = renderReferralShareMessage(text, { link: sampleLink })
     return json({ ok: true, template: text, preview })
   } catch (e) {

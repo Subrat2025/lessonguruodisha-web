@@ -5,7 +5,7 @@ import { ThemeProvider } from 'next-themes'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.in'
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.com'
 const SITE_NAME = 'Lesson Guru Odisha'
 const SITE_DESC = "Odisha's #1 premium lesson plan platform for teachers. Access NCF-aligned lesson plans for Balvatika to Class 10 in Odia, English, Hindi, Mathematics, Science, Social Science & Sanskrit. ଓଡ଼ିଶା ଶିକ୍ଷକଙ୍କ ପାଇଁ ବାଳବାଟିକା ରୁ ଦଶମ ଶ୍ରେଣୀ ପର୍ଯ୍ୟନ୍ତ ସମ୍ପୂର୍ଣ୍ଣ ପାଠ୍ୟକ୍ରମ ଯୋଜନା।"
 

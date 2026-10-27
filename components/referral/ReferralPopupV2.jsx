@@ -101,7 +101,7 @@ export default function ReferralPopupV2({ data, config, onClose, onMaybeLater })
   const [copied, setCopied] = React.useState(false)
   const code = data?.code || ''
   // Referral link ALWAYS uses the configured production host (never preview/other).
-  const base = String(config?.referralBaseUrl || 'https://lessonguruodisha.in').replace(/\/+$/, '')
+  const base = String(config?.referralBaseUrl || 'https://lessonguruodisha.com').replace(/\/+$/, '')
   const link = code ? `${base}/?ref=${code}` : base
   const shortLink = link.replace(/^https?:\/\//, '')
   const target = config?.target || 500

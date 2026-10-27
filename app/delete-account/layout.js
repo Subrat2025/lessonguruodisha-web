@@ -1,4 +1,4 @@
-const SITE_URL = 'https://lessonguruodisha.in'
+const SITE_URL = 'https://lessonguruodisha.com'
 
 export const metadata = {
   title: 'Delete your account - Lesson Guru Odisha',

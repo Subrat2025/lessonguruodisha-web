@@ -458,7 +458,7 @@ const PreviewModal = ({ paper, user, onClose, onPrint }) => {
             </button>
             <div className="text-[10px] text-slate-500 mt-1.5 text-center">
               {isActive
-                ? 'Print includes LessonGuruOdisha.in branding. Downloads are disabled to protect originality.'
+                ? 'Print includes LessonGuruOdisha.com branding. Downloads are disabled to protect originality.'
                 : 'Premium subscribers can print unlimited official papers.'}
             </div>
           </div>

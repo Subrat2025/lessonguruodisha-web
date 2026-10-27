@@ -422,7 +422,7 @@ const AjiraPathyaJojanaView = ({ go, user, active, api }) => {
         .actionbar button:hover{background:#e5e7eb;}
         .actionbar .close-btn{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);}
         @media print{ .actionbar{display:none !important;} .paper{box-shadow:none;margin:0;width:auto;} body{background:#fff;} }
-        /* Repeating logo + "lessonguruodisha.in" + teacher-name watermark tiled
+        /* Repeating logo + "lessonguruodisha.com" + teacher-name watermark tiled
            across the page.  Uses a fixed layer beneath the content so it prints
            on every page.  The logo tile keeps brand recall strong even after
            teachers photocopy the printout. */
@@ -454,18 +454,18 @@ const AjiraPathyaJojanaView = ({ go, user, active, api }) => {
       </div>
       <div class="paper">
       <div class="wm-layer" aria-hidden="true"><div class="wm-diag">
-        ${Array.from({length: 48}).map(() => `<span class="wm-tile"><img src="${logoUrl}" alt="" onerror="this.style.display='none'"/>lessonguruodisha.in · ${teacherName}</span>`).join('')}
+        ${Array.from({length: 48}).map(() => `<span class="wm-tile"><img src="${logoUrl}" alt="" onerror="this.style.display='none'"/>lessonguruodisha.com · ${teacherName}</span>`).join('')}
       </div></div>
       <div class="content">
         <div class="header-brand">
           <img src="${logoUrl}" alt="Lesson Guru Odisha" onerror="this.style.display='none'"/>
-          <span class="brand-txt">Lesson Guru Odisha · lessonguruodisha.in</span>
+          <span class="brand-txt">Lesson Guru Odisha · lessonguruodisha.com</span>
         </div>
         <h2>ଦୈନିକ ପାଠ ଯୋଜନା — ${theme.name}</h2>
         <h3>${esc(cls.dateText)} (${esc(cls.dayName)}) · ସପ୍ତାହ-${esc(cls.weekNo)} · ଶିକ୍ଷାଦାନ ଦିବସ-${esc(cls.teachingDayNo)}</h3>
         <div class="teacher-bar">
           <span><b>Teacher:</b> ${teacherName}${teacherMobile ? ` &nbsp;·&nbsp; ${teacherMobile}` : ''}</span>
-          <span><b>Source:</b> lessonguruodisha.in</span>
+          <span><b>Source:</b> lessonguruodisha.com</span>
         </div>
         <table>
           <thead><tr>
@@ -478,7 +478,7 @@ const AjiraPathyaJojanaView = ({ go, user, active, api }) => {
           <tbody>${rows}</tbody>
         </table>
         <div class="footer">${esc(cls.note || '')}</div>
-        <div class="footer">© lessonguruodisha.in · Prepared for ${teacherName} · Printed on ${new Date().toLocaleString('en-IN', { dateStyle:'medium', timeStyle:'short' })}</div>
+        <div class="footer">© lessonguruodisha.com · Prepared for ${teacherName} · Printed on ${new Date().toLocaleString('en-IN', { dateStyle:'medium', timeStyle:'short' })}</div>
       </div>
       </div>
     </body></html>`)

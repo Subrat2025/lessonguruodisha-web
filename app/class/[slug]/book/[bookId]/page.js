@@ -3,7 +3,7 @@ import { seedDatabase } from '@/lib/seed-data'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-const SITE_URL = 'https://lessonguruodisha.in'
+const SITE_URL = 'https://lessonguruodisha.com'
 
 async function loadBook(slug, bookId) {
   const db = await getDb()

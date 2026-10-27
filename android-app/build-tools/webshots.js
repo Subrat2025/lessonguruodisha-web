@@ -9,7 +9,7 @@ const ROOT = process.argv[2]
 const SITE = process.argv[3]
 const OUT = path.join(ROOT, 'dist/screenshots')
 const W = 412, H = 915, DPR = 2.625, SAT = 32, BAR = 56
-const ORIGIN = 'https://lessonguruodisha.in'
+const ORIGIN = 'https://lessonguruodisha.com'
 const UA = 'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Mobile Safari/537.36 LessonGuruApp/1.3.0 (Android)'
 
 const PAGES = [

@@ -1,5 +1,5 @@
 // Next.js built-in robots.txt generator
-const SITE_URL = 'https://lessonguruodisha.in'
+const SITE_URL = 'https://lessonguruodisha.com'
 
 // Public read-only API endpoints that external tools / AI sandboxes are
 // EXPLICITLY allowed to fetch.  These carry no user data, no auth, and are

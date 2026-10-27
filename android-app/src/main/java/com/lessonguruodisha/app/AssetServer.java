@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Serves assets/app/** at https://lessonguruodisha.in/__app/** (same origin as the live site). */
+/** Serves assets/app/** at https://lessonguruodisha.com/__app/** (same origin as the live site). */
 final class AssetServer {
     private AssetServer() {
     }

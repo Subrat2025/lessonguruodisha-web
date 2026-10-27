@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const SITE_URL = 'https://lessonguruodisha.in'
+const SITE_URL = 'https://lessonguruodisha.com'
 
 export const metadata = {
   title: 'Refund & Cancellation Policy - Lesson Guru Odisha',

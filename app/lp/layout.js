@@ -15,7 +15,7 @@
 // ============================================================================
 import Script from 'next/script'
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.in'
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://lessonguruodisha.com'
 const LP_URL = `${SITE_URL}/lp`
 const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID || ''
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || ''

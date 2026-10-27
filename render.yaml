@@ -1,4 +1,4 @@
-# Render Blueprint for lessonguruodisha.in
+# Render Blueprint for lessonguruodisha.com
 # Render dashboard -> New -> Blueprint -> pick this GitHub repo. Render reads this file and creates:
 #   - lessonguru-web: the website + API (Docker, Singapore, 2 GB RAM)
 #   - 5 cron jobs that replace .emergent/crons.yml (times converted from IST to UTC)
@@ -6,8 +6,10 @@
 # Secrets marked `sync: false` are asked for once when the Blueprint is created. Every other value
 # from the old environment can be pasted in bulk afterwards: lessonguru-web -> Environment ->
 # "Add from .env".
-# BACKGROUND_JOBS_DISABLED=1 pauses WhatsApp campaigns/queue, Drive sync and cron jobs until the
-# switch. On switch day: Env Groups -> lessonguru-shared -> delete it (or set 0).
+# lessonguruodisha.com runs on its own database, next to the old lessonguruodisha.in site.
+# BACKGROUND_JOBS_DISABLED=1 keeps WhatsApp campaigns/queue and Drive sync paused here, so teachers
+# don't get the same campaign twice (run campaigns from one site only). Set it to 0 to run them here.
+# The 5 scheduled jobs run unless CRONS_DISABLED is 1.
 
 envVarGroups:
   - name: lessonguru-shared
@@ -36,7 +38,7 @@ services:
       - key: JWT_SECRET # must be the same value as before, or every teacher is logged out
         sync: false
       - key: NEXT_PUBLIC_BASE_URL
-        value: https://lessonguruodisha.in
+        value: https://lessonguruodisha.com
       - key: RAZORPAY_KEY_SECRET
         sync: false
       - key: NEXT_PUBLIC_RAZORPAY_KEY_ID
@@ -69,7 +71,7 @@ services:
     envVars:
       - fromGroup: lessonguru-shared
       - key: SITE_URL
-        value: https://lessonguruodisha.in
+        value: https://lessonguruodisha.com
 
   - type: cron
     name: cron-answer-key-bundle-expiry # 01:00 IST daily
@@ -83,7 +85,7 @@ services:
     envVars:
       - fromGroup: lessonguru-shared
       - key: SITE_URL
-        value: https://lessonguruodisha.in
+        value: https://lessonguruodisha.com
 
   - type: cron
     name: cron-answer-key-sla-alert # every hour at :15 IST
@@ -97,7 +99,7 @@ services:
     envVars:
       - fromGroup: lessonguru-shared
       - key: SITE_URL
-        value: https://lessonguruodisha.in
+        value: https://lessonguruodisha.com
 
   - type: cron
     name: cron-store-access-repair # 01:30 IST daily
@@ -111,7 +113,7 @@ services:
     envVars:
       - fromGroup: lessonguru-shared
       - key: SITE_URL
-        value: https://lessonguruodisha.in
+        value: https://lessonguruodisha.com
 
   - type: cron
     name: cron-tob-purge-trash # 02:00 IST daily
@@ -125,4 +127,4 @@ services:
     envVars:
       - fromGroup: lessonguru-shared
       - key: SITE_URL
-        value: https://lessonguruodisha.in
+        value: https://lessonguruodisha.com

@@ -72,9 +72,9 @@ public class LaunchTest {
 
     @Test
     public void opensDeepLink() {
-        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://lessonguruodisha.in/panchapadi"));
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://lessonguruodisha.com/panchapadi"));
         try (ActivityController<MainActivity> c = Robolectric.buildActivity(MainActivity.class, i).setup()) {
-            assertEquals("https://lessonguruodisha.in/panchapadi", shadowOf(c.get().web).getLastLoadedUrl());
+            assertEquals("https://lessonguruodisha.com/panchapadi", shadowOf(c.get().web).getLastLoadedUrl());
         }
     }
 
