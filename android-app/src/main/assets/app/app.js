@@ -591,13 +591,14 @@
       <div class="menu-h">About</div>
       <div class="menu">
         ${mi('info', '', 'About Lesson Guru', '', 'data-go="/about"')}
+        ${mi('book', '', 'Sources & disclaimer', 'Official sources · not a government app', 'data-go="/sources"')}
         ${mi('shield', '', 'Privacy Policy', '', 'data-go="/privacy"')}
         ${mi('paper', '', 'Terms of Use', '', 'data-go="/terms"')}
         ${mi('refund', '', 'Refund Policy', '', 'data-go="/refund"')}
         ${mi('trash', 'danger', 'Delete account', 'Remove your account and data', 'data-go="/delete-account"', 'danger')}
         ${u ? mi('logout', 'danger', 'Logout', '', 'data-logout', 'danger') : ''}
       </div>
-      <div class="ver">Lesson Guru Odisha · v${esc(info.version || '1.0.0')}<br>by Teacher Utility Tool Kit</div>`
+      <div class="ver">Lesson Guru Odisha · v${esc(info.version || '1.0.0')}<br>by Teacher Utility Tool Kit<br><small>Independent app · not affiliated with any government body</small></div>`
   }
 
   // ------------------------------------------------------------ cloud library
