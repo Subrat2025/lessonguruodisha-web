@@ -6,7 +6,7 @@ import math
 import os
 import sys
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = sys.argv[1]
 RES = os.path.join(ROOT, 'res')
@@ -73,14 +73,41 @@ def star(cx, cy, r_out, r_in, points=4, rot=-math.pi / 2):
     return pts
 
 
+FONTS = ['/home/user/tools/poppins/package/files/poppins-latin-800-normal.woff',
+         '/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf']
+
+
+def lg_mark(img, c, u):
+    """Bold "LG" monogram above the book, white with a soft plum shadow."""
+    size = img.size[0]
+    font = None
+    for f in FONTS:
+        try:
+            font = ImageFont.truetype(f, int(25 * u))
+            break
+        except OSError:
+            continue
+    text = 'LG'
+    box = font.getbbox(text)
+    tw, th = box[2] - box[0], box[3] - box[1]
+    x = c - tw / 2 - box[0]
+    y = c - 16 * u - th / 2 - box[1]
+    sh = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+    ImageDraw.Draw(sh).text((x, y + 1.8 * u), text, font=font, fill=(60, 0, 80, 140))
+    img.alpha_composite(sh.filter(ImageFilter.GaussianBlur(1.6 * u)))
+    ImageDraw.Draw(img).text((x, y), text, font=font, fill=(255, 255, 255, 255))
+    return x + tw + box[0], y + box[1]  # top-right corner of the letters
+
+
 def foreground(size, scale=1.0):
-    """White open book with a golden spark: sits inside the 66dp safe zone."""
+    """"LG" monogram over a white open book with a golden spark, inside the 66dp safe zone."""
     img = Image.new('RGBA', (size, size), (0, 0, 0, 0))
     c = size / 2
     u = size / 108 * scale  # 1dp in px
+    bs, by = 0.7, 10  # book scale and downward shift (dp) to make room for the letters
 
-    def P(x, y):  # dp offsets from centre -> px
-        return (c + x * u, c + y * u)
+    def P(x, y):  # dp offsets from centre (book coordinates) -> px
+        return (c + x * bs * u, c + (by + y * bs) * u)
 
     # shadow layer
     shadow = Image.new('RGBA', (size, size), (0, 0, 0, 0))
@@ -104,19 +131,18 @@ def foreground(size, scale=1.0):
         d.line(rn, fill=(160, 90, 230, 200), width=max(1, int(1.6 * u)), joint='curve')
     # spine
     d.line([P(0, -5), P(0, 21)], fill=(255, 210, 190, 255), width=max(1, int(1.2 * u)))
-    # golden spark above the book
+    # "LG" letters, then the golden spark at their top-right corner
+    rx, ty = lg_mark(img, c, u)
+    gx, gy = rx + 1.5 * u, ty + 0.5 * u
     glow = Image.new('RGBA', (size, size), (0, 0, 0, 0))
     gd = ImageDraw.Draw(glow)
-    gx, gy = P(0, -22)
-    gd.ellipse((gx - 9 * u, gy - 9 * u, gx + 9 * u, gy + 9 * u), fill=(255, 230, 120, 150))
-    glow = glow.filter(ImageFilter.GaussianBlur(4 * u))
+    gd.ellipse((gx - 6 * u, gy - 6 * u, gx + 6 * u, gy + 6 * u), fill=(255, 230, 120, 150))
+    glow = glow.filter(ImageFilter.GaussianBlur(3 * u))
     img.alpha_composite(glow)
     d = ImageDraw.Draw(img)
-    d.polygon(star(gx, gy, 8.5 * u, 2.4 * u), fill=(255, 214, 10, 255))
-    sx, sy = P(13, -24)
-    d.polygon(star(sx, sy, 3.6 * u, 1.1 * u), fill=(255, 255, 255, 235))
-    sx, sy = P(-13, -19)
-    d.polygon(star(sx, sy, 2.6 * u, 0.8 * u), fill=(255, 255, 255, 200))
+    d.polygon(star(gx, gy, 5.5 * u, 1.6 * u), fill=(255, 214, 10, 255))
+    sx, sy = c - 19 * u, c - 25 * u
+    d.polygon(star(sx, sy, 2.6 * u, 0.8 * u), fill=(255, 255, 255, 220))
     return img
 
 
