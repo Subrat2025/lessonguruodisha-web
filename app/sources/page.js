@@ -6,13 +6,11 @@ export const metadata = {
   alternates: { canonical: `${SITE_URL}/sources` },
 }
 
+// Only links that open from outside India (checked with check-host.net); Google Play reviews from abroad.
 const SOURCES = [
-  ['SCERT Odisha (State Council of Educational Research and Training)', 'https://scertodisha.nic.in', 'State curriculum, textbooks, Panchapadi teaching approach'],
-  ['OSEPA (Odisha School Education Programme Authority, Samagra Shiksha)', 'https://osepa.odisha.gov.in', 'State school programmes and teacher resources'],
+  ['OSEPA (Odisha School Education Programme Authority, Samagra Shiksha)', 'https://osepa.odisha.gov.in', 'Odisha school programmes, curriculum and teacher resources'],
   ['Board of Secondary Education, Odisha', 'https://bseodisha.ac.in', 'Class 9–10 syllabus and examination pattern'],
-  ['NCERT (National Council of Educational Research and Training)', 'https://ncert.nic.in', 'National Curriculum Framework (NCF) and Learning Outcomes (LO codes)'],
-  ['DIKSHA (Ministry of Education, Government of India)', 'https://diksha.gov.in', 'Official digital textbooks and teacher material'],
-  ['Ministry of Education, Government of India', 'https://www.education.gov.in', 'National education policy (NEP 2020)'],
+  ['DIKSHA (Ministry of Education, Government of India)', 'https://diksha.gov.in', 'Official digital textbooks (including Odisha textbooks), NCERT material and Learning Outcomes'],
 ]
 
 export default function SourcesPage() {
@@ -22,7 +20,7 @@ export default function SourcesPage() {
       <header className="rounded-3xl p-6 text-white bg-gradient-to-br from-slate-600 to-indigo-700 shadow-xl">
         <div className="text-5xl">🏛️</div>
         <h1 className="text-4xl font-black mt-3">Sources &amp; Disclaimer</h1>
-        <p className="text-sm mt-2 opacity-95">Last updated: 29 October 2026</p>
+        <p className="text-sm mt-2 opacity-95">Last updated: 31 October 2026</p>
       </header>
       <article className="prose prose-slate mt-8 max-w-none dark:prose-invert">
         <div className="not-prose rounded-2xl border-2 border-amber-300 bg-amber-50 p-4 text-amber-900">
