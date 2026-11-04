@@ -11162,16 +11162,23 @@ async function handler(request, { params }) {
           } },
       ]).toArray()
 
+      // Resolve class/book/chapter names once. Uploaded Q&A keep the names from upload time, so
+      // refresh them from the current chapter/book/class records (full chapter names in every list).
+      const [allClasses, allBooks, allChapters] = await Promise.all([
+        d.collection('classes').find({}).project({ _id: 0, id: 1, name: 1 }).toArray(),
+        d.collection('books').find({}).project({ _id: 0, id: 1, name: 1 }).toArray(),
+        d.collection('chapters').find({}).project({ _id: 0, id: 1, name: 1, title: 1 }).toArray(),
+      ])
+      const clsMap = Object.fromEntries(allClasses.map(x => [x.id, x.name]))
+      const bkMap  = Object.fromEntries(allBooks.map(x => [x.id, x.name]))
+      const chMap  = Object.fromEntries(allChapters.map(x => [x.id, x.name || x.title]))
+      for (const it of items) {
+        if (chMap[it.chapterId]) it.chapterName = chMap[it.chapterId]
+        if (bkMap[it.bookId]) it.bookName = bkMap[it.bookId]
+        if (clsMap[it.classId]) it.className = clsMap[it.classId]
+      }
+
       if (groups.length > 0) {
-        // Resolve class/book/chapter names (once)
-        const [allClasses, allBooks, allChapters] = await Promise.all([
-          d.collection('classes').find({}).project({ _id: 0, id: 1, name: 1 }).toArray(),
-          d.collection('books').find({}).project({ _id: 0, id: 1, name: 1 }).toArray(),
-          d.collection('chapters').find({}).project({ _id: 0, id: 1, name: 1 }).toArray(),
-        ])
-        const clsMap = Object.fromEntries(allClasses.map(x => [x.id, x.name]))
-        const bkMap  = Object.fromEntries(allBooks.map(x => [x.id, x.name]))
-        const chMap  = Object.fromEntries(allChapters.map(x => [x.id, x.name]))
 
         for (const g of groups) {
           const { classId, subjectId, chapterId } = g._id

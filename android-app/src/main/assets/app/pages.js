@@ -258,8 +258,8 @@
       const prem = kind === 'premium'
       return `<div class="gate">
         <div class="gate-ic">${prem ? '👑' : '🔐'}</div>
-        <b>${prem ? 'This lesson is for Premium members' : 'Log in to continue'}</b>
-        <p>${prem ? 'Your account does not have an active Premium plan.' + LG.noBuy() : 'Use the same mobile number and password as on the website.'}</p>
+        <b>${prem ? 'Full plan opens with Premium' : 'Log in to continue'}</b>
+        <p>${prem ? 'You can read the preview above. If your account already has Premium, it opens here automatically.' : 'Use the same mobile number and password as on the website.'}</p>
         ${prem ? (LG.direct ? LG.buyBtn('/plans', 'Get Premium') : `<button class="btn btn-soft tap" data-pg-open="/my-plan">My Plan</button>`) : `<button class="btn btn-primary tap" data-pg-open="/login">${icon('login', 19)} Login</button>`}
       </div>`
     },

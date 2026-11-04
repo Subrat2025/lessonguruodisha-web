@@ -192,7 +192,8 @@ async function hub(browser, name, { user = DEMO_USER, seed, tab = 'home', scroll
   await hub(browser, '21-cloud-file-actions', { seed: richSeed, tab: 'cloud', setup: async (p) => { await p.waitForTimeout(800); await p.click('[data-cmore="f1"]') } })
   await hub(browser, '22-cloud-free-user-starred', { user: FREE_USER, seed: richSeed, tab: 'cloud', setup: async (p) => { await p.waitForTimeout(800); await p.click('[data-ckind="starred"]') } })
   await hub(browser, '23-cloud-guest', { user: null, seed: richSeed, tab: 'cloud' })
-  await hub(browser, '24-home-cloud-card', { seed: richSeed, setup: async (p) => { await p.waitForTimeout(800); await p.evaluate(() => document.getElementById('homeCloud').scrollIntoView({ block: 'center' })) } })
+  await hub(browser, '24-home-tiles-classes', { seed: richSeed, setup: async (p) => { await p.waitForTimeout(800); await p.evaluate(() => document.querySelector('.tiles').scrollIntoView({ block: 'start' })) } })
+  await hub(browser, '25-home-tools-streak', { seed: richSeed, setup: async (p) => { await p.waitForTimeout(800); await p.evaluate(() => document.querySelector('.mts').scrollIntoView({ block: 'start' })) } })
   // offline screen
   {
     const { ctx, page } = await makePage(browser, { user: DEMO_USER })

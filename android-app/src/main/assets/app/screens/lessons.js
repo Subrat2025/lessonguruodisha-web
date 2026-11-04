@@ -116,7 +116,7 @@
       if (!lessons.length) { ctx.body.innerHTML = ui.empty('🗓️', 'No lesson plans yet', 'Plans for this chapter are coming soon.'); return }
       const premium = LG.subInfo(LG.state.user).active || (LG.state.user && LG.state.user.role === 'admin')
       ctx.body.innerHTML = `
-        ${premium ? '' : `<div class="card" style="background:linear-gradient(135deg,#FFF7ED,#FDF2F8);border-color:#FBCFE8;margin-bottom:12px;font-size:13.5px">👑 Full lesson plans open for Premium members. You can see a preview of each one.</div>`}
+        ${premium ? '' : `<div class="card" style="background:linear-gradient(135deg,#FFF7ED,#FDF2F8);border-color:#FBCFE8;margin-bottom:12px;font-size:13.5px">👀 Tap any lesson to read its preview. Full plans open on Premium accounts.</div>`}
         <div class="list">${lessons.map((l, i) => ui.row({
           ic: 'P' + (l.period || i + 1), g: grad(i + 1), t: l.title || ('Period ' + (l.period || i + 1)),
           s: (l.loCodes && l.loCodes.length ? l.loCodes.slice(0, 3).join(' · ') : 'Period ' + od(l.period || i + 1)),

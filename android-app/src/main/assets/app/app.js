@@ -137,7 +137,6 @@
   ]
   const CATS = [['all', 'All'], ['plan', 'Lesson Plans'], ['assess', 'Assessment'], ['ai', 'AI Tools'], ['res', 'Resources'], ['me', 'My Stuff']]
   const CAT_SUB = { plan: 'ଶିକ୍ଷଣ ଯୋଜନା', assess: 'ମୂଲ୍ୟାୟନ', ai: 'AI ସାଧନ', res: 'ସମ୍ବଳ', me: 'ମୋ ଜିନିଷ' }
-  const QUICK = ['lessons', 'panchapadi', 'qp', 'assess', 'daily', 'qbank', 'abp']
 
   const CLASSES = [{ n: 'B', t: 'Balvatika', o: 'ବାଳବାଟିକା' }].concat(
     Array.from({ length: 10 }, (_, i) => ({ n: String(i + 1), t: 'Class ' + (i + 1), o: 'ଶ୍ରେଣୀ ' + od(i + 1) })))
@@ -343,8 +342,6 @@
     const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7))
     const activity = week.ws === monday.getTime() ? (week.n || 0) : 0
     const goal = 10
-    const pct = Math.min(1, activity / goal)
-    const C = 2 * Math.PI * 34
     const favClass = LS.get('lgapp_fav_class', null)
     const tip = TIPS[Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000) % TIPS.length]
     const cont = continueItem()
@@ -360,18 +357,27 @@
       ? 'Your streak starts today! Come back tomorrow to make it 2 🔥'
       : `Amazing consistency! Open tomorrow to reach ${streak + 1} days.`
 
-    const quick = QUICK.map(id => {
+    // Home: one clear path — today's plan, 4 big tools, your class, a short row of other tools.
+    const FEATURE = [
+      ['lessons', 'violet', 'Chapter-wise, Balvatika–10'],
+      ['panchapadi', 'sunset', '5-step plans'],
+      ['qp', 'teal', 'Make & print papers'],
+      ['assess', 'rose', 'Tests with answer keys'],
+    ]
+    const tiles = FEATURE.map(([id, g, line]) => {
       const t = toolById(id)
-      return `<button class="q tap" data-go="${t.path}">${t.b ? `<em class="badge ${t.b === 'NEW' ? 'new' : ''}">${t.b}</em>` : ''}<div class="ico" style="${gStyle(t.g)}">${icon(t.i, 26)}</div><span>${t.t}</span></button>`
-    }).join('') + `<button class="q tap" data-tab-go="explore"><div class="ico" style="${gStyle('slate')}">${icon('grid', 24)}</div><span>All Tools</span></button>`
-
-    // Consumption-only app (Google Play Payments policy): show plan status, never an upsell.
-    const promo = sub.active
-      ? `<div class="promo active tap" data-tab-go="premium"><div class="crown">👑</div><small>${sub.lifetime ? 'Lifetime member' : 'Premium active'}</small>
-          <h3>${sub.lifetime ? 'Everything unlocked, forever ✨' : `${sub.days} days of Premium left`}</h3>
-          ${sub.lifetime ? '' : `<div class="meter"><i style="width:${sub.pct}%"></i></div>`}
-          <p>Thank you for supporting Lesson Guru. Enjoy unlimited plans & downloads.</p></div>`
-      : ''
+      return `<button class="tile tap" data-go="${t.path}" style="${gStyle(g)}">
+        ${t.b ? `<em class="tile-badge">${t.b}</em>` : ''}
+        <span class="tile-ic">${icon(t.i, 26, 2.2)}</span>
+        <span class="tile-t"><b>${t.t}</b><small class="od">${t.o}</small><i>${line}</i></span></button>`
+    }).join('')
+    const MORE = ['daily', 'qbank', 'abp', 'instant', 'multigrade', 'lo', 'mcm', 'res']
+    const more = MORE.map(id => {
+      const t = toolById(id)
+      return `<button class="mt tap" data-go="${t.path}"><span class="mt-ic" style="${gStyle(t.g)}">${icon(t.i, 22)}</span><span>${t.t}</span></button>`
+    }).join('') + `<button class="mt tap" data-tab-go="explore"><span class="mt-ic" style="${gStyle('slate')}">${icon('grid', 22)}</span><span>All Tools</span></button>`
+    const classGrid = CLASSES.map((c, i) => `<button class="cg tap ${favClass === c.n ? 'fav' : ''}" data-cls="${c.n}"><span class="n" style="${gStyle(CLASS_G[i])}">${c.n}</span><span>${c.n === 'B' ? 'Balvatika' : 'Class ' + c.n}</span></button>`).join('')
+      + `<button class="cg tap" data-go="/lessons"><span class="n" style="${gStyle('slate')}">${icon('grid', 18)}</span><span>All</span></button>`
 
     $('#s-home').innerHTML = `
       <header class="hero">
@@ -394,48 +400,32 @@
           <div class="go-btn">${icon('arrow', 22, 2.4)}</div>
         </div>
 
-        <div class="sec"><h2>Quick Tools<small>Everything you need, one tap away</small></h2></div>
-        <div class="qgrid">${quick}</div>
+        ${cont ? `<div class="cont tap" data-go="${esc(cont.path)}" style="margin-top:14px">
+          <div class="thumb">${icon('book', 24)}</div>
+          <div class="t"><small>Continue · ${esc(cont.small)}</small><b>${esc(cont.title)}</b><small>${timeAgo(cont.ts)}</small></div>
+          <span class="chev">${icon('chev', 20)}</span>
+        </div>` : ''}
 
-        <div class="sec"><h2>Your Teaching Streak</h2></div>
-        <div class="streak">
-          <div class="ring">
-            <svg width="82" height="82"><circle cx="41" cy="41" r="34" stroke="rgba(255,255,255,.15)" stroke-width="8" fill="none"/>
-            <circle cx="41" cy="41" r="34" stroke="url(#rg)" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - pct)}" style="transition:stroke-dashoffset 1s"/>
-            <defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="#FFD60A"/><stop offset="1" stop-color="#FF2D78"/></linearGradient></defs></svg>
-            <div class="val"><div><b>${activity}</b><small>of ${goal}<br>this week</small></div></div>
-          </div>
+        <div class="sec"><h2>Start here<small class="od">ଏଠାରୁ ଆରମ୍ଭ କରନ୍ତୁ</small></h2></div>
+        <div class="tiles">${tiles}</div>
+
+        <div class="sec"><h2>Choose your class<small class="od">ଶ୍ରେଣୀ ବାଛନ୍ତୁ</small></h2></div>
+        <div class="cgrid">${classGrid}</div>
+
+        <div class="sec"><h2>More tools<small class="od">ଅନ୍ୟ ସାଧନ</small></h2><button data-tab-go="explore">See all</button></div>
+        <div class="hscroll mts">${more}</div>
+
+        <div class="streak streak-sm">
           <div class="streak-body">
-            <h3>🔥 ${streak} day${streak === 1 ? '' : 's'} streak</h3>
+            <h3>🔥 ${streak} day${streak === 1 ? '' : 's'} streak · ${activity}/${goal} this week</h3>
             <p>${streakMsg}</p>
             <div class="week">${weekDots}</div>
           </div>
         </div>
 
-        ${cont ? `<div class="sec"><h2>Continue where you left off</h2></div>
-        <div class="cont tap" data-go="${esc(cont.path)}">
-          <div class="thumb">${icon('book', 24)}</div>
-          <div class="t"><small>${esc(cont.small)}</small><b>${esc(cont.title)}</b><small>${timeAgo(cont.ts)}</small></div>
-          <span class="chev">${icon('chev', 20)}</span>
-        </div>` : ''}
-
-        <div class="sec"><h2>Cloud Library<small>Every PDF you download, saved safely</small></h2><button data-tab-go="cloud">Open</button></div>
-        <div id="homeCloud"></div>
-
-        <div class="sec"><h2>Choose your class<small class="od">ଶ୍ରେଣୀ ବାଛନ୍ତୁ</small></h2><button data-go="/lessons">See all</button></div>
-        <div class="hscroll">${CLASSES.map((c, i) => `<button class="cls tap ${favClass === c.n ? 'fav' : ''}" data-cls="${c.n}"><div class="n" style="${gStyle(CLASS_G[i])}">${c.n}</div><span>${c.t}</span><span class="od">${c.o}</span></button>`).join('')}</div>
-
-        <div style="height:6px"></div>
-        ${promo}
-
-        <div class="sec"><h2>Tip of the day<small>For a happier classroom</small></h2></div>
-        <div class="tip"><div class="q-mark">“</div><small>💡 Teacher tip</small><p>${esc(tip[0])}</p><p class="od">${esc(tip[1])}</p></div>
-
-        <div class="sec"><h2>Trusted across Odisha</h2></div>
-        <div class="stats"><div><b data-count="12500">0</b><span>Teachers</span></div><div><b data-count="8400">0</b><span>Lesson plans</span></div><div><b data-count="95" data-suffix="%">0</b><span>Satisfaction</span></div></div>
+        <div class="tip" style="margin-top:14px"><div class="q-mark">“</div><small>💡 Tip of the day</small><p>${esc(tip[0])}</p><p class="od">${esc(tip[1])}</p></div>
         <div class="made">Made with ❤️ for Odisha's teachers</div>
       </div>`
-    countUp($('#s-home'))
     drawHomeCloud()
     if (token() && !cloud.loading && Date.now() - (cloud.loadedAt || 0) > 30000) loadCloud()
     maybeMilestone(streak)

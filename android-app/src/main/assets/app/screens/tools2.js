@@ -389,7 +389,7 @@
           <div class="seg">${[['qbank', '🏦 Question Bank'], ['qa', '📗 Books Q&A Solved']].map(([k, l]) => `<button class="tap ${st.tool === k ? 'on' : ''}" data-tool="${k}">${l}</button>`).join('')}</div>
           <div class="sbox">${icon('search', 20)}<input id="q" type="search" placeholder="Search chapter or book…" value="${esc(st.q)}"></div>
           ${chips([['', 'All classes'], ...classes.map(c => [c, c])], st.cls, 'data-fcls')}
-          <div id="ql">${Object.keys(groups).length ? Object.entries(groups).map(([k, arr]) => `${label(k, arr.length + ' chapters')}<div class="list">${arr.map((it, i) => ui.row({ ic: st.tool === 'qbank' ? 'bank' : 'book', g: g(i), t: it.chapterName || it.title, s: [it.questionCount ? it.questionCount + ' questions' : '', it.pageCount ? it.pageCount + ' pages' : ''].filter(Boolean).join(' · '), badge: it.heroTag, attrs: `data-qa="${esc(it.id)}"` })).join('')}</div>`).join('') : ui.empty('🔍', 'Nothing found', 'Try another class or search word.')}</div>`
+          <div id="ql" class="full-names">${Object.keys(groups).length ? Object.entries(groups).map(([k, arr]) => `${label(k, arr.length + ' chapters')}<div class="list">${arr.map((it, i) => ui.row({ ic: st.tool === 'qbank' ? 'bank' : 'book', g: g(i), t: it.chapterName || it.title, s: [it.questionCount ? it.questionCount + ' questions' : '', it.pageCount ? it.pageCount + ' pages' : ''].filter(Boolean).join(' · '), badge: it.heroTag, attrs: `data-qa="${esc(it.id)}"` })).join('')}</div>`).join('') : ui.empty('🔍', 'Nothing found', 'Try another class or search word.')}</div>`
         LG.hydrateIcons(ctx.body)
       }
       ctx.on('click', '[data-tool]', (b) => { st.tool = b.dataset.tool; st.cls = ''; draw() })
@@ -404,12 +404,15 @@
     async render(ctx) {
       ctx.body.innerHTML = ui.skeleton(5)
       const { item } = await ctx.api('/qa-worksheets/' + encodeURIComponent(ctx.params.id))
-      ctx.title(item.title || item.chapterName || 'Questions', [item.className, item.bookName].filter(Boolean).join(' · '))
-      ctx.actions(`<button data-print aria-label="Print">${icon('download', 22)}</button>`)
+      const bookQa = item.source !== 'qbank-import'
+      ctx.title(item.chapterName || item.title || 'Questions', [item.className, item.bookName].filter(Boolean).join(' · '))
+      // Books Q&A Solved is read-only in the app: no PDF / print
+      if (!bookQa) ctx.actions(`<button data-print aria-label="Print">${icon('download', 22)}</button>`)
       const doc = new DOMParser().parseFromString(item.htmlContent || '', 'text/html')
+      if (bookQa) doc.querySelectorAll('button, a[download], [onclick*="print"], .no-print, .download, .print-btn').forEach(n => n.remove())
       const styles = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n').replace(/(^|})\s*(body|html)\b/g, '$1 .doc')
-      ctx.body.innerHTML = `<div class="doc print-area"><style>${styles}</style>${LG.clean(doc.body.innerHTML)}</div>`
-      ctx.on('click', '[data-print]', () => LG.printNow(item.title))
+      ctx.body.innerHTML = `${bookQa && item.chapterName ? `<div class="qa-ch od">${esc(item.chapterName)}</div>` : ''}<div class="doc ${bookQa ? '' : 'print-area'}"><style>${styles}</style>${LG.clean(doc.body.innerHTML)}</div>`
+      if (!bookQa) ctx.on('click', '[data-print]', () => LG.printNow(item.title))
     },
   })
 

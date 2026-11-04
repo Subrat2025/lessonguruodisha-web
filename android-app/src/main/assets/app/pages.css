@@ -311,3 +311,6 @@
 .ptool b { font-size: 12.5px; line-height: 1.25; }
 .ptool small { font-size: 10.5px; color: var(--muted); line-height: 1.2; }
 .ptool .badge { top: 6px; right: 6px; }
+/* Q&A lists: show the full chapter name, never cut it */
+.full-names .row-t b { display: block; -webkit-line-clamp: unset; overflow: visible; white-space: normal; }
+.qa-ch { margin: 0 2px 12px; padding: 12px 14px; border-radius: 16px; background: linear-gradient(135deg, #ECFEFF, #F0FDF4); border: 1px solid #CCFBF1; font-size: 16px; font-weight: 700; line-height: 1.45; color: #0F766E; }
